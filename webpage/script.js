@@ -28,7 +28,7 @@ function handleOrientation(event) {
     document.getElementById("grav_x").innerHTML = "y: " + event.alpha;
     document.getElementById("grav_y").innerHTML = "z: " + event.beta;
     document.getElementById("grav_z").innerHTML = "x: " + event.gamma;
-    sendData(event.alpha, "/orientation/y");
+    sendData(event.alpha, "orientation/y");
     sendData(event.beta, "orientation/z");
     sendData(event.gamma, "orientation/x");
 };
@@ -42,10 +42,7 @@ function sendData(data, subtopic) {
 
 function incrementCounter() {
     counter += 1;
-    var message = new Paho.Message("" + counter);
-    message.destinationName = mainTopic;
-    message.qos = 0;
-    client.send(message);
+    sendData(counter, "counter")
 }
 
 function update_all() {
