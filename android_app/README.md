@@ -25,3 +25,9 @@ Config:
 ### Private MQTT server
 
 [HIVEMQ](https://console.hivemq.cloud/clusters/detail?uuid=d6b5f80560aa4c889516ecf66760dcae&nav=credentials)
+
+### Need Python extension
+
+It needs to be installed on the robot
+
+[Download instruction](https://linux-packages.com/ubuntu-focal-fossa/package/python3-paho-mqtt)
