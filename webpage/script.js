@@ -20,7 +20,6 @@ var options = {
         connected = true
         client.subscribe(mainTopic + "in_use");
     },
-    useSSL: false,
     //Gets Called if the connection could not be established
     onFailure: function (message) {
         alert("Connection failed: " + message.errorMessage);
@@ -39,36 +38,46 @@ function buttonPressed() {
         document.getElementById("controller").innerText = "Release";
     } else {
         document.getElementById("controller").innerText = "Take Control";
+        sendData("released", "in_use");
     }
 }
 
 client.onMessageArrived = function (message) {
     if (message.payloadString != userId && message.payloadString != "released") {
-        console.log("someone is using it!");
         document.getElementById("controller").disabled = true;
         document.getElementById("controller").innerText = "In use!";
+        console.log("Other device is using the controller");
         in_use = true;
     } else if (message.payloadString == "released") {
+        console.log("Other device released the controller");
         document.getElementById("controller").disabled = false;
-        document.getElementById("controller").innerText = "Take Control";
+        text = "Take Control"
+        if (capturingData) {
+            text = "Release"
+        }
+
+        document.getElementById("controller").innerText = text;
         in_use = false;
     }
 }
 
 function handleOrientation(event) {
     if (connected && capturingData && !in_use) {
-        document.getElementById("grav_x").innerHTML = "y: " + event.alpha;
-        document.getElementById("grav_y").innerHTML = "z: " + event.beta;
-        document.getElementById("grav_z").innerHTML = "x: " + event.gamma;
+        alpha = (event.alpha).toFixed(2);
+        beta = (event.beta).toFixed(2);
+        gamma = (event.gamma).toFixed(2);
+        document.getElementById("grav_x").innerHTML = "y: " + alpha;
+        document.getElementById("grav_y").innerHTML = "z: " + beta;
+        document.getElementById("grav_z").innerHTML = "x: " + gamma;
         sendData(userId, "in_use");
-        sendData(event.alpha, "orientation/y");
-        sendData(event.beta, "orientation/z");
-        sendData(event.gamma, "orientation/x");
+        sendData(alpha, "orientation/y");
+        sendData(beta, "orientation/z");
+        sendData(gamma, "orientation/x");
     }
 };
 
 function sendData(data, subtopic) {
-    if (connected && capturingData && !in_use) {
+    if (data == "released" || (connected && capturingData && !in_use)) {
         var message = new Paho.Message("" + data);
         message.destinationName = mainTopic + "" + subtopic;
         message.qos = 0;
