@@ -1,4 +1,4 @@
-# Mobil application wit apk
+# Mobil application with apk
 
 ## App creator
   MIT app inventor
@@ -8,7 +8,7 @@
 
 ## MQTT server
 
-### I used MQTT Explorer to preview datas
+### I used MQTT Explorer to preview the published data
 Config:
 
     tls: ON
