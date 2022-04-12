@@ -4,9 +4,12 @@ mainTopic = "webtest/";
 connected = false
 hostname = "192.168.1.150";
 port = 9001;
-clientid = "test-client";
+clientId = "test-client";
+in_use = false;
+capturingData = false;
+userId = uuidv4();
 
-client = new Paho.Client(hostname, port, clientid);
+client = new Paho.Client(hostname, port, clientId);
 
 var options = {
     timeout: 3,
@@ -15,8 +18,9 @@ var options = {
     onSuccess: function () {
         console.log("Connected!")
         connected = true
+        client.subscribe(mainTopic + "in_use");
     },
-    useSSL:false,
+    useSSL: false,
     //Gets Called if the connection could not be established
     onFailure: function (message) {
         alert("Connection failed: " + message.errorMessage);
@@ -25,11 +29,38 @@ var options = {
 
 client.connect(options);
 
+
+window.addEventListener("deviceorientation", handleOrientation);
+setInterval(update_all, 10);
+
+function buttonPressed() {
+    capturingData = !capturingData
+    if (capturingData) {
+        document.getElementById("controller").innerText = "Release";
+    } else {
+        document.getElementById("controller").innerText = "Take Control";
+    }
+}
+
+client.onMessageArrived = function (message) {
+    if (message.payloadString != userId && message.payloadString != "released") {
+        console.log("someone is using it!");
+        document.getElementById("controller").disabled = true;
+        document.getElementById("controller").innerText = "In use!";
+        in_use = true;
+    } else if (message.payloadString == "released") {
+        document.getElementById("controller").disabled = false;
+        document.getElementById("controller").innerText = "Take Control";
+        in_use = false;
+    }
+}
+
 function handleOrientation(event) {
-    if (connected) {
+    if (connected && capturingData && !in_use) {
         document.getElementById("grav_x").innerHTML = "y: " + event.alpha;
         document.getElementById("grav_y").innerHTML = "z: " + event.beta;
         document.getElementById("grav_z").innerHTML = "x: " + event.gamma;
+        sendData(userId, "in_use");
         sendData(event.alpha, "orientation/y");
         sendData(event.beta, "orientation/z");
         sendData(event.gamma, "orientation/x");
@@ -37,7 +68,7 @@ function handleOrientation(event) {
 };
 
 function sendData(data, subtopic) {
-    if (connected) {
+    if (connected && capturingData && !in_use) {
         var message = new Paho.Message("" + data);
         message.destinationName = mainTopic + "" + subtopic;
         message.qos = 0;
@@ -46,8 +77,8 @@ function sendData(data, subtopic) {
 }
 
 function incrementCounter() {
-    counter += 1;
-    if (connected) {
+    if (connected && capturingData && !in_use) {
+        counter += 1;
         sendData(counter, "counter")
     }
 }
@@ -57,6 +88,8 @@ function update_all() {
     document.getElementById("counter_val").innerHTML = counter;
 }
 
-
-window.addEventListener("deviceorientation", handleOrientation);
-setInterval(update_all, 10);
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
