@@ -2,8 +2,8 @@ counter = 1;
 
 mainTopic = "webtest/";
 connected = false
-hostname = "broker.emqx.io";
-port = 8084;
+hostname = "192.168.1.150";
+port = 9001;
 clientid = "test-client";
 
 client = new Paho.Client(hostname, port, clientid);
@@ -16,7 +16,7 @@ var options = {
         console.log("Connected!")
         connected = true
     },
-
+    useSSL:false,
     //Gets Called if the connection could not be established
     onFailure: function (message) {
         alert("Connection failed: " + message.errorMessage);
