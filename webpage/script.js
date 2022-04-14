@@ -1,5 +1,6 @@
-counter = 1;
+const TIMEOUT_VAL = 100;
 
+counter = 1;
 userId = uuidv4();
 clientId = "test-client";
 hostname = "192.168.1.150";
@@ -8,6 +9,7 @@ port = 9001;
 alphaOffset = 0;
 betaOffset = 0;
 gammaOffset = 0;
+useTimeout = TIMEOUT_VAL;
 
 inUse = false;
 connected = false
@@ -51,21 +53,30 @@ function buttonPressed() {
 
 client.onMessageArrived = function (message) {
     if (message.payloadString != userId && message.payloadString != "released") {
-        document.getElementById("controller").disabled = true;
-        document.getElementById("controller").innerText = "In use!";
-        console.log("Other device is using the controller");
-        inUse = true;
+        lockController();
     } else if (message.payloadString == "released") {
-        console.log("Other device released the controller");
-        document.getElementById("controller").disabled = false;
-        text = "Take Control"
-        if (capturingData) {
-            text = "Release"
-        }
-
-        document.getElementById("controller").innerText = text;
-        inUse = false;
+        releaseController();
     }
+}
+
+function lockController() {
+    document.getElementById("controller").disabled = true;
+    document.getElementById("controller").innerText = "In use!";
+    console.log("Other device is using the controller");
+    inUse = true;
+    useTimeout = TIMEOUT_VAL;
+}
+
+function releaseController() {
+    console.log("Other device released the controller");
+    document.getElementById("controller").disabled = false;
+    text = "Take Control"
+    if (capturingData) {
+        text = "Release"
+    }
+
+    document.getElementById("controller").innerText = text;
+    inUse = false;
 }
 
 function handleOrientation(event) {
@@ -102,6 +113,14 @@ function sendData(data, subtopic) {
 }
 
 function incrementCounter() {
+    if(useTimeout > 0 && inUse){
+        useTimeout--;
+    }
+
+    if (useTimeout == 0) {
+        releaseController();
+    }
+
     if (connected && capturingData && !inUse) {
         counter += 1;
         sendData(counter, "counter")
