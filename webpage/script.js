@@ -1,13 +1,19 @@
 counter = 1;
 
-mainTopic = "webtest/";
-connected = false
-hostname = "192.168.1.150";
-port = 9001;
-clientId = "test-client";
-in_use = false;
-capturingData = false;
 userId = uuidv4();
+clientId = "test-client";
+hostname = "192.168.1.150";
+mainTopic = "webtest/";
+port = 9001;
+alphaOffset = 0;
+betaOffset = 0;
+gammaOffset = 0;
+
+inUse = false;
+connected = false
+capturingData = false;
+firstCapture = true;
+
 
 client = new Paho.Client(hostname, port, clientId);
 
@@ -18,7 +24,7 @@ var options = {
     onSuccess: function () {
         console.log("Connected!")
         connected = true
-        client.subscribe(mainTopic + "in_use");
+        client.subscribe(mainTopic + "inUse");
     },
     //Gets Called if the connection could not be established
     onFailure: function (message) {
@@ -38,7 +44,8 @@ function buttonPressed() {
         document.getElementById("controller").innerText = "Release";
     } else {
         document.getElementById("controller").innerText = "Take Control";
-        sendData("released", "in_use");
+        firstCapture = true;
+        sendData("released", "inUse");
     }
 }
 
@@ -47,7 +54,7 @@ client.onMessageArrived = function (message) {
         document.getElementById("controller").disabled = true;
         document.getElementById("controller").innerText = "In use!";
         console.log("Other device is using the controller");
-        in_use = true;
+        inUse = true;
     } else if (message.payloadString == "released") {
         console.log("Other device released the controller");
         document.getElementById("controller").disabled = false;
@@ -57,19 +64,28 @@ client.onMessageArrived = function (message) {
         }
 
         document.getElementById("controller").innerText = text;
-        in_use = false;
+        inUse = false;
     }
 }
 
 function handleOrientation(event) {
-    if (connected && capturingData && !in_use) {
-        alpha = (event.alpha).toFixed(2);
-        beta = (event.beta).toFixed(2);
-        gamma = (event.gamma).toFixed(2);
+    if (connected && capturingData && !inUse) {
+        if (firstCapture) {
+            firstCapture = false;
+            alphaOffset = convertValue(event.alpha);
+            betaOffset = -convertValue(event.beta);
+            gammaOffset = -convertValue(event.gamma);
+        }
+
+        alpha = calculateRealOffset(event.alpha, alphaOffset);
+        beta = calculateRealOffset(-event.beta, betaOffset);
+        gamma = calculateRealOffset(-event.gamma, gammaOffset);
+
         document.getElementById("grav_x").innerHTML = "y: " + alpha;
         document.getElementById("grav_y").innerHTML = "z: " + beta;
         document.getElementById("grav_z").innerHTML = "x: " + gamma;
-        sendData(userId, "in_use");
+
+        sendData(userId, "inUse");
         sendData(alpha, "orientation/y");
         sendData(beta, "orientation/z");
         sendData(gamma, "orientation/x");
@@ -77,7 +93,7 @@ function handleOrientation(event) {
 };
 
 function sendData(data, subtopic) {
-    if (data == "released" || (connected && capturingData && !in_use)) {
+    if (data == "released" || (connected && capturingData && !inUse)) {
         var message = new Paho.Message("" + data);
         message.destinationName = mainTopic + "" + subtopic;
         message.qos = 0;
@@ -86,7 +102,7 @@ function sendData(data, subtopic) {
 }
 
 function incrementCounter() {
-    if (connected && capturingData && !in_use) {
+    if (connected && capturingData && !inUse) {
         counter += 1;
         sendData(counter, "counter")
     }
@@ -101,4 +117,16 @@ function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
+}
+
+function convertValue(value) {
+    modifiedValue = value % 180;
+    if (value > 180) {
+        modifiedValue = -180 + modifiedValue;
+    }
+    return -modifiedValue
+}
+
+function calculateRealOffset(realValue, offset) {
+    return (convertValue((realValue + offset) % 360)).toFixed(2);
 }
