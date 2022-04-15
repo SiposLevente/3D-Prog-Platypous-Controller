@@ -2,9 +2,9 @@ const TIMEOUT_VAL = 100;
 
 counter = 1;
 userId = uuidv4();
-clientId = "test-client";
+clientId = userId;
 hostname = "192.168.1.150";
-mainTopic = "webtest/";
+mainTopic = "controller/";
 port = 9001;
 alphaOffset = 0;
 betaOffset = 0;
