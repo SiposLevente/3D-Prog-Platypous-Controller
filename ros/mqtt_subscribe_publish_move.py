@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import paho.mqtt.client as mqttClient
 import time
 import certifi
@@ -10,6 +9,8 @@ from nav_msgs.msg import Odometry
 class Platypous_Controller:
     def __init__(self):
         rospy.init_node('mqtt_subscriber', anonymous=True)
+        rospy.sleep(1)
+        rospy.Subscriber("/driver/wheel_odometry", Odometry, self.cb_odometry_cp)
         self.twist_pub = rospy.Publisher('/cmd_vel/nav', Twist, queue_size=10)
         self.main_topic = "controller/"
         self.x_topic = "controller/orientation/x"
@@ -17,12 +18,11 @@ class Platypous_Controller:
         self.z_topic = "controller/orientation/z"
         self.platypous_topic = "platypous/"
         self.connected = False
-        rospy.Subscriber("/odometry/wheel", Odometry, self.cb_odometry_cp)
 
     def cb_odometry_cp(self, msg):
         self.odometry_cp = msg
 
-    def on_connect(client, userdata, flags, rc):
+    def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
             print("Connected to broker")
             self.connected = True  # Signal connection
@@ -36,7 +36,7 @@ class Platypous_Controller:
             time.sleep(0.1)
 
     # The callback for when a PUBLISH message is received from the server.
-    def on_message(client, userdata, msg):
+    def on_message(self, client, userdata, msg):
         if self.x_topic in msg.topic:
             x = msg.payload
             print(x)  # debug
@@ -62,7 +62,7 @@ class Platypous_Controller:
         client = mqttClient.Client("Python")  # create new instance
         # client.tls_set(certifi.where())
         # set username and password
-        # client.username_pw_set(user, password=password)
+        #client.username_pw_set(user, password=password)
         client.on_connect = self.on_connect  # attach function to callback
         client.connect(broker_address, port=port)  # connect to broker
 
@@ -96,8 +96,8 @@ class Platypous_Controller:
             print("X: " + str(Orientation.x) + " Y: " +
                   str(Orientation.y) + " Z: " + str(Orientation.z))
 
-            vel_msg.linear.x = float(Orientation.y)/10
-            vel_msg.angular.z = float(Orientation.x)/10
+            vel_msg.linear.x = float(Orientation.z)/100
+            vel_msg.angular.z = float(Orientation.y)/100
             self.twist_pub.publish(vel_msg)
 
 
