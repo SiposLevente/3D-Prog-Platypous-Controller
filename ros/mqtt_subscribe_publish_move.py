@@ -5,6 +5,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
+TIMEOUT_TIME = 1
 
 class Platypous_Controller:
     def __init__(self):
@@ -17,8 +18,10 @@ class Platypous_Controller:
         self.x_topic = "controller/orientation/x"
         self.y_topic = "controller/orientation/y"
         self.z_topic = "controller/orientation/z"
+        self.use_topic = "controller/inUse"
         self.platypous_topic = "platypous/"
         self.connected = False
+        self.timeout = TIMEOUT_TIME
 
     def cb_odometry_cp(self, msg):
         self.odometry_cp = msg
@@ -30,6 +33,7 @@ class Platypous_Controller:
             client.subscribe(self.x_topic)
             client.subscribe(self.y_topic)
             client.subscribe(self.z_topic)
+            client.subscribe(self.use_topic)
         else:
             print("Connection failed")
 
@@ -39,14 +43,19 @@ class Platypous_Controller:
     # The callback for when a PUBLISH message is received from the server.
     def on_message(self, client, userdata, msg):
         if self.x_topic in msg.topic:
-            x = msg.payload
-            Orientation.x = self.get_val_from_message(x)
+            Orientation.x = self.get_val_from_message(msg.payload)
         elif self.y_topic in msg.topic:
-            y = msg.payload
-            Orientation.y = self.get_val_from_message(y)
+            Orientation.y = self.get_val_from_message(msg.payload)
         elif self.z_topic in msg.topic:
-            z = msg.payload
-            Orientation.z = self.get_val_from_message(z)
+            Orientation.z = self.get_val_from_message(msg.payload)
+        elif self.use_topic in msg.topic:
+            msg = self.get_val_from_message(msg.payload)
+            if msg == "released":
+                Orientation.x = 0
+                Orientation.y = 0
+                Orientation.z = 0
+            else:
+                self.timeout = TIMEOUT_TIME
 
     def get_val_from_message(self, value):
         return str(value).split("b'")[1].split("'")[0]
@@ -69,6 +78,11 @@ class Platypous_Controller:
         client.loop_start()  # start the loop
         while not rospy.is_shutdown():
             vel_msg = Twist()
+            self.timeout -= 1
+            if self.timeout == 0:
+                Orientation.x = 0
+                Orientation.y = 0
+                Orientation.z = 0
             time.sleep(1)
             odometry_data = self.odometry_cp
             positions = str(odometry_data.pose).split()
