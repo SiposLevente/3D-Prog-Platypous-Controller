@@ -7,6 +7,7 @@ from nav_msgs.msg import Odometry
 
 TIMEOUT_TIME = 1
 
+
 class Platypous_Controller:
     def __init__(self):
         rospy.init_node('mqtt_subscriber', anonymous=True)
@@ -87,20 +88,18 @@ class Platypous_Controller:
             odometry_data = self.odometry_cp
             positions = str(odometry_data.pose).split()
 
-            # --------------------------------------------
-
             self.public_platypous_positon("x", positions, client)
             self.public_platypous_positon("y", positions, client)
             self.public_platypous_positon("z", positions, client)
-
-            # --------------------------------------------
 
             client.on_message = self.on_message
 
             # print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
 
-            vel_msg.linear.x = -float(Orientation.z)/50
-            vel_msg.angular.z = -float(Orientation.x)/50
+            if abs(float(Orientation().z)) > 15:
+                vel_msg.linear.x = -float(Orientation.z)/50
+            if abs(float(Orientation().x)) > 15:
+                vel_msg.angular.z = -float(Orientation.x)/50
             self.twist_pub.publish(vel_msg)
 
     def public_platypous_positon(self, value, positions, client):
