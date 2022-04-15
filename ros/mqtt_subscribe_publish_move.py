@@ -10,7 +10,8 @@ class Platypous_Controller:
     def __init__(self):
         rospy.init_node('mqtt_subscriber', anonymous=True)
         rospy.sleep(1)
-        rospy.Subscriber("/driver/wheel_odometry", Odometry, self.cb_odometry_cp)
+        rospy.Subscriber("/driver/wheel_odometry",
+                         Odometry, self.cb_odometry_cp)
         self.twist_pub = rospy.Publisher('/cmd_vel/nav', Twist, queue_size=10)
         self.main_topic = "controller/"
         self.x_topic = "controller/orientation/x"
@@ -39,19 +40,18 @@ class Platypous_Controller:
     def on_message(self, client, userdata, msg):
         if self.x_topic in msg.topic:
             x = msg.payload
-            print(x)  # debug
-            Orientation.x = str(x).split("b'")[1].split("'")[0]
+            Orientation.x = self.get_val_from_message(x)
         elif self.y_topic in msg.topic:
             y = msg.payload
-            print(y)  # debug
-            Orientation.y = str(y).split("b'")[1].split("'")[0]
+            Orientation.y = self.get_val_from_message(y)
         elif self.z_topic in msg.topic:
             z = msg.payload
-            print(z)  # debug
-            Orientation.z = str(z).split("b'")[1].split("'")[0]
+            Orientation.z = self.get_val_from_message(z)
+
+    def get_val_from_message(self, value):
+        return str(value).split("b'")[1].split("'")[0]
 
     def start(self):
-        vel_msg = Twist()
         self.connected = False
 
         broker_address = "192.168.1.150"
@@ -68,37 +68,32 @@ class Platypous_Controller:
 
         client.loop_start()  # start the loop
         while not rospy.is_shutdown():
+            vel_msg = Twist()
             time.sleep(1)
             odometry_data = self.odometry_cp
             positions = str(odometry_data.pose).split()
 
             # --------------------------------------------
 
-            x_index = positions.index("x:")
-            y_index = positions.index("y:")
-            z_index = positions.index("z:")
-
-            x = positions[x_index+1]
-            y = positions[y_index+1]
-            z = positions[z_index+1]
-
-            client.publish(self.platypous_topic +
-                           positions[x_index].split(":")[0], x)
-            client.publish(self.platypous_topic +
-                           positions[y_index].split(":")[0], y)
-            client.publish(self.platypous_topic +
-                           positions[z_index].split(":")[0], z)
+            self.public_platypous_positon("x", positions, client)
+            self.public_platypous_positon("y", positions, client)
+            self.public_platypous_positon("z", positions, client)
 
             # --------------------------------------------
 
             client.on_message = self.on_message
 
-            print("X: " + str(Orientation.x) + " Y: " +
-                  str(Orientation.y) + " Z: " + str(Orientation.z))
+            # print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
 
-            vel_msg.linear.x = float(Orientation.z)/100
-            vel_msg.angular.z = float(Orientation.y)/100
+            vel_msg.linear.x = -float(Orientation.z)/50
+            vel_msg.angular.z = -float(Orientation.x)/50
             self.twist_pub.publish(vel_msg)
+
+    def public_platypous_positon(self, value, positions, client):
+        value_index = positions.index(value + ":")
+        value = positions[value_index+1]
+        client.publish(self.platypous_topic +
+                       positions[value_index].split(":")[0], value)
 
 
 class Orientation:
