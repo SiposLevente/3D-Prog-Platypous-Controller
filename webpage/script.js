@@ -17,7 +17,7 @@ capturingData = false;
 firstCapture = true;
 
 
-client = new Paho.Client(hostname, port, clientId);
+client = new Paho.Client(hostname, port, "", clientId);
 
 var options = {
     timeout: 3,
@@ -26,7 +26,7 @@ var options = {
     onSuccess: function () {
         console.log("Connected!")
         connected = true
-        client.subscribe(mainTopic + "inUse");
+        client.subscribe(mainTopic + "inUse")
     },
     //Gets Called if the connection could not be established
     onFailure: function (message) {
@@ -70,6 +70,7 @@ function lockController() {
 function releaseController() {
     console.log("Other device released the controller");
     document.getElementById("controller").disabled = false;
+    document.getElementById("dot").style.display = "none";
     text = "Take Control"
     if (capturingData) {
         text = "Release"
@@ -83,6 +84,7 @@ function handleOrientation(event) {
     if (connected && capturingData && !inUse) {
         if (firstCapture) {
             firstCapture = false;
+            document.getElementById("dot").style.display = "block";
             alphaOffset = convertValue(event.alpha);
             betaOffset = -convertValue(event.beta);
             gammaOffset = -convertValue(event.gamma);
@@ -96,12 +98,39 @@ function handleOrientation(event) {
         document.getElementById("grav_y").innerHTML = "z: " + beta;
         document.getElementById("grav_z").innerHTML = "x: " + gamma;
 
+        moveDot(gamma, -beta);
+
         sendData(userId, "inUse");
         sendData(alpha, "orientation/y");
         sendData(beta, "orientation/z");
         sendData(gamma, "orientation/x");
     }
 };
+
+function moveDot(xOffset, yOffset) {
+    dot = document.getElementById("dot")
+    dot_radius = parseInt(dot.style.height);
+    rect_size = parseInt(document.getElementById("controll_border").style.height.replace("px", ""));
+    baseX = (rect_size / 2) - dot_radius / 2;
+    baseY = (rect_size / 2) - dot_radius / 2;
+
+    dot.style.left = offsetDot(baseX, xOffset, { minVal: 0, maxVal: rect_size-dot_radius}) + "px"
+    dot.style.bottom = offsetDot(baseY, yOffset, { minVal: 0, maxVal: rect_size-dot_radius }) + "px"
+
+}
+
+function offsetDot(base, offset, treshold) {
+    product = Number(base + parseInt(offset*2));
+    if (product < treshold.minVal) {
+
+        return treshold.minVal;
+    } else if (product > treshold.maxVal) {
+
+        return treshold.maxVal;
+    }
+
+    return product;
+}
 
 function sendData(data, subtopic) {
     if (data == "released" || (connected && capturingData && !inUse)) {
@@ -113,7 +142,7 @@ function sendData(data, subtopic) {
 }
 
 function incrementCounter() {
-    if(useTimeout > 0 && inUse){
+    if (useTimeout > 0 && inUse) {
         useTimeout--;
     }
 
