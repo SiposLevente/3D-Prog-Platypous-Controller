@@ -7,6 +7,10 @@ from nav_msgs.msg import Odometry
 
 TIMEOUT_TIME = 1
 
+class Orientation:
+    x = 0.0
+    y = 0.0
+    z = 0.0
 
 class Platypous_Controller:
     def __init__(self):
@@ -94,7 +98,7 @@ class Platypous_Controller:
 
             client.on_message = self.on_message
 
-            # print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
+            print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
 
             if abs(float(Orientation().z)) > 15:
                 vel_msg.linear.x = -float(Orientation.z)/50
@@ -108,17 +112,6 @@ class Platypous_Controller:
         client.publish(self.platypous_topic +
                        positions[value_index].split(":")[0], value)
 
-
-class Orientation:
-    x = 0.0
-    y = 0.0
-    z = 0.0
-
-
 if __name__ == '__main__':
     controller = Platypous_Controller()
     controller.start()
-
-    # source ~/catkin_ws/devel/setup.bash
-    # clear
-    # rosrun ros_project mqtt.py
