@@ -100,9 +100,9 @@ class Platypous_Controller:
 
             print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
 
-            if abs(float(Orientation().z)) > 15:
+            if abs(float(Orientation().z)) > 10:
                 vel_msg.linear.x = -float(Orientation.z)/50
-            if abs(float(Orientation().x)) > 15:
+            if abs(float(Orientation().x)) > 10:
                 vel_msg.angular.z = -float(Orientation.x)/50
             self.twist_pub.publish(vel_msg)
 
