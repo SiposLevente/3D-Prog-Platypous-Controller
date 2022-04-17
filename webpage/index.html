@@ -7,6 +7,7 @@
     <title>Updating data</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="style.css">
     <script src="./mqtt.js"></script>
     <script src="script.js"></script>
 </head>
@@ -18,10 +19,14 @@
     <p id="grav_z"></p>
     <button id="controller" type="button" onclick="buttonPressed()">Take Control</button>
 
-    <div id="controll_border"
-        style="position: absolute; left: 100px; bottom: 280px; width: 200px; height: 200px; background-color:lightgray;">
-        <div id="dot"
-            style="position: absolute; background-color: red; border-radius: 100px;height: 20px; width: 20px; display: none;">
+    <div id="controll_border">
+        <svg width="200" height="200">
+            <line x1="100" y1="0" x2="100" y2="200" />
+            <line x1="0" y1="100" x2="200" y2="100" />
+        </svg>
+        <div id="deadzone">
+        </div>
+        <div id="dot">
         </div>
     </div>
 </body>

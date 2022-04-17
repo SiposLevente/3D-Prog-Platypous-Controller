@@ -36,7 +36,6 @@ var options = {
 
 client.connect(options);
 
-
 window.addEventListener("deviceorientation", handleOrientation);
 setInterval(update_all, 10);
 
@@ -70,7 +69,7 @@ function lockController() {
 function releaseController() {
     console.log("Other device released the controller");
     document.getElementById("controller").disabled = false;
-    document.getElementById("dot").style.display = "none";
+    changeControllerDotVisibility(false);
     text = "Take Control"
     if (capturingData) {
         text = "Release"
@@ -84,7 +83,7 @@ function handleOrientation(event) {
     if (connected && capturingData && !inUse) {
         if (firstCapture) {
             firstCapture = false;
-            document.getElementById("dot").style.display = "block";
+            changeControllerDotVisibility(true);
             alphaOffset = convertValue(event.alpha);
             betaOffset = -convertValue(event.beta);
             gammaOffset = -convertValue(event.gamma);
@@ -107,6 +106,14 @@ function handleOrientation(event) {
     }
 };
 
+function changeControllerDotVisibility(visible) {
+    if (visible) {
+        document.getElementById("dot").style.display = "block";
+    } else {
+        document.getElementById("dot").style.display = "none";
+    }
+}
+
 function moveDot(xOffset, yOffset) {
     dot = document.getElementById("dot")
     dot_radius = parseInt(dot.style.height);
@@ -114,13 +121,13 @@ function moveDot(xOffset, yOffset) {
     baseX = (rect_size / 2) - dot_radius / 2;
     baseY = (rect_size / 2) - dot_radius / 2;
 
-    dot.style.left = offsetDot(baseX, xOffset, { minVal: 0, maxVal: rect_size-dot_radius}) + "px"
-    dot.style.bottom = offsetDot(baseY, yOffset, { minVal: 0, maxVal: rect_size-dot_radius }) + "px"
+    dot.style.left = offsetDot(baseX, xOffset, { minVal: 0, maxVal: rect_size - dot_radius }) + "px"
+    dot.style.bottom = offsetDot(baseY, yOffset, { minVal: 0, maxVal: rect_size - dot_radius }) + "px"
 
 }
 
 function offsetDot(base, offset, treshold) {
-    product = Number(base + parseInt(offset*2));
+    product = Number(base + parseInt(offset * 2));
     if (product < treshold.minVal) {
 
         return treshold.minVal;
