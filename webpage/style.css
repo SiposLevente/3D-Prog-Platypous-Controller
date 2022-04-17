@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(189, 103, 103);
+}
+
 .deadzone_style {
     background: repeating-linear-gradient(-45deg,
             rgba(0, 0, 0, 0.2),
@@ -9,13 +13,18 @@
 .controll_button_style {
     margin: 0;
     position: absolute;
-    top: 50%;
-    left: 51%;
+    top: 75%;
+    left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 
 line {
-    stroke: rgb(0, 0, 0);
+    stroke: rgb(70, 0, 0);
     stroke-width: 2;
+}
+
+h1 {
+    color: white;
+    text-align: center;
 }
