@@ -6,6 +6,15 @@
             rgba(0, 0, 0, 0.3) 20px);
 }
 
+.controll_button_style {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 51%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 line {
     stroke: rgb(0, 0, 0);
     stroke-width: 2;

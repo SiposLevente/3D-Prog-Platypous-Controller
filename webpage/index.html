@@ -13,21 +13,22 @@
 </head>
 
 <body>
-    <button id="controller" type="button" onclick="buttonPressed()">Take Control</button>
 
     <div id="controll_border"
-        style="border: 3px;border-style: solid;left: 100px;bottom: 280px;width: 200px;height: 200px;background-color: lightgray;position: absolute;">
-        <svg width="200" height="200">
-            <line x1="100" y1="0" x2="100" y2="200" />
-            <line x1="0" y1="100" x2="200" y2="100" />
+        style="border: 3px;border-style: solid;left:50%;top:30%;width: 300px;height: 300px;background-color: lightgray;position: absolute;transform:translate(-50%,-50%);">
+        <svg width="300" height="300">
+            <line x1="150" y1="0" x2="150" y2="300" />
+
+            <line x1="0" y1="150" x2="400" y2="150" />
         </svg>
 
         <div id="deadzone" class="deadzone_style"
-            style="left: 65px;top: 65px;background-color: darkred;width: 70px;height: 70px;position: absolute;"> </div>
+            style="left: 115px;top: 115px;background-color: darkred;width: 70px;height: 70px;position: absolute;"> </div>
         <div id="dot"
             style="position: absolute; background-color: red; border-radius: 100px;height: 20px; width: 20px; display: none;">
         </div>
     </div>
+    <button id="controller" class="controll_button_style" type="button" onclick="buttonPressed()">Take Control</button>
 </body>
 
 </html>
