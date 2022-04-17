@@ -15,16 +15,17 @@
 <body>
     <button id="controller" type="button" onclick="buttonPressed()">Take Control</button>
 
-    <div id="controll_border">
+    <div id="controll_border"
+        style="border: 3px;border-style: solid;left: 100px;bottom: 280px;width: 200px;height: 200px;background-color: lightgray;position: absolute;">
         <svg width="200" height="200">
             <line x1="100" y1="0" x2="100" y2="200" />
             <line x1="0" y1="100" x2="200" y2="100" />
         </svg>
 
-        <div id="deadzone">
-        </div>
-
-        <div id="dot">
+        <div id="deadzone" class="deadzone_style"
+            style="left: 65px;top: 65px;background-color: darkred;width: 70px;height: 70px;position: absolute;"> </div>
+        <div id="dot"
+            style="position: absolute; background-color: red; border-radius: 100px;height: 20px; width: 20px; display: none;">
         </div>
     </div>
 </body>

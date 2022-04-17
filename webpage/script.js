@@ -92,7 +92,7 @@ function handleOrientation(event) {
         alpha = calculateRealOffset(event.alpha, alphaOffset);
         beta = calculateRealOffset(-event.beta, betaOffset);
         gamma = calculateRealOffset(-event.gamma, gammaOffset);
-
+        console.log(gamma);
         moveDot(gamma, -beta);
 
         sendData(userId, "inUse");
@@ -116,16 +116,15 @@ function moveDot(xOffset, yOffset) {
     rect_size = parseInt(document.getElementById("controll_border").style.height.replace("px", ""));
     baseX = (rect_size / 2) - dot_radius / 2;
     baseY = (rect_size / 2) - dot_radius / 2;
-
     dot.style.left = offsetDot(baseX, xOffset, { minVal: 0, maxVal: rect_size - dot_radius }) + "px"
     dot.style.bottom = offsetDot(baseY, yOffset, { minVal: 0, maxVal: rect_size - dot_radius }) + "px"
-
+    
 }
 
 function offsetDot(base, offset, treshold) {
     product = Number(base + parseInt(offset * 2));
     if (product < treshold.minVal) {
-
+        
         return treshold.minVal;
     } else if (product > treshold.maxVal) {
 
