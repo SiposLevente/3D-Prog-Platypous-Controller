@@ -37,7 +37,7 @@ var options = {
 client.connect(options);
 
 window.addEventListener("deviceorientation", handleOrientation);
-setInterval(update_all, 10);
+setInterval(updateAll, 10);
 
 function buttonPressed() {
     capturingData = !capturingData
@@ -92,10 +92,6 @@ function handleOrientation(event) {
         alpha = calculateRealOffset(event.alpha, alphaOffset);
         beta = calculateRealOffset(-event.beta, betaOffset);
         gamma = calculateRealOffset(-event.gamma, gammaOffset);
-
-        document.getElementById("grav_x").innerHTML = "y: " + alpha;
-        document.getElementById("grav_y").innerHTML = "z: " + beta;
-        document.getElementById("grav_z").innerHTML = "x: " + gamma;
 
         moveDot(gamma, -beta);
 
@@ -152,20 +148,17 @@ function incrementCounter() {
     if (useTimeout > 0 && inUse) {
         useTimeout--;
     }
-
     if (useTimeout == 0) {
         releaseController();
     }
-
     if (connected && capturingData && !inUse) {
         counter += 1;
         sendData(counter, "counter")
     }
 }
 
-function update_all() {
+function updateAll() {
     incrementCounter();
-    document.getElementById("counter_val").innerHTML = counter;
 }
 
 function uuidv4() {

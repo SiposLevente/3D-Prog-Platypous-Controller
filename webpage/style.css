@@ -1,10 +1,10 @@
-#controll_border,
-#dearzone,
-#dot {
+div#controll_border,
+div#dearzone,
+div#dot {
     position: absolute;
 }
 
-#deadzone {
+div#deadzone {
     background: repeating-linear-gradient(-45deg,
             rgba(0, 0, 0, 0.2),
             rgba(0, 0, 0, 0.2) 10px,
@@ -17,7 +17,7 @@
     height: 70px;
 }
 
-#controll_border {
+div#controll_border {
     border: 3px;
     border-style: solid;
     left: 100px;
@@ -27,7 +27,7 @@
     background-color: lightgray;
 }
 
-#dot {
+div#dot {
     background-color: red;
     border-radius: 100px;
     height: 20px;
