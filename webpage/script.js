@@ -107,9 +107,9 @@ function handleOrientation(event) {
         moveDot(gamma, -beta);
 
         sendData(userId, useTopic);
-        sendData(alpha, yTopic);
-        sendData(beta, zTopic);
-        sendData(gamma, xTopic);
+        sendData(alpha, zTopic);
+        sendData(-beta, xTopic);
+        sendData(gamma, yTopic);
     }
 };
 
