@@ -83,6 +83,8 @@ The z part is unimportant in all the parts, because the robot does not lift up o
 Publish your x, y and z datas under the <mark> to_platypous/ </mark> topic in order to go in the given direction.
 </pre>
 
-- Subscibe your x, y and z datas on the  <mark> to_platypous/ </mark> topic in order to use the robot real time location in other project.
+<pre>
+Subscibe your x, y and z datas on the <mark> from_platypous/</mark> topic in order to use the robot real time location in other project.
+</pre>
 
 Pictures taken by [carbon.now](https://carbon.now.sh/)
