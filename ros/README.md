@@ -53,7 +53,7 @@ In the robot github documentation we can see that this is installed under [RUN p
 
 <p align="center">
   <img
-    src="/images/cerifi.png"
+    src="/images/certifi.png"
     alt="drawing"
     width="800"
   />
