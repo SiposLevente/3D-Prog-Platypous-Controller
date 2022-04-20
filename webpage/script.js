@@ -11,6 +11,7 @@ const counterTopic = "counter";
 
 const dotId = "dot";
 const controllerButtonId = "controller";
+const centerButtonId = "center_button";
 const controllerBorderId = "controll_border";
 
 counter = 1;
@@ -77,6 +78,7 @@ client.onMessageArrived = function (message) {
 function lockController() {
     document.getElementById(dotId).style.backgroundColor = "grey";
     document.getElementById(controllerButtonId).disabled = true;
+    document.getElementById(centerButtonId).disabled = true;
     document.getElementById(controllerButtonId).innerText = "In use!";
     console.log("Other device is using the controller");
     inUse = true;
@@ -87,6 +89,7 @@ function releaseController() {
     console.log("Other device released the controller");
     document.getElementById(dotId).style.backgroundColor = "red";
     document.getElementById(controllerButtonId).disabled = false;
+    document.getElementById(centerButtonId).disabled = false;
     text = "Take Control"
     if (capturingData) {
         text = "Release"
