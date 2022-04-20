@@ -21,9 +21,9 @@ class Main:
             print("Connected to broker")    
             global Connected                #Use global variable
             Connected = True                #Signal connection
-            client.subscribe("xAccel")
-            client.subscribe("yAccel")
-            client.subscribe("zAccel")
+            client.subscribe("to_platypous/x")
+            client.subscribe("to_platypous/y")
+            client.subscribe("to_platypous/z")
         else:    
             print("Connection failed")
         
@@ -59,27 +59,23 @@ class Main:
         
         client.loop_start()        #start the loop
         while not rospy.is_shutdown():
-            time.sleep(1)
+            time.sleep(0.1)
             o = self.odometry_cp
-            positions = str(o.pose).split()
-            x_index = positions.index("x:")
-            y_index = positions.index("y:")
-            z_index = positions.index("z:")
 
-            x = positions[x_index+1]
-            y = positions[y_index+1]
-            z = positions[z_index+1]
-
+            x = o.pose.pose.position.x
+            y = o.pose.pose.position.y
+            z = o.pose.pose.position.z
+            
             f = "from_platypous/"
 
-            client.publish(f + positions[x_index].split(":")[0], x)
-            client.publish(f + positions[y_index].split(":")[0], y)
-            client.publish(f + positions[z_index].split(":")[0], z)
+            client.publish(f + "x", str(x))
+            client.publish(f + "y", str(y))
+            client.publish(f + "z", str(z))
 
             client.on_message = Main.on_message
-            print("X: " + str(Values.x_value) + " Y: " + str(Values.y_value) + " Z: " + str(Values.z_value))
-            vel_msg.linear.x = float(Values.y_value)/10
-            vel_msg.angular.z = float(Values.x_value)/10
+            
+            vel_msg.linear.x = -float(Values.y_value)/8
+            vel_msg.angular.z = float(Values.x_value)/8
             self.twist_pub.publish(vel_msg)
             
 class Values:
