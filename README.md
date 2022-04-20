@@ -21,6 +21,8 @@
 - [x] [Make a mobil application](https://github.com/SiposLevente/3D-Prog-Platypous-Controller/tree/main/android_app) or [Webpage](https://github.com/SiposLevente/3D-Prog-Platypous-Controller/tree/main/webpage)
 - [x] Make (own) MQTT server
 - [x] Write [some code](https://github.com/SiposLevente/3D-Prog-Platypous-Controller/tree/main/ros) for the robot movement
+- [x] Test it in the ros virtual environment
+- [x] Test it in real environment
 
 <br />
 
