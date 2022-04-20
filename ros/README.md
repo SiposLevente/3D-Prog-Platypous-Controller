@@ -27,7 +27,7 @@ In the robot github documentation we can see that this is installed under [RUN p
 
 <p align="center">
   <img
-    src="images/paho.png"
+    src="/images/paho.png"
     alt="drawing"
     width="800"
   />
@@ -39,7 +39,7 @@ In the robot github documentation we can see that this is installed under [RUN p
 
 <p align="center">
   <img
-    src="images/sub_pub.png"
+    src="/images/sub_pub.png"
     alt="drawing"
     width="800"
   />
@@ -53,7 +53,7 @@ In the robot github documentation we can see that this is installed under [RUN p
 
 <p align="center">
   <img
-    src="images/cerifi.png"
+    src="/images/cerifi.png"
     alt="drawing"
     width="800"
   />
@@ -66,7 +66,7 @@ Name conversions: "from_platypous/x", "from_platypous/y", "from_platypous/z".
 
 <p align="center">
   <img
-    src="images/publish2.png"
+    src="/images/publish2.png"
     alt="drawing"
     width="800"
   />
