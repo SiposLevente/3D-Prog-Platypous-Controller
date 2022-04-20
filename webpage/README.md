@@ -2,6 +2,12 @@
 Simple website based controller for Platyous robot, built using HTML, CSS and Javascript. The project requires an external MQTT broker to work correctly. The Platypous robot needs to be connected to the same MQTT broker!
 **The website only works for devices with a built in orientation sensor!!!**
 
+Images from the website:
+- [Default state, user can take control of the robot](../images/webpage/web0.jpg)
+- [User is controlling the robot, the dot moves as the device orientation is changed. This helps the user keep track of the controls.](../images/webpage/web1.jpg)
+- [Other user is controlling the robot. While this is the case the user cannot interact with the webpage, and the dot is greyed out.](../images/webpage/web2.jpg)
+
+
 ## **Functionalities**
 The website uses the user device's built in orientation sensor to control the robot. The interface also prevents multiple users from controlling the device at the same time to prevent unintended behaviors.
 
