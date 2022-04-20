@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(189, 103, 103);
+    background-color: rgb(255, 255, 255);
 }
 
 .deadzone_style {
@@ -25,6 +25,5 @@ line {
 }
 
 h1 {
-    color: white;
     text-align: center;
 }
