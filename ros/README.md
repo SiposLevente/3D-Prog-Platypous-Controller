@@ -84,7 +84,7 @@ Publish your x, y and z datas under the <mark> to_platypous/ </mark> topic in or
 </pre>
 
 <pre>
-Subscibe your x, y and z datas on the <mark> from_platypous/</mark> topic in order to use the robot real time location in other project.
+Subscibe your x, y and z datas on the <span style="background-color: #D13525">from_platypous/</span> topic in order to use the robot real time location in other project.
 </pre>
 
 Pictures taken by [carbon.now](https://carbon.now.sh/)
