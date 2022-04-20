@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="images/Python-01.jpg"
+    src="/images/Python-01.jpg"
     alt="drawing" 
     width="400"
   />
