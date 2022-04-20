@@ -49,7 +49,7 @@ client.connect(options);
 window.addEventListener("deviceorientation", handleOrientation);
 setInterval(updateAll, 10);
 
-function buttonPressed() {
+function controllButtonPressed() {
     capturingData = !capturingData
     if (capturingData) {
         document.getElementById(controllerButtonId).innerText = "Release";
@@ -60,6 +60,10 @@ function buttonPressed() {
         changeControllerDotVisibility(false);
         sendData(RELEASE_TEXT, useTopic);
     }
+}
+
+function centerDot() {
+    firstCapture = true;
 }
 
 client.onMessageArrived = function (message) {

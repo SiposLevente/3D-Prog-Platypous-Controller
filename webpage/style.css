@@ -14,7 +14,16 @@ body {
     margin: 0;
     position: absolute;
     top: 75%;
-    left: 50%;
+    left: 25%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.center_button_style {
+    margin: 0;
+    position: absolute;
+    top: 75%;
+    left: 75%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
