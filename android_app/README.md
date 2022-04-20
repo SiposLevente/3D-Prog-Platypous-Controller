@@ -37,6 +37,7 @@ This is a private MQTT cloud server. Feel free to create your own:
 <p align="center">
   <img
     src="qr-code.jpg"
-    style="display: inline-block; margin: 0 auto; max-width: 200px"
-    />
+    alt="drawing" 
+    width="300"
+  />
 </p>
