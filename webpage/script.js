@@ -7,7 +7,6 @@ const useTopic = "inUse";
 const xTopic = "orietation/x";
 const yTopic = "orietation/y";
 const zTopic = "orietation/z";
-const counterTopic = "counter";
 
 const dotId = "dot";
 const controllerButtonId = "controller";
@@ -179,7 +178,6 @@ function incrementCounter() {
     }
     if (connected && capturingData && !inUse) {
         counter += 1;
-        sendData(counter, counterTopic)
     }
 }
 
