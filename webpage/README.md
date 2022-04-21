@@ -11,7 +11,11 @@ Images from the website:
 ## **Functionalities**
 The website uses the user device's built in orientation sensor to control the robot. The interface also prevents multiple users from controlling the device at the same time to prevent unintended behaviors.
 
-![Phone orientation](../images/phone_orientation.png)
+<center>
+<img src="../images/phone_orientation.png">
+<br>
+<i>Coordinate system of the phone</i>
+</center>
 
 Depending on the user device's orientation the robot starts to move. The corresponding movements are the following:
 |                                     | **X-wise rotation**   | **Y-wise rotation**       |
