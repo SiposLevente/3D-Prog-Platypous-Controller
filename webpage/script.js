@@ -1,21 +1,32 @@
+// MQTT release publish text
 const RELEASE_TEXT = "released"
-const TIMEOUT_VAL = 100;
-const hostname = "192.168.1.150";
-const port = 9001;
+
+// MQTT topics
 const mainTopic = "controller/";
 const useTopic = "inUse";
 const xTopic = "orietation/x";
 const yTopic = "orietation/y";
 const zTopic = "orietation/z";
 
+
+// MQTT connection settings
+const hostname = "192.168.1.150";
+const port = 9001;
+const useSSL = false;
+const username = "";
+const password = "";
+const path = "/ws";
+
+// HTML id names:
 const dotId = "dot";
 const controllerButtonId = "controller";
 const centerButtonId = "center_button";
 const controllerBorderId = "controll_border";
 
+// Website variables
+const TIMEOUT_VAL = 100;
+const userId = uuidv4();
 counter = 1;
-userId = uuidv4();
-clientId = userId;
 alphaOffset = 0;
 betaOffset = 0;
 gammaOffset = 0;
@@ -26,8 +37,7 @@ connected = false
 capturingData = false;
 firstCapture = true;
 
-
-client = new Paho.Client(hostname, port, "", clientId);
+client = new Paho.Client(hostname, port, path, userId);
 
 var options = {
     timeout: 3,
@@ -38,6 +48,9 @@ var options = {
         connected = true
         client.subscribe(mainTopic + useTopic)
     },
+    userName: username,
+    password: password,
+    useSSL: useSSL,
     //Gets Called if the connection could not be established
     onFailure: function (message) {
         alert("Connection failed: " + message.errorMessage);

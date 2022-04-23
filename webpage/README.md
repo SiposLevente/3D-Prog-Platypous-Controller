@@ -1,4 +1,4 @@
-# **Platypous-Web-Based-Controller(WIP)**
+# **Platypous-Web-Based-Controller**
 Simple website based controller for Platyous robot, built using HTML, CSS and Javascript. The project requires an external MQTT broker to work correctly. The Platypous robot needs to be connected to the same MQTT broker!
 **The website only works for devices with a built in orientation sensor!!!**
 
