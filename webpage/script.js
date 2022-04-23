@@ -35,7 +35,7 @@ useTimeout = TIMEOUT_VAL;
 inUse = false;
 connected = false
 capturingData = false;
-firstCapture = true;
+resetOffset = true;
 
 client = new Paho.Client(hostname, port, path, userId);
 
@@ -57,10 +57,14 @@ var options = {
     }
 };
 
+ // MQTT tries to connect to specified broker
 client.connect(options);
 
+// Orientation event
 window.addEventListener("deviceorientation", handleOrientation);
-setInterval(updateAll, 10);
+
+// Ticks every 10ms
+setInterval(incrementCounter, 10); 
 
 function controllButtonPressed() {
     capturingData = !capturingData
@@ -69,16 +73,17 @@ function controllButtonPressed() {
         changeControllerDotVisibility(true);
     } else {
         document.getElementById(controllerButtonId).innerText = "Take Control";
-        firstCapture = true;
+        resetOffset = true;
         changeControllerDotVisibility(false);
         sendData(RELEASE_TEXT, useTopic);
     }
 }
 
 function centerDot() {
-    firstCapture = true;
+    resetOffset = true;
 }
 
+// Message arrives on a subscribed topic
 client.onMessageArrived = function (message) {
     if (message.payloadString != userId && message.payloadString != RELEASE_TEXT) {
         lockController();
@@ -111,10 +116,11 @@ function releaseController() {
     inUse = false;
 }
 
+// Phone orientation change event, triggers every time the orientation changes
 function handleOrientation(event) {
     if (connected && capturingData && !inUse) {
-        if (firstCapture) {
-            firstCapture = false;
+        if (resetOffset) {
+            resetOffset = false;
             alphaOffset = convertValue(event.alpha);
             betaOffset = -convertValue(event.beta);
             gammaOffset = -convertValue(event.gamma);
@@ -173,6 +179,7 @@ function offsetDot(base, offset, treshold) {
     return product;
 }
 
+// Publishes given data to a given subtopic under the specified main MQTT topic
 function sendData(data, subtopic) {
     if (data == RELEASE_TEXT || (connected && capturingData && !inUse)) {
         var message = new Paho.Message("" + data);
@@ -194,10 +201,7 @@ function incrementCounter() {
     }
 }
 
-function updateAll() {
-    incrementCounter();
-}
-
+// Generates a temprorary universal unique id for the user
 function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
