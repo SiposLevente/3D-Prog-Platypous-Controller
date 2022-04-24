@@ -1,0 +1,80 @@
+{
+  "body": {
+    "id": "gauge3",
+    "url": "gauge_body.mesh",
+    "position": {
+      "x": 1200,
+      "y": 500,
+      "z": 700
+    },
+    "orientation": {
+      "w": 0.707,
+      "x": -0.707,
+      "y": 0,
+      "z": 0
+    },
+    "scale": { "x": 30, "y": 30, "z": 30 },
+    "physical": {
+      "mesh": "gauge_body.mesh_phy.obj",
+      "shape": "mesh"
+    }
+  },
+  "dial": {
+    "url": "gauge_dial.mesh",
+    "position": {
+      "x": 0,
+      "y": -0.3100000023841858,
+      "z": 5.029000282287598
+    },
+    "orientation": {
+      "w": 1,
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 1,
+    "physical": {
+      "mesh": "gauge_dial.mesh_phy.obj",
+      "shape": "mesh"
+    },
+    "texture": {
+      "width": 300,
+      "height": 300,
+      "units": "bar",
+      "majorTicks": [0, 200, 400, 600, 800, 1000],
+      "highlights": [
+        { "from": 600, "to": 800, "color": "#0dff00" },
+        { "from": 800, "to": 950, "color": "#ff8000" },
+        { "from": 950, "to": 1000, "color": "#ff0000" }
+      ],
+      "colorPlate": "#fff"
+    }
+  },
+  "needle": {
+    "url": "gauge_indicator.mesh",
+    "position": {
+      "x": 0.0,
+      "y": -0.03999999910593033,
+      "z": 0
+    },
+    "orientation": {
+      "w": 1,
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": 1,
+    "physical": {
+      "mesh": "gauge_indicator.mesh_phy.obj",
+      "shape": "mesh"
+    },
+    "axis": [0, 1, 0]
+  },
+  "mapping": {
+    "minAngle": 90,
+    "maxAngle": 270,
+    "minValue": 0,
+    "maxValue": 1000,
+    "sensitivity": 1
+  }
+}

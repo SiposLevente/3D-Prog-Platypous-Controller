@@ -1,0 +1,536 @@
+<script type="text/javascript">
+  RED.nodes.registerType('add-light', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.settings.displayName || 'add light';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+
+      let formSettings = {
+        schema: {
+          options: {
+            type: 'object',
+            properties: {
+              id: {
+                title: 'Node id',
+                type: 'string',
+                required: true,
+              },
+              position: {
+                type: 'object',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 0,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 0,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 0,
+                  },
+                },
+              },
+              orientation: {
+                type: 'object',
+                properties: {
+                  w: {
+                    type: 'number',
+                    title: 'W',
+                    default: 1,
+                    step: 0.01,
+
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                },
+              },
+              scale: {
+                type: 'object',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 1,
+                    step: 0.01,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 1,
+                    step: 0.01,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 1,
+                    step: 0.01,
+                  },
+                },
+              },
+              autophysical: {
+                title: 'Auto physical',
+                type: 'boolean',
+                default: false,
+              },
+              physical: {
+                type: 'object',
+                properties: {
+                  'link-type': {
+                    type: 'string',
+                    enum: ['static', 'dynamic', 'kinematic', 'ghost'],
+                    default: 'ghost',
+                    title: 'Link-type',
+                  },
+                  raycast: {
+                    type: 'boolean',
+                    default: false,
+                    title: 'Raycast',
+                  },
+                  collision: {
+                    type: 'boolean',
+                    default: false,
+                    title: 'Collision',
+                  },
+                  coefficients: {
+                    type: 'object',
+                    properties: {
+                      restitution: {
+                        type: 'number',
+                        default: 0.7,
+                        title: 'Restitution',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      'linear-damping': {
+                        type: 'number',
+
+                        default: 0.1,
+                        title: 'Linear-damping',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      'angular-damping': {
+                        type: 'number',
+                        minimum: 0,
+                        maximum: 1,
+                        default: 0.1,
+                        title: 'Angular-damping',
+                        step: 0.01,
+                      },
+                      friction: {
+                        type: 'number',
+                        minimum: 0,
+                        maximum: 1,
+                        default: 0.3,
+                        title: 'Friction',
+                        step: 0.01,
+                      },
+                      'rolling-friction': {
+                        type: 'number',
+                        minimum: 0,
+                        maximum: 1,
+                        default: 0.01,
+                        title: 'Rolling friction',
+                        step: 0.01,
+                      },
+                      gravity: {
+                        type: 'object',
+                        properties: {
+                          x: {
+                            type: 'number',
+                            title: 'X',
+                            default: 0,
+                          },
+                          y: {
+                            type: 'number',
+                            title: 'Y',
+                            default: -9.81,
+                          },
+                          z: {
+                            type: 'number',
+                            title: 'Z',
+                            default: 0,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              lighttype: {
+                type: 'string',
+                enum: ['spot', 'directional', 'point'],
+                default: 'point',
+                title: 'Light type',
+              },
+              diffuse: {
+                type: 'object',
+                properties: {
+                  r: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'R',
+                  },
+                  g: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'G',
+                  },
+                  b: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'B',
+                  },
+                  a: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'A',
+                  },
+                },
+              },
+              specular: {
+                type: 'object',
+                properties: {
+                  r: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'R',
+                  },
+                  g: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'G',
+                  },
+                  b: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'B',
+                  },
+                  a: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+                    step: 0.01,
+                    title: 'A',
+                  },
+                },
+              },
+              range: {
+                type: 'object',
+                properties: {
+                  inner_angle: {
+                    type: 'number',
+                    default: 35,
+                    step: 0.01,
+                    title: 'Inner angle',
+                  },
+                  outer_angle: {
+                    type: 'number',
+                    default: 70,
+
+                    step: 0.01,
+                    title: 'Outer angle',
+                  },
+                  falloff: {
+                    type: 'number',
+                    default: 1,
+
+                    step: 0.01,
+                    title: 'Falloff',
+                  },
+                },
+              },
+              attenuation: {
+                type: 'object',
+                properties: {
+                  range: {
+                    type: 'number',
+                    default: 5000,
+                    step: 0.01,
+                    title: 'Range',
+                  },
+                  constant: {
+                    type: 'number',
+                    default: 1,
+                    minimum: 0,
+                    maximum: 1,
+
+                    step: 0.01,
+                    title: 'Constant',
+                  },
+                  linear: {
+                    type: 'number',
+                    default: 0.0009,
+
+                    step: 0.0001,
+                    title: 'linear',
+                  },
+                  quadratic: {
+                    type: 'number',
+                    default: 0.000003,
+                    step: 0.000001,
+                    title: 'Quadratic',
+                  },
+                },
+              },
+              direction: {
+                type: 'object',
+                properties: {
+                  x: {
+                    type: 'number',
+                    default: 0,
+                    step: 0.01,
+                    title: 'X',
+                  },
+                  y: {
+                    type: 'number',
+                    default: -1,
+                    step: 0.01,
+                    title: 'Y',
+                  },
+                  z: {
+                    type: 'number',
+                    default: 0,
+                    step: 0.01,
+                    title: 'Z',
+                  },
+                },
+              },
+            },
+          },
+          displayName: {
+            type: 'string',
+            title: 'Display name',
+          },
+          create: {
+            type: 'string',
+            title: 'Create on',
+            enum: ['init', 'input'],
+            default: 'init',
+          },
+        },
+        form: [
+          {
+            key: 'create',
+            titleMap: {
+              init: 'Initialization',
+              input: 'Input',
+            },
+          },
+          'options.id',
+          {
+            type: 'advancedfieldset',
+            title: 'Position',
+            items: [
+              {
+                key: 'options.position',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Orientation',
+            items: [
+              {
+                key: 'options.orientation',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Scale',
+            items: [
+              {
+                key: 'options.scale',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Physical',
+            items: [
+              {
+                key: 'options.autophysical',
+              },
+              {
+                key: 'options.physical.raycast',
+              },
+              // Excluded in lite
+              {
+                key: 'options.physical.collision',
+              },
+              {
+                key: 'options.physical.link-type',
+              },
+              {
+                type: 'advancedfieldset',
+                title: 'Coefficients ',
+                items: [
+                  {
+                    key: 'options.physical.coefficients.restitution',
+                  },
+                  {
+                    key: 'options.physical.coefficients.linear-damping',
+                  },
+                  {
+                    key: 'options.physical.coefficients.angular-damping',
+                  },
+                  {
+                    key: 'options.physical.coefficients.friction',
+                  },
+                  {
+                    key: 'options.physical.coefficients.rolling-friction',
+                  },
+                  {
+                    type: 'advancedfieldset',
+                    title: 'Gravity ',
+                    items: [
+                      {
+                        key: 'options.physical.coefficients.gravity',
+                      },
+                    ],
+                  },
+                ],
+              },
+              // Excluded in lite
+            ],
+          },
+
+          {
+            type: 'advancedfieldset',
+            title: 'Diffuse',
+            items: [
+              {
+                key: 'options.diffuse',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Specular',
+            items: [
+              {
+                key: 'options.specular',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Range',
+            items: [
+              {
+                key: 'options.range',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Attenuation',
+            items: [
+              {
+                key: 'options.attenuation',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Direction',
+            items: [
+              {
+                key: 'options.direction',
+              },
+            ],
+          },
+
+          {
+            key: 'displayName',
+          },
+        ],
+      };
+      if (!node.settings) {
+        $('#jsonFormContainer').jsonForm(formSettings);
+      } else {
+        $('#jsonFormContainer').jsonForm(
+          Object.assign({ value: node.settings }, formSettings),
+        );
+      }
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+<script type="text/html" data-template-name="add-light" id="add-light"></script>
+
+<script type="text/html" data-help-name="add-light">
+  <p>Adds a light source to the Where.</p>
+  <a href="https://tools.maxwhere.com/voc-builder/latest/adv/add-light/"
+    >Docs</a
+  >
+</script>

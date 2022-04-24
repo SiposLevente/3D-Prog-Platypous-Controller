@@ -1,0 +1,5 @@
+{
+  "name": "voc-builder",
+  "main": "index.js",
+  "resources": "./resources"
+}

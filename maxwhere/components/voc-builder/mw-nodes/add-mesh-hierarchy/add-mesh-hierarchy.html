@@ -1,0 +1,615 @@
+<script type="text/javascript">
+  let form;
+  let meshNames;
+  let tree;
+
+  function demo_create() {
+    var ref = $('#jstreeContainer').jstree(true),
+      sel = ref.get_selected();
+    if (!sel.length) {
+      return false;
+    }
+    ref.deselect_node(sel);
+    sel = sel[0];
+    sel = ref.create_node(sel, { type: 'child' });
+    if (sel) {
+      ref.select_node(sel);
+      ref.edit(sel);
+    }
+
+    //form = $('#jsonFormContainer').jsonForm(formSettings);
+    //console.log(sel);
+  }
+  function demo_rename() {
+    var ref = $('#jstreeContainer').jstree(true),
+      sel = ref.get_selected();
+    if (!sel.length) {
+      return false;
+    }
+    sel = sel[0];
+    ref.edit(sel);
+  }
+  function demo_delete() {
+    var ref = $('#jstreeContainer').jstree(true),
+      sel = ref.get_selected();
+    if (!sel.length) {
+      return false;
+    }
+    ref.delete_node(sel);
+  }
+
+  RED.nodes.registerType('add-mesh-hierarchy', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      parent: { value: '' },
+      name: { value: '' },
+      save: { value: true },
+      create: { value: 'init' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.name || 'add mesh hierarchy';
+    },
+    oneditprepare: function () {
+      let node = this;
+      $.when(
+        $.ajax({
+          type: 'GET',
+          url: './getMeshNames/',
+          async: false,
+        }),
+        $.ajax({
+          type: 'GET',
+          url: './getPhyObjectNames/',
+          async: false,
+        }),
+      ).done((response1, response2) => {
+        console.log(response1);
+        let meshNames = Array.from(new Set(response1[0]));
+        let phyObjNames = Array.from(new Set(response2[0]));
+        let formSettings = {
+          schema: {
+            options: {
+              type: 'object',
+              properties: {
+                url: {
+                  title: 'Mesh file',
+                  type: 'string',
+                  enum: meshNames,
+                },
+                id: {
+                  title: 'Node id',
+                  type: 'string',
+                  required: true,
+                },
+                position: {
+                  type: 'object',
+                  properties: {
+                    x: {
+                      type: 'number',
+                      title: 'X',
+                      default: 0,
+                    },
+                    y: {
+                      type: 'number',
+                      title: 'Y',
+                      default: 0,
+                    },
+                    z: {
+                      type: 'number',
+                      title: 'Z',
+                      default: 0,
+                    },
+                  },
+                },
+                orientation: {
+                  type: 'object',
+                  properties: {
+                    w: {
+                      type: 'number',
+                      title: 'W',
+                      default: 1,
+                      step: 0.01,
+
+                      minimum: -1,
+                      maximum: 1,
+                    },
+                    x: {
+                      type: 'number',
+                      title: 'X',
+                      default: 0,
+                      step: 0.01,
+                      minimum: -1,
+                      maximum: 1,
+                    },
+                    y: {
+                      type: 'number',
+                      title: 'Y',
+                      default: 0,
+                      step: 0.01,
+                      minimum: -1,
+                      maximum: 1,
+                    },
+                    z: {
+                      type: 'number',
+                      title: 'Z',
+                      default: 0,
+                      step: 0.01,
+                      minimum: -1,
+                      maximum: 1,
+                    },
+                  },
+                },
+                scale: {
+                  type: 'object',
+                  properties: {
+                    x: {
+                      type: 'number',
+                      title: 'X',
+                      default: 1,
+                      step: 0.01,
+                    },
+                    y: {
+                      type: 'number',
+                      title: 'Y',
+                      default: 1,
+                      step: 0.01,
+                    },
+                    z: {
+                      type: 'number',
+                      title: 'Z',
+                      default: 1,
+                      step: 0.01,
+                    },
+                  },
+                },
+                autophysical: {
+                  title: 'Auto physical',
+                  type: 'boolean',
+                  default: true,
+                },
+                physical: {
+                  type: 'object',
+                  properties: {
+                    'link-type': {
+                      type: 'string',
+                      enum: ['static', 'dynamic', 'kinematic', 'ghost'],
+                      default: 'ghost',
+                      title: 'Link-type',
+                    },
+                    raycast: {
+                      type: 'boolean',
+                      default: true,
+                      title: 'Raycast',
+                    },
+                    collision: {
+                      type: 'boolean',
+                      default: false,
+                      title: 'Collision',
+                    },
+                    coefficients: {
+                      type: 'object',
+                      properties: {
+                        restitution: {
+                          type: 'number',
+                          default: 0.7,
+                          title: 'Restitution',
+                          step: 0.01,
+                          minimum: 0,
+                          maximum: 1,
+                        },
+                        'linear-damping': {
+                          type: 'number',
+
+                          default: 0.1,
+                          title: 'Linear-damping',
+                          step: 0.01,
+                          minimum: 0,
+                          maximum: 1,
+                        },
+                        'angular-damping': {
+                          type: 'number',
+                          minimum: 0,
+                          maximum: 1,
+                          default: 0.1,
+                          title: 'Angular-damping',
+                          step: 0.01,
+                          minimum: 0,
+                          maximum: 1,
+                        },
+                        friction: {
+                          type: 'number',
+                          minimum: 0,
+                          maximum: 1,
+                          default: 0.3,
+                          title: 'Friction',
+                          step: 0.01,
+                          minimum: 0,
+                          maximum: 1,
+                        },
+                        'rolling-friction': {
+                          type: 'number',
+                          minimum: 0,
+                          maximum: 1,
+                          default: 0.01,
+                          title: 'Rolling friction',
+                          step: 0.01,
+                          minimum: 0,
+                          maximum: 1,
+                        },
+                        gravity: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: -9.81,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0,
+                            },
+                          },
+                        },
+                      },
+                    },
+                    phyObj: {
+                      title: 'Physical file',
+                      type: 'string',
+                      enum: ['None'].concat(phyObjNames),
+                      default: 'None',
+                    },
+                  },
+                },
+              },
+            },
+            displayName: {
+              type: 'string',
+              title: 'Display name',
+            },
+            create: {
+              type: 'string',
+              title: 'Create on',
+              enum: ['init', 'input'],
+              default: 'init',
+            },
+            save: {
+              title: 'Save',
+              type: 'boolean',
+              default: false,
+            },
+          },
+          form: [
+            // {
+            //   key: 'create',
+            //   titleMap: {
+            //     init: 'Initialization',
+            //     input: 'Input',
+            //   },
+            // },
+            'options.url',
+            'options.id',
+
+            {
+              type: 'advancedfieldset',
+              title: 'Position',
+              items: [
+                {
+                  key: 'options.position',
+                },
+              ],
+            },
+            {
+              type: 'advancedfieldset',
+              title: 'Orientation',
+              items: [
+                {
+                  key: 'options.orientation',
+                },
+              ],
+            },
+            {
+              type: 'advancedfieldset',
+              title: 'Scale',
+              items: [
+                {
+                  key: 'options.scale',
+                },
+              ],
+            },
+
+            {
+              type: 'advancedfieldset',
+              title: 'Physical',
+              items: [
+                {
+                  key: 'options.autophysical',
+                },
+                {
+                  key: 'options.physical.raycast',
+                },
+                {
+                  key: 'options.physical.phyObj',
+                },
+                // Excluded in lite
+                {
+                  key: 'options.physical.collision',
+                },
+                {
+                  key: 'options.physical.link-type',
+                },
+                {
+                  type: 'advancedfieldset',
+                  title: 'Coefficients ',
+                  items: [
+                    {
+                      key: 'options.physical.coefficients.restitution',
+                    },
+                    {
+                      key: 'options.physical.coefficients.linear-damping',
+                    },
+                    {
+                      key: 'options.physical.coefficients.angular-damping',
+                    },
+                    {
+                      key: 'options.physical.coefficients.friction',
+                    },
+                    {
+                      key: 'options.physical.coefficients.rolling-friction',
+                    },
+                    {
+                      type: 'advancedfieldset',
+                      title: 'Gravity ',
+                      items: [
+                        {
+                          key: 'options.physical.coefficients.gravity',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                // Excluded in lite
+              ],
+            },
+            // {
+            //   key: 'save',
+            // },
+
+            // {
+            //   key: 'displayName',
+            // },
+          ],
+        };
+
+        $('#dialog-form').before('<div id="editorContainer"></div>');
+
+        $('#editorContainer').append(`<div class="row">
+<div class="col-sm-8 col-xs-8">
+<button type="button" class="btn btn-success btn-sm" onclick="demo_create();"><i class="fa fa-plus-square"></i> Create</button>
+<button type="button" class="btn btn-warning btn-sm" onclick="demo_rename();"><i class="fa fa-pencil-square-o"></i> Rename</button>
+<button type="button" class="btn btn-danger btn-sm" onclick="demo_delete();"><i class="fa fa-minus-square"></i> Delete</button>
+</div>
+</div>`);
+
+        $('#editorContainer').append('<div id="jstreeContainer"></div>');
+        $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+        //TODO should be refactored ASAP
+        if (!node.parent) {
+          form = $('#jsonFormContainer').jsonForm(formSettings);
+          tree = $('#jstreeContainer').jstree({
+            core: {
+              data: [
+                {
+                  text: 'Parent',
+                  id: 'parent',
+                  state: {
+                    selected: true,
+                    opened: true,
+                  },
+                  type: 'root',
+
+                  data: form.root.getFormValues(),
+                },
+              ],
+              check_callback: true,
+              multiple: false,
+            },
+            types: {
+              '#': {
+                valid_children: ['root'],
+              },
+              root: {
+                icon: 'fa fa-certificate',
+                valid_children: ['child'],
+              },
+              child: {
+                icon: 'fa fa-dot-circle-o',
+              },
+            },
+            plugins: ['contextmenu', 'changed', 'types'],
+          });
+        } else {
+          tree = $('#jstreeContainer').jstree({
+            core: {
+              data: [node.parent],
+              check_callback: true,
+              multiple: false,
+            },
+            types: {
+              '#': {
+                valid_children: ['root'],
+              },
+              root: {
+                icon: 'fa fa-certificate',
+                valid_children: ['child'],
+              },
+              child: {
+                icon: 'fa fa-dot-circle-o',
+              },
+            },
+            plugins: ['contextmenu', 'changed', 'types'],
+          });
+          setTimeout(function () {
+            let selected = tree
+              .jstree(true)
+              .get_node(tree.jstree(true).get_selected()[0]);
+            if (selected) {
+              form = $('#jsonFormContainer').jsonForm(
+                Object.assign({ value: selected.data }, formSettings),
+              );
+            }
+          }, 100);
+        }
+
+        $('#jstreeContainer').on('changed.jstree', function (e, data) {
+          if (
+            data.action == 'select_node' &&
+            data.changed.deselected.length &&
+            data.changed.selected.length
+          ) {
+            console.log('changed event selected and deselected aga');
+            let selected = tree.jstree(true).get_node(data.changed.selected[0]);
+            let deselected = tree
+              .jstree(true)
+              .get_node(data.changed.deselected[0]);
+            deselected.data = form.root.getFormValues();
+            // normalize qiaternion
+            let ori = deselected.data.options.orientation;
+            let quaternion = new THREE.Quaternion(ori.x, ori.y, ori.z, ori.w);
+            quaternion.normalize();
+            deselected.data.options.orientation = {
+              x: quaternion.x,
+              y: quaternion.y,
+              z: quaternion.z,
+              w: quaternion.w,
+            };
+
+            $('#jsonFormContainer').empty();
+
+            const newForm = $('#jsonFormContainer').clone();
+            $('#jsonFormContainer').replaceWith(newForm);
+
+            if (selected.data) {
+              form = $('#jsonFormContainer').jsonForm(
+                Object.assign({ value: selected.data }, formSettings),
+              );
+            } else {
+              form = $('#jsonFormContainer').jsonForm(formSettings);
+            }
+          } else if (
+            data.action == 'select_node' &&
+            data.changed.selected.length
+          ) {
+            console.log('changed event selected aga');
+            let selected = tree.jstree(true).get_node(data.changed.selected[0]);
+            form = $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: selected.data }, formSettings),
+            );
+          } else if (
+            data.action == 'deselect_node' &&
+            data.changed.deselected.length
+          ) {
+            console.log('chnaged evenet deselected aga');
+            let deselected = tree
+              .jstree(true)
+              .get_node(data.changed.deselected[0]);
+            deselected.data = form.root.getFormValues();
+            let ori = deselected.data.options.orientation;
+            let quaternion = new THREE.Quaternion(ori.x, ori.y, ori.z, ori.w);
+            quaternion.normalize();
+            deselected.data.options.orientation = {
+              x: quaternion.x,
+              y: quaternion.y,
+              z: quaternion.z,
+              w: quaternion.w,
+            };
+            $('#jsonFormContainer').empty();
+
+            const newForm = $('#jsonFormContainer').clone();
+            $('#jsonFormContainer').replaceWith(newForm);
+          } else if (data.action == 'delete_node') {
+            $('#jsonFormContainer').empty();
+
+            const newForm = $('#jsonFormContainer').clone();
+            $('#jsonFormContainer').replaceWith(newForm);
+          }
+          console.log(data);
+          //console.log(e);
+        });
+
+        //console.log(tree.jstree(true).get_json());
+
+        /*
+if (node.children) {
+console.log(node.children);
+formSettings.value = node.children;
+}
+$('#jsonFormContainer').jsonForm(formSettings); */
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      let selected = tree
+        .jstree(true)
+        .get_node(tree.jstree(true).get_selected()[0]);
+      selected.data = form.root.getFormValues();
+      let ori = selected.data.options.orientation;
+      let quaternion = new THREE.Quaternion(ori.x, ori.y, ori.z, ori.w);
+      quaternion.normalize();
+      selected.data.options.orientation = {
+        x: quaternion.x,
+        y: quaternion.y,
+        z: quaternion.z,
+        w: quaternion.w,
+      };
+      let parent = tree.jstree(true).get_json()[0];
+
+      console.log('value of parent on save');
+      console.log(parent);
+      node.parent = parent;
+      //$('#jsonFormContainer').submit();
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="add-mesh-hierarchy"
+  id="add-mesh-hierarchy"
+>
+  <hr />
+  <div class="form-row">
+    <label for="node-input-create"><i class="fa fa-tag"></i> Create on</label>
+    <select id="node-input-create" name="node-input-create">
+      <option value="init">Initialization</option>
+      <option value="input">Input</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-save" style="width:70%">
+      <input
+        type="checkbox"
+        id="node-input-save"
+        style="display:inline-block; width:22px; vertical-align:top;"
+      />
+      Save
+    </label>
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Display name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="add-mesh-hierarchy">
+  <p>Add a hierarchical mesh to the MaxWhere space.</p>
+</script>

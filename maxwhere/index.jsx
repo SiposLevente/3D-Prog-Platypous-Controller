@@ -1,5 +1,10 @@
 <root>
   <ts-skeleton />
+  <voc-builder
+    userDir="userDir"
+    flowFile="./../../myVoc/exampleFlows.json"
+    resources="./../../myVoc/resources"
+  />
   {/* <mw-powerup /> */}
   {/* <osm /> */}
   <node

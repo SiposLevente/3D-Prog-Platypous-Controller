@@ -1,0 +1,69 @@
+<script type="text/javascript">
+  RED.nodes.registerType('offset', {
+    category: 'MaxWhere',
+    color: '#5ca61f',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'offset';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+
+      let formSettings = {
+        schema: {
+          offset: {
+            type: 'object',
+            title: 'Offset vector',
+            properties: {
+              x: {
+                type: 'number',
+                title: 'X',
+                default: 0,
+              },
+              y: {
+                type: 'number',
+                title: 'Y',
+                default: 0,
+              },
+              z: {
+                type: 'number',
+                title: 'Z',
+                default: 0,
+              },
+            },
+          },
+          displayName: {
+            type: 'string',
+            title: 'Display name',
+          },
+        },
+        form: ['offset', 'displayName'],
+      };
+      if (!node.settings) {
+        $('#jsonFormContainer').jsonForm(formSettings);
+      } else {
+        $('#jsonFormContainer').jsonForm(
+          Object.assign({ value: node.settings }, formSettings),
+        );
+      }
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="offset" id="offset"></script>
+
+<script type="text/html" data-help-name="offset">
+  <p>Offsets a position.</p>
+</script>

@@ -1,0 +1,11 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "node-red-contrib-s7": "~3.0.0",
+        "node-red-node-random": "~0.4.0"
+    }
+}

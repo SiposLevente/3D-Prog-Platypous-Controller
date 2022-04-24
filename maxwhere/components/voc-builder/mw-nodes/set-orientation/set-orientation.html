@@ -1,0 +1,205 @@
+<script type="text/javascript">
+  RED.nodes.registerType('set-orientation', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'set-orientation';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              nodeid: {
+                type: 'string',
+                title: 'Node ID',
+                enum: ['camera'].concat(womIds),
+                default: womIds[0],
+              },
+              oriType: {
+                type: 'string',
+                title: 'Oirentataion type',
+                enum: ['quaternion', 'angle-axis'],
+              },
+
+              'angle-axis': {
+                type: 'object',
+                properties: {
+                  angle: {
+                    type: 'number',
+                    title: 'Angle',
+                    default: 180,
+                    step: 0.01,
+                  },
+                  axis: {
+                    type: 'object',
+                    title: 'Axis',
+                    properties: {
+                      x: {
+                        type: 'number',
+                        title: 'X',
+                        default: 1,
+                        step: 0.01,
+                        minimum: -1,
+                        maximum: 1,
+                      },
+                      y: {
+                        type: 'number',
+                        title: 'Y',
+                        default: 0,
+                        step: 0.01,
+                        minimum: -1,
+                        maximum: 1,
+                      },
+                      z: {
+                        type: 'number',
+                        title: 'Z',
+                        default: 0,
+                        step: 0.01,
+                        minimum: -1,
+                        maximum: 1,
+                      },
+                    },
+                  },
+                },
+              },
+              quaternion: {
+                type: 'object',
+                title: 'Quaternion',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  w: {
+                    type: 'number',
+                    title: 'W',
+                    default: 1,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                },
+              },
+              reference: {
+                type: 'string',
+                title: 'Reference',
+                enum: ['absolute', 'relative'],
+                default: 'absolute',
+              },
+              space: {
+                type: 'string',
+                title: 'Space',
+                enum: ['parent', 'local', 'world'],
+                default: 'parent',
+              },
+              mode: {
+                type: 'string',
+                //title: 'Data source',
+                enum: ['local', 'fromInput'],
+                default: 'local',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              'nodeid',
+              {
+                type: 'selectfieldset',
+                key: 'mode',
+                title: 'Data source',
+                titleMap: {
+                  local: 'Set here',
+                  fromInput: 'Input data',
+                },
+                items: [
+                  /*  {
+                    type: 'section',
+                    title: 'Author',
+                    items: ['quaternion', 'angle-axis'],
+                  }, */
+                  {
+                    type: 'selectfieldset',
+                    key: 'oriType',
+                    title: 'Orientation type',
+                    items: ['quaternion', 'angle-axis'],
+                  },
+                  '',
+                ],
+              },
+              {
+                key: 'reference',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              {
+                key: 'space',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="set-orientation"
+  id="set-orientation"
+></script>
+
+<script type="text/html" data-help-name="set-orientation">
+  <p>Set a MaxWhere node orientation.</p>
+</script>

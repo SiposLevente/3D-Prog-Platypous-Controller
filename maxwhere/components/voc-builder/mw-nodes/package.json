@@ -1,0 +1,38 @@
+{
+  "name": "mw-nodes",
+  "version": "1.0.0",
+  "description": "Maxwhere Node-red Custom Nodes",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "node-red": {
+    "nodes": {
+      "add-mesh": "./add-mesh/add-mesh.js",
+      "add-instanced-mesh": "./add-instanced-mesh/add-instanced-mesh.js",
+      "add-mesh-hierarchy": "./add-mesh-hierarchy/add-mesh-hierarchy.js",
+      "add-light": "./add-light/add-light.js",
+      "add-webtable": "./add-webtable/add-webtable.js",
+      "add-overlay": "./add-overlay/add-overlay.js",
+      "animate": "./animate/animate.js",
+      "get-node-property": "./get-node-property/get-node-property.js",
+      "mesh-animator": "./mesh-animator/mesh-animator.js",
+      "wom-event-subscribe": "./wom-event-subscribe/wom-event-subscribe.js",
+      "node-event-subscribe": "./node-event-subscribe/node-event-subscribe.js",
+      "set-position": "./set-position/set-position.js",
+      "set-scale": "./set-scale/set-scale.js",
+      "set-orientation": "./set-orientation/set-orientation.js",
+      "set-shader": "./set-shader/set-shader.js",
+      "node-select": "./node-select/node-select.js",
+      "exploded-view": "./exploded-view/exploded-view.js",
+      "load-otf-asset": "./load-otf-asset/load-otf-asset.js",
+      "set-material": "./set-material/set-material.js",
+      "set-skybox": "./set-skybox/set-skybox.js",
+      "offset": "./offset/offset.js",
+      "rotate": "./rotate/rotate.js",
+      "mw-gauge": "./mw-gauge/mw-gauge.js",
+      "mw-tank": "./mw-tank/mw-tank.js"
+    }
+  }
+}

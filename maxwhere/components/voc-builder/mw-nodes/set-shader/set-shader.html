@@ -1,0 +1,130 @@
+<script src="./utils/public/formManagement.js"></script>
+<script type="text/javascript">
+  RED.nodes.registerType('set-shader', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'set-shader';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              nodeid: {
+                type: 'string',
+                title: 'Node ID',
+                enum: womIds,
+                default: womIds[0],
+              },
+              value: {
+                type: 'number',
+                title: 'Value',
+                default: 1,
+                minimum: -1,
+                maximum: 1,
+                step: 0.01,
+              },
+              mode: {
+                type: 'string',
+                //title: 'Data source',
+                enum: ['local', 'fromInput'],
+                default: 'local',
+              },
+
+              reference: {
+                type: 'string',
+                title: 'Reference',
+                enum: ['absolute', 'relative'],
+                default: 'absolute',
+              },
+              shader: {
+                type: 'string',
+                title: 'Shader',
+                enum: [
+                  'SurfacecolorbiasR',
+                  'SurfacecolorbiasG',
+                  'SurfacecolorbiasB',
+                  'SpecularcolorbiasR',
+                  'SpecularcolorbiasG',
+                  'SpecularcolorbiasB',
+                  'SurfacereflectivityA',
+                  'SurfacereflectivityD',
+                  'TextureoffsetX',
+                  'TextureoffsetY',
+                  'TextureoffsetNormalX',
+                  'TextureoffsetNormalY',
+                  'TextureoffsetRoughnessX',
+                  'TextureoffsetRoughnessY',
+                  'TextureoffsetMetallicX',
+                  'TextureoffsetMetallicY',
+                ],
+                default: 'SurfacecolorbiasR',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              'nodeid',
+              'shader',
+              {
+                type: 'selectfieldset',
+                key: 'mode',
+                title: 'Data source',
+                titleMap: {
+                  local: 'Set here',
+                  fromInput: 'Input data',
+                },
+                items: ['value', ''],
+              },
+              {
+                key: 'reference',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="set-shader"
+  id="set-shader"
+></script>
+
+<script type="text/html" data-help-name="set-shader">
+  <p>Set a maxWhere node color shader.</p>
+</script>

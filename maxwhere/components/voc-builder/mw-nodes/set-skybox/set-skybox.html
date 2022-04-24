@@ -1,0 +1,90 @@
+<script type="text/javascript">
+  RED.nodes.registerType('set-skybox', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'set-skybox';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getSkyBoxNames/',
+        async: false,
+        success: function (response) {
+          materials = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              create: {
+                type: 'string',
+                title: 'Set on',
+                enum: ['init', 'input'],
+                default: 'init',
+              },
+              material: {
+                type: 'string',
+                title: 'Material',
+                enum: materials,
+                default: materials[0],
+              },
+              distance: {
+                type: 'number',
+                title: 'Distance',
+                default: 5000,
+              },
+
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              {
+                key: 'create',
+                titleMap: {
+                  init: 'Initialization',
+                  input: 'Input',
+                },
+              },
+
+              'material',
+              'distance',
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="set-skybox"
+  id="set-skybox"
+></script>
+
+<script type="text/html" data-help-name="set-skybox">
+  <p>Set the skybox of the Where.</p>
+</script>

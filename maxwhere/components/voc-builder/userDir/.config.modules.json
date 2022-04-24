@@ -1,0 +1,8 @@
+{
+    "lodash": {
+        "spec": "lodash",
+        "module": "lodash",
+        "builtin": false,
+        "known": false
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "voc-builder",
+  "version": "1.0.0",
+  "description": "wom manipulation with node-red",
+  "main": "index.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install"
+  },
+  "author": "Norbert Rajos",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "canvas-gauges": "^2.1.7-radial",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "mw-nodes": "file:mw-nodes",
+    "node-red": "^2.0.6",
+    "node-red-contrib-counter": "~0.1.6",
+    "node-red-dashboard": "~2.24.0",
+    "node-red-debugger": "^1.1.1"
+  },
+  "devDependencies": {}
+}

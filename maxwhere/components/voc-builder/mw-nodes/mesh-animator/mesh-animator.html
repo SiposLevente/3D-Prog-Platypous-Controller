@@ -1,0 +1,81 @@
+<script type="text/javascript">
+  RED.nodes.registerType('mesh-animator', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'mesh-animator';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let animatorsOfMeshes;
+      $.ajax({
+        type: 'GET',
+        url: './getAnimators/',
+        async: false,
+        success: function (response) {
+          animatorsOfMeshes = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              meshid: {
+                type: 'string',
+                title: 'Mesh ID',
+                enum: animatorsOfMeshes.map((mesh) => mesh.id),
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              {
+                type: 'selectfieldset',
+                key: 'meshid',
+                title: 'Mesh id',
+                items: animatorsOfMeshes.map((mesh) => `${mesh.id}Animator`),
+              },
+              'displayName',
+            ],
+          };
+          animatorsOfMeshes.forEach((mesh) => {
+            formSettings.schema[`${mesh.id}Animator`] = {
+              type: 'string',
+              title: 'Animator',
+              enum: mesh.animators,
+            };
+          });
+          console.log(formSettings);
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="mesh-animator"
+  id="mesh-animator"
+></script>
+
+<script type="text/html" data-help-name="mesh-animator">
+  <p>Start a mesh animation.</p>
+</script>

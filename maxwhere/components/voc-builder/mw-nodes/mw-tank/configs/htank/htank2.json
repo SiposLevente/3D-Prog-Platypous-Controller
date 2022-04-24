@@ -1,0 +1,42 @@
+{
+  "tank": {
+    "id": "htank2",
+    "url": "horizontalTank.mesh",
+    "position": {
+      "x": 126.48735046386719,
+      "y": 195.40281677246094,
+      "z": 523.625244140625
+    },
+    "orientation": {
+      "w": 0.0,
+      "x": 0.0,
+      "y": 0.7071068286895752,
+      "z": 0.7071068286895752
+    },
+    "scale": 100,
+    "physical": {
+      "mesh": "horizontalTank.mesh_phy.obj",
+      "shape": "mesh"
+    },
+    "length": 2.95,
+    "radius": 0.495
+  },
+  "liquid": {
+    "resolution": 30,
+    "buildingBlock": {
+      "url": "Cube.mesh",
+      "edgeLength": 2
+    }
+  },
+  "mapping": {
+    "color": {
+      "min": 0,
+      "max": 1000
+    },
+    "liquid": {
+      "min": 0,
+      "max": 1000
+    }
+  },
+  "transparentMaterial": "Uveg_1"
+}

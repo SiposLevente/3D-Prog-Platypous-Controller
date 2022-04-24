@@ -1,0 +1,886 @@
+<script type="text/javascript">
+  RED.nodes.registerType('mw-tank', {
+    category: 'MaxWhere',
+    color: '#b85863',
+    defaults: {
+      settings: {
+        value: '',
+      },
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.settings.displayName || 'MW Tank';
+    },
+
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      $.when(
+        $.ajax({
+          type: 'GET',
+          url: './getMeshNames/',
+          async: false,
+        }),
+        $.ajax({
+          type: 'GET',
+          url: './getPhyObjectNames/',
+          async: false,
+        }),
+        $.ajax({
+          type: 'GET',
+          url: './getVerticalTankConfigs/',
+          async: false,
+        }),
+        $.ajax({
+          type: 'GET',
+          url: './getHorizontalTankConfigs/',
+          async: false,
+        }),
+      ).done((response1, response2, response3, response4) => {
+        console.log(response1);
+        console.log(response2);
+        let meshNames = Array.from(new Set(response1[0]));
+        let phyObjNames = Array.from(new Set(response2[0]));
+        let verticalTankConfigFiles = Array.from(new Set(response3[0]));
+        let horizontalTankConfigFiles = Array.from(new Set(response4[0]));
+        let formSettings = {
+          schema: {
+            options: {
+              type: 'object',
+              properties: {
+                verticalTank: {
+                  type: 'object',
+                  properties: {
+                    tank: {
+                      type: 'object',
+                      title: 'Tank',
+                      properties: {
+                        id: {
+                          title: 'Node id',
+                          type: 'string',
+                          required: true,
+                        },
+                        url: {
+                          title: 'Mesh file',
+                          type: 'string',
+                          enum: meshNames,
+                          default: 'verticalTank.mesh',
+                        },
+                        position: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0,
+                            },
+                          },
+                        },
+                        orientation: {
+                          type: 'object',
+                          properties: {
+                            w: {
+                              type: 'number',
+                              title: 'W',
+                              default: 0,
+                              step: 0.01,
+
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0.7071068286895752,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0.7071068286895752,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                          },
+                        },
+                        scale: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 1,
+                              step: 0.01,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 1,
+                              step: 0.01,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 1,
+                              step: 0.01,
+                            },
+                          },
+                        },
+                        physical: {
+                          type: 'object',
+                          title: 'Physical',
+                          properties: {
+                            mesh: {
+                              title: 'Physical file',
+                              type: 'string',
+                              enum: phyObjNames,
+                              default: 'verticalTank.mesh_phy.obj',
+                            },
+                          },
+                        },
+                      },
+                    },
+                    liquid: {
+                      type: 'object',
+                      title: 'Liquid',
+                      properties: {
+                        url: {
+                          title: 'Mesh file',
+                          type: 'string',
+                          enum: meshNames,
+                          default: 'Cylinder.mesh',
+                        },
+                        position: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0,
+                            },
+                          },
+                        },
+                        orientation: {
+                          type: 'object',
+                          properties: {
+                            w: {
+                              type: 'number',
+                              title: 'W',
+                              default: 1,
+                              step: 0.01,
+
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                          },
+                        },
+                        maxLiquidScale: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0.3,
+                              step: 0.01,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0.3,
+                              step: 0.01,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0.75,
+                              step: 0.01,
+                            },
+                          },
+                        },
+                        scale: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0.3,
+                              step: 0.01,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0.3,
+                              step: 0.01,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0.05,
+                              step: 0.01,
+                            },
+                          },
+                        },
+                        physical: {
+                          type: 'object',
+                          title: 'Physical',
+                          properties: {
+                            mesh: {
+                              title: 'Physical file',
+                              type: 'string',
+                              enum: phyObjNames,
+                              default: 'horizontalTank.mesh_phy.obj',
+                            },
+                          },
+                        },
+                      },
+                    },
+
+                    mapping: {
+                      type: 'object',
+                      title: 'Mapping',
+                      properties: {
+                        liquid: {
+                          type: 'object',
+                          title: 'Liquid',
+                          properties: {
+                            min: {
+                              type: 'number',
+                              title: 'Minimum',
+                              default: 0,
+                            },
+                            max: {
+                              type: 'number',
+                              title: 'Maximum',
+                              default: 1000,
+                            },
+                          },
+                        },
+                        color: {
+                          type: 'object',
+                          title: 'Color',
+                          properties: {
+                            min: {
+                              type: 'number',
+                              title: 'Minimum',
+                              default: 0,
+                            },
+                            max: {
+                              type: 'number',
+                              title: 'Maximum',
+                              default: 1000,
+                            },
+                          },
+                        },
+                      },
+                    },
+                    transparentMaterial: {
+                      type: 'string',
+                      title: 'Transparent material',
+                      default: 'Uveg_1',
+                    },
+                    configFile: {
+                      title: 'Configuration file',
+                      type: 'string',
+                      enum: verticalTankConfigFiles,
+                    },
+                  },
+                },
+                horizontalTank: {
+                  type: 'object',
+                  properties: {
+                    tank: {
+                      type: 'object',
+                      title: 'Tank',
+                      properties: {
+                        id: {
+                          title: 'Node id',
+                          type: 'string',
+                          required: true,
+                        },
+                        url: {
+                          title: 'Mesh file',
+                          type: 'string',
+                          enum: meshNames,
+                          default: 'horizontalTank.mesh',
+                        },
+                        position: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0,
+                            },
+                          },
+                        },
+                        orientation: {
+                          type: 'object',
+                          properties: {
+                            w: {
+                              type: 'number',
+                              title: 'W',
+                              default: 1,
+                              step: 0.01,
+
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 0,
+                              step: 0.01,
+                              minimum: -1,
+                              maximum: 1,
+                            },
+                          },
+                        },
+                        scale: {
+                          type: 'object',
+                          properties: {
+                            x: {
+                              type: 'number',
+                              title: 'X',
+                              default: 1,
+                              step: 0.01,
+                            },
+                            y: {
+                              type: 'number',
+                              title: 'Y',
+                              default: 1,
+                              step: 0.01,
+                            },
+                            z: {
+                              type: 'number',
+                              title: 'Z',
+                              default: 1,
+                              step: 0.01,
+                            },
+                          },
+                        },
+                        physical: {
+                          type: 'object',
+                          title: 'Physical',
+                          properties: {
+                            mesh: {
+                              title: 'Physical file',
+                              type: 'string',
+                              enum: phyObjNames,
+                              default: 'verticalTank.mesh_phy.obj',
+                            },
+                          },
+                        },
+                        length: {
+                          type: 'number',
+                          title: 'Length',
+                          default: 2.95,
+                        },
+                        radius: {
+                          type: 'number',
+                          title: 'Radius',
+                          default: 0.495,
+                        },
+                      },
+                    },
+                    liquid: {
+                      type: 'object',
+                      title: 'Liquid',
+                      properties: {
+                        resolution: {
+                          type: 'number',
+                          title: 'Resolution',
+                          default: 30,
+                        },
+                        buildingBlock: {
+                          type: 'object',
+                          title: 'Building block',
+                          properties: {
+                            url: {
+                              title: 'Mesh file',
+                              type: 'string',
+                              enum: meshNames,
+                              default: 'Cube.mesh',
+                            },
+                            edgeLength: {
+                              type: 'number',
+                              title: 'Edge length',
+                              default: 2,
+                            },
+                          },
+                        },
+                      },
+                    },
+
+                    mapping: {
+                      type: 'object',
+                      title: 'Mapping',
+                      properties: {
+                        liquid: {
+                          type: 'object',
+                          title: 'Liquid',
+                          properties: {
+                            min: {
+                              type: 'number',
+                              title: 'Minimum',
+                              default: 0,
+                            },
+                            max: {
+                              type: 'number',
+                              title: 'Maximum',
+                              default: 1000,
+                            },
+                          },
+                        },
+                        color: {
+                          type: 'object',
+                          title: 'Color',
+                          properties: {
+                            min: {
+                              type: 'number',
+                              title: 'Minimum',
+                              default: 0,
+                            },
+                            max: {
+                              type: 'number',
+                              title: 'Maximum',
+                              default: 1000,
+                            },
+                          },
+                        },
+                      },
+                    },
+                    transparentMaterial: {
+                      type: 'string',
+                      title: 'Transparent material',
+                      default: 'Uveg_1',
+                    },
+                    configFile: {
+                      title: 'Configuration file',
+                      type: 'string',
+                      enum: horizontalTankConfigFiles,
+                    },
+                  },
+                },
+              },
+            },
+
+            displayName: {
+              type: 'string',
+              title: 'Display name',
+            },
+            configType: {
+              type: 'string',
+              title: 'Config method',
+              enum: ['file', 'local'],
+              default: 'local',
+            },
+            save: {
+              title: 'Save',
+              type: 'boolean',
+              default: false,
+            },
+            tankTypeFile: {
+              title: 'Tank type',
+              type: 'string',
+              enum: ['horizontal', 'vertical'],
+            },
+
+            tankTypeLocal: {
+              title: 'Tank type',
+              type: 'string',
+              enum: ['horizontal', 'vertical'],
+            },
+          },
+          form: [
+            {
+              type: 'selectfieldset',
+              key: 'configType',
+              title: 'Config method',
+              titleMap: {
+                file: 'Config from file',
+                local: 'Set here',
+              },
+              items: [
+                {
+                  type: 'section',
+                  items: {
+                    type: 'selectfieldset',
+                    key: 'tankTypeFile',
+                    title: 'Tank type',
+                    items: [
+                      {
+                        type: 'section',
+                        items: ['options.horizontalTank.configFile'],
+                      },
+                      {
+                        type: 'section',
+                        items: ['options.verticalTank.configFile'],
+                      },
+                    ],
+                  },
+                },
+                {
+                  type: 'section',
+                  items: [
+                    {
+                      type: 'selectfieldset',
+                      key: 'tankTypeLocal',
+                      title: 'Tank type',
+                      items: [
+                        {
+                          type: 'section',
+                          items: [
+                            {
+                              type: 'advancedfieldset',
+                              title: 'Tank',
+                              items: [
+                                {
+                                  key: 'options.horizontalTank.tank.id',
+                                },
+                                {
+                                  key: 'options.horizontalTank.tank.url',
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Position',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.horizontalTank.tank.position',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Oirentation',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.horizontalTank.tank.orientation',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Scale',
+                                  items: [
+                                    {
+                                      key: 'options.horizontalTank.tank.scale',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Physical',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.horizontalTank.tank.physical.mesh',
+                                    },
+                                  ],
+                                },
+                                'options.horizontalTank.tank.length',
+                                'options.horizontalTank.tank.radius',
+                              ],
+                            },
+                            {
+                              type: 'advancedfieldset',
+                              title: 'Liquid',
+                              items: [
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Building block',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.horizontalTank.liquid.buildingBlock.url',
+                                    },
+                                    {
+                                      key:
+                                        'options.horizontalTank.liquid.buildingBlock.edgeLength',
+                                    },
+                                  ],
+                                },
+                                'options.horizontalTank.liquid.resolution',
+                              ],
+                            },
+
+                            {
+                              type: 'advancedfieldset',
+                              title: 'Mapping',
+                              items: [
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Liquid',
+                                  items: [
+                                    'options.horizontalTank.mapping.liquid.min',
+                                    'options.horizontalTank.mapping.liquid.max',
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Color',
+                                  items: [
+                                    'options.horizontalTank.mapping.color.min',
+                                    'options.horizontalTank.mapping.color.max',
+                                  ],
+                                },
+                              ],
+                            },
+                            'options.horizontalTank.transparentMaterial',
+                          ],
+                        },
+                        {
+                          type: 'section',
+                          items: [
+                            {
+                              type: 'advancedfieldset',
+                              title: 'Tank',
+                              items: [
+                                {
+                                  key: 'options.verticalTank.tank.id',
+                                },
+                                {
+                                  key: 'options.verticalTank.tank.url',
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Position',
+                                  items: [
+                                    {
+                                      key: 'options.verticalTank.tank.position',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Oirentation',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.verticalTank.tank.orientation',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Scale',
+                                  items: [
+                                    {
+                                      key: 'options.verticalTank.tank.scale',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Physical',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.verticalTank.tank.physical.mesh',
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                            {
+                              type: 'advancedfieldset',
+                              title: 'Liquid',
+                              items: [
+                                {
+                                  key: 'options.verticalTank.liquid.url',
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Position',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.verticalTank.liquid.position',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Oirentation',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.verticalTank.liquid.orientation',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Scale',
+                                  items: [
+                                    {
+                                      key: 'options.verticalTank.liquid.scale',
+                                    },
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Max liquid scale',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.verticalTank.liquid.maxLiquidScale',
+                                    },
+                                  ],
+                                },
+
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Physical',
+                                  items: [
+                                    {
+                                      key:
+                                        'options.verticalTank.liquid.physical.mesh',
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+
+                            {
+                              type: 'advancedfieldset',
+                              title: 'Mapping',
+                              items: [
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Liquid',
+                                  items: [
+                                    'options.verticalTank.mapping.liquid.min',
+                                    'options.verticalTank.mapping.liquid.max',
+                                  ],
+                                },
+                                {
+                                  type: 'advancedfieldset',
+                                  title: 'Color',
+                                  items: [
+                                    'options.verticalTank.mapping.color.min',
+                                    'options.verticalTank.mapping.color.max',
+                                  ],
+                                },
+                              ],
+                            },
+                            'options.verticalTank.transparentMaterial',
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            'displayName',
+          ],
+        };
+
+        if (!node.settings) {
+          $('#jsonFormContainer').jsonForm(formSettings);
+        } else {
+          $('#jsonFormContainer').jsonForm(
+            Object.assign({ value: node.settings }, formSettings),
+          );
+        }
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="mw-tank" id="mw-tank"></script>
+
+<script type="text/html" data-help-name="mw-tank">
+  <p>Add a tank to the MaxWhere space.</p>
+</script>

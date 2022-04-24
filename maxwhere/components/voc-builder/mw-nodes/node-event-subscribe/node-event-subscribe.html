@@ -1,0 +1,99 @@
+<script src="./utils/public/formManagement.js"></script>
+<script type="text/javascript">
+  RED.nodes.registerType('node-event-subscribe', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.settings.displayName || 'node-event-subscribe';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              nodeid: {
+                type: 'string',
+                title: 'Node ID',
+                enum: womIds,
+                default: womIds[0],
+              },
+              eventName: {
+                type: 'string',
+                title: 'Event name',
+                enum: [
+                  'click',
+                  'contextMenu',
+                  'dblclick',
+                  'mouseDown',
+                  'mouseUp',
+                  'mouseEnter',
+                  'mouseLeave',
+                  'mouseMove',
+                  'mouseWheel',
+                ],
+                default: 'click',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              'nodeid',
+              {
+                key: 'eventName',
+                titleMap: {
+                  click: 'Click',
+                  contextMenu: 'Right Click',
+                  dblclick: 'Double Click',
+                  mouseDown: 'Mose Button Pressed',
+                  mouseUp: 'Mouse Button Released',
+                  mouseEnter: 'Mouse enter to area',
+                  mouseLeave: 'Mouse left area',
+                  mouseMove: 'Mouse moves over',
+                  mouseWheel: 'Mouse wheel movement',
+                },
+              },
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="node-event-subscribe"
+  id="node-event-subscribe"
+></script>
+
+<script type="text/html" data-help-name="node-event-subscribe">
+  <p>Add an eventlistener to a node.</p>
+</script>

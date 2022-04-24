@@ -1,0 +1,127 @@
+<script src="./utils/public/formManagement.js"></script>
+<script type="text/javascript">
+  RED.nodes.registerType('set-scale', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'set-scale';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              nodeid: {
+                type: 'string',
+                title: 'Node ID',
+                enum: womIds,
+                default: womIds[0],
+              },
+              scale: {
+                type: 'object',
+                title: 'Scale',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 1,
+                    step: 0.01,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 1,
+                    step: 0.01,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 1,
+                    step: 0.01,
+                  },
+                },
+              },
+              reference: {
+                type: 'string',
+                title: 'Reference',
+                enum: ['absolute', 'relative'],
+                default: 'absolute',
+              },
+              space: {
+                type: 'string',
+                title: 'Space',
+                enum: ['parent', 'local', 'world'],
+                default: 'parent',
+              },
+              mode: {
+                type: 'string',
+                //title: 'Data source',
+                enum: ['local', 'fromInput'],
+                default: 'local',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              'nodeid',
+              {
+                type: 'selectfieldset',
+                key: 'mode',
+                title: 'Data source',
+                titleMap: {
+                  local: 'Set here',
+                  fromInput: 'Input data',
+                },
+                items: ['scale', ''],
+              },
+              {
+                key: 'reference',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              {
+                key: 'space',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="set-scale" id="set-scale"></script>
+
+<script type="text/html" data-help-name="set-scale">
+  <p>Set a MaxWhere node scale.</p>
+</script>

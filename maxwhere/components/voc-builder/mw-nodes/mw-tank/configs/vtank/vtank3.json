@@ -1,0 +1,70 @@
+{
+  "tank": {
+    "id": "vtank3",
+    "url": "verticalTank.mesh",
+    "position": {
+      "x": -466.63751220703125,
+      "y": 6.827607154846191,
+      "z": 658.4354858398438
+    },
+    "orientation": {
+      "w": 0.0,
+      "x": 0.0,
+      "y": 0.7071068286895752,
+      "z": 0.7071068286895752
+    },
+    "scale": {
+      "x": 100.0,
+      "y": 100.0,
+      "z": 100.0
+    },
+    "physical": {
+      "mesh": "verticalTank.mesh_phy.obj",
+      "shape": "mesh"
+    }
+  },
+  "liquid": {
+    "url": "Cylinder.mesh",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "orientation": {
+      "w": 1,
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "scale": {
+      "x": 0.3,
+      "y": 0.3,
+      "z": 0.05
+    },
+    "maxLiquidScale": {
+      "x": 0.3,
+      "y": 0.3,
+      "z": 0.75
+    },
+    "color": {
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    "physical": {
+      "mesh": "Cylinder.mesh_phy.obj",
+      "shape": "mesh"
+    }
+  },
+  "mapping": {
+    "color": {
+      "min": 0,
+      "max": 1000
+    },
+    "liquid": {
+      "min": 0,
+      "max": 1000
+    }
+  },
+  "transparentMaterial": "Uveg_1"
+}

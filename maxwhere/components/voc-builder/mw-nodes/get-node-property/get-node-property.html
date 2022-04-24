@@ -1,0 +1,72 @@
+<script type="text/javascript">
+  RED.nodes.registerType('get-node-property', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'get-node-property';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              nodeid: {
+                type: 'string',
+                title: 'Node ID',
+                enum: ['camera'].concat(womIds),
+                default: womIds[0],
+              },
+              prop: {
+                type: 'string',
+                title: 'Property',
+                enum: ['position', 'orientation', 'scale'],
+                default: 'position',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: ['nodeid', 'prop', 'displayName'],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="get-node-property"
+  id="get-node-property"
+></script>
+
+<script type="text/html" data-help-name="get-node-property">
+  <p>Get a property of a MaxWhere node.</p>
+</script>

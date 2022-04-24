@@ -1,0 +1,764 @@
+<script type="text/javascript">
+  RED.nodes.registerType('mw-gauge', {
+    category: 'MaxWhere',
+    color: '#b85863',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.settings.displayName || 'MW Gauge';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      $.when(
+        $.ajax({
+          type: 'GET',
+          url: './getMeshNames/',
+          async: false,
+        }),
+        $.ajax({
+          type: 'GET',
+          url: './getPhyObjectNames/',
+          async: false,
+        }),
+        $.ajax({
+          type: 'GET',
+          url: './getGaugeConfigs/',
+          async: false,
+        }),
+      ).done((response1, response2, response3) => {
+        console.log(response1);
+        console.log(response2);
+        let meshNames = Array.from(new Set(response1[0]));
+        let phyObjNames = Array.from(new Set(response2[0]));
+        let configFiles = Array.from(new Set(response3[0]));
+        let formSettings = {
+          schema: {
+            options: {
+              type: 'object',
+              properties: {
+                body: {
+                  type: 'object',
+                  title: 'Body',
+                  properties: {
+                    id: {
+                      title: 'Node id',
+                      type: 'string',
+                      required: true,
+                    },
+                    url: {
+                      title: 'Mesh file',
+                      type: 'string',
+                      enum: meshNames,
+                      default: 'gauge_body.mesh',
+                    },
+                    position: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                        },
+                      },
+                    },
+                    orientation: {
+                      type: 'object',
+                      properties: {
+                        w: {
+                          type: 'number',
+                          title: 'W',
+                          default: 0.707,
+                          step: 0.01,
+
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: -0.707,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                      },
+                    },
+                    scale: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 1,
+                          step: 0.01,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 1,
+                          step: 0.01,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 1,
+                          step: 0.01,
+                        },
+                      },
+                    },
+                    physical: {
+                      type: 'object',
+                      title: 'Physical',
+                      properties: {
+                        mesh: {
+                          title: 'Physical file',
+                          type: 'string',
+                          enum: phyObjNames,
+                          default: 'gauge_body.mesh_phy.obj',
+                        },
+                      },
+                    },
+                  },
+                },
+                dial: {
+                  type: 'object',
+                  title: 'Dial',
+                  properties: {
+                    id: {
+                      title: 'Node id',
+                      type: 'string',
+                      required: true,
+                    },
+                    url: {
+                      title: 'Mesh file',
+                      type: 'string',
+                      enum: meshNames,
+                      default: 'gauge_dial.mesh',
+                    },
+                    position: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: -0.31,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 5.029,
+                        },
+                      },
+                    },
+                    orientation: {
+                      type: 'object',
+                      properties: {
+                        w: {
+                          type: 'number',
+                          title: 'W',
+                          default: 1,
+                          step: 0.01,
+
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                      },
+                    },
+                    scale: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 1,
+                          step: 0.01,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 1,
+                          step: 0.01,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 1,
+                          step: 0.01,
+                        },
+                      },
+                    },
+                    physical: {
+                      type: 'object',
+                      title: 'Physical',
+                      properties: {
+                        mesh: {
+                          title: 'Physical file',
+                          type: 'string',
+                          enum: phyObjNames,
+                          default: 'gauge_dial.mesh_phy.obj',
+                        },
+                      },
+                    },
+                    texture: {
+                      type: 'object',
+                      title: 'Texture',
+                      properties: {
+                        width: {
+                          type: 'number',
+                          title: 'Width',
+                          default: 300,
+                        },
+                        height: {
+                          type: 'number',
+                          title: 'Width',
+                          default: 300,
+                        },
+                        units: {
+                          type: 'string',
+                          title: 'Units',
+                          default: 'bar',
+                        },
+                        majorTicks: {
+                          type: 'array',
+                          title: 'Major ticks',
+                          items: {
+                            type: 'object',
+                            properties: {
+                              value: {
+                                type: 'number',
+                                title: 'value',
+                                default: 0,
+                              },
+                            },
+                          },
+                        },
+                        highlights: {
+                          type: 'array',
+                          title: 'Highlights',
+                          items: {
+                            type: 'object',
+                            properties: {
+                              from: {
+                                type: 'number',
+                                title: 'From',
+                                default: 0,
+                              },
+                              to: {
+                                type: 'number',
+                                title: 'To',
+                                default: 200,
+                              },
+                              color: {
+                                type: 'string',
+                                title: 'Color',
+                                format: 'color',
+                                default: '#ff0000',
+                              },
+                            },
+                          },
+                        },
+                        colorPlate: {
+                          type: 'string',
+                          title: 'Plate color',
+                          format: 'color',
+                          default: '#ffffff',
+                        },
+                      },
+                    },
+                  },
+                },
+                needle: {
+                  type: 'object',
+                  title: 'Body',
+                  properties: {
+                    id: {
+                      title: 'Node id',
+                      type: 'string',
+                      required: true,
+                    },
+                    url: {
+                      title: 'Mesh file',
+                      type: 'string',
+                      enum: meshNames,
+                      default: 'gauge_indicator.mesh',
+                    },
+                    position: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: -0.04,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                        },
+                      },
+                    },
+                    orientation: {
+                      type: 'object',
+                      properties: {
+                        w: {
+                          type: 'number',
+                          title: 'W',
+                          default: 1,
+                          step: 0.01,
+
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                      },
+                    },
+                    scale: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 1,
+                          step: 0.01,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 1,
+                          step: 0.01,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 1,
+                          step: 0.01,
+                        },
+                      },
+                    },
+                    physical: {
+                      type: 'object',
+                      title: 'Physical',
+                      properties: {
+                        mesh: {
+                          title: 'Physical file',
+                          type: 'string',
+                          enum: phyObjNames,
+                          default: 'gauge_indicator.mesh_phy.obj',
+                        },
+                      },
+                    },
+                    axis: {
+                      type: 'object',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 1,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                      },
+                    },
+                  },
+                },
+                mapping: {
+                  type: 'object',
+                  title: 'Mapping',
+                  properties: {
+                    minAngle: {
+                      type: 'number',
+                      title: 'Min angle',
+                      default: 0,
+                      step: 0.01,
+                    },
+                    maxAngle: {
+                      type: 'number',
+                      title: 'Max angle',
+                      default: 360,
+                      step: 0.01,
+                    },
+                    minValue: {
+                      type: 'number',
+                      title: 'Min value',
+                      default: 0,
+                      step: 0.01,
+                    },
+                    maxValue: {
+                      type: 'number',
+                      title: 'Max value',
+                      default: 1000,
+                      step: 0.01,
+                    },
+                  },
+                },
+              },
+            },
+            configFile: {
+              title: 'Configuration file',
+              type: 'string',
+              enum: configFiles,
+            },
+
+            displayName: {
+              type: 'string',
+              title: 'Display name',
+            },
+            configType: {
+              type: 'string',
+              title: 'Config method',
+              enum: ['file', 'local'],
+              default: 'local',
+            },
+            save: {
+              title: 'Save',
+              type: 'boolean',
+              default: false,
+            },
+          },
+          form: [
+            {
+              type: 'selectfieldset',
+              key: 'configType',
+              title: 'Config method',
+              titleMap: {
+                file: 'Config from file',
+                local: 'Set here',
+              },
+              items: [
+                {
+                  key: 'configFile',
+                },
+                {
+                  type: 'section',
+                  items: [
+                    {
+                      type: 'advancedfieldset',
+                      title: 'Body',
+                      items: [
+                        {
+                          key: 'options.body.id',
+                        },
+                        {
+                          key: 'options.body.url',
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Position',
+                          items: [
+                            {
+                              key: 'options.body.position',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Oirentation',
+                          items: [
+                            {
+                              key: 'options.body.orientation',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Scale',
+                          items: [
+                            {
+                              key: 'options.body.scale',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Physical',
+                          items: [
+                            {
+                              key: 'options.body.physical.mesh',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'advancedfieldset',
+                      title: 'Dial',
+                      items: [
+                        {
+                          key: 'options.dial.id',
+                        },
+                        {
+                          key: 'options.dial.url',
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Position',
+                          items: [
+                            {
+                              key: 'options.dial.position',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Oirentation',
+                          items: [
+                            {
+                              key: 'options.dial.orientation',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Scale',
+                          items: [
+                            {
+                              key: 'options.dial.scale',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Physical',
+                          items: [
+                            {
+                              key: 'options.dial.physical.mesh',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Texture',
+                          items: [
+                            {
+                              key: 'options.dial.texture.width',
+                            },
+                            {
+                              key: 'options.dial.texture.height',
+                            },
+                            {
+                              key: 'options.dial.texture.units',
+                            },
+                            {
+                              key: 'options.dial.texture.majorTicks',
+                            },
+                            {
+                              key: 'options.dial.texture.highlights',
+                            },
+                            {
+                              key: 'options.dial.texture.colorPlate',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'advancedfieldset',
+                      title: 'Needle',
+                      items: [
+                        {
+                          key: 'options.needle.id',
+                        },
+                        {
+                          key: 'options.needle.url',
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Position',
+                          items: [
+                            {
+                              key: 'options.needle.position',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Oirentation',
+                          items: [
+                            {
+                              key: 'options.needle.orientation',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Scale',
+                          items: [
+                            {
+                              key: 'options.needle.scale',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Physical',
+                          items: [
+                            {
+                              key: 'options.needle.physical.mesh',
+                            },
+                          ],
+                        },
+                        {
+                          type: 'advancedfieldset',
+                          title: 'Axis',
+                          items: [
+                            {
+                              key: 'options.needle.axis',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      type: 'advancedfieldset',
+                      title: 'Mapping',
+                      items: [
+                        {
+                          key: 'options.mapping.minAngle',
+                        },
+                        {
+                          key: 'options.mapping.maxAngle',
+                        },
+                        {
+                          key: 'options.mapping.minValue',
+                        },
+                        {
+                          key: 'options.mapping.maxValue',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            'displayName',
+          ],
+        };
+
+        if (!node.settings) {
+          $('#jsonFormContainer').jsonForm(formSettings);
+        } else {
+          $('#jsonFormContainer').jsonForm(
+            Object.assign({ value: node.settings }, formSettings),
+          );
+        }
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="mw-gauge" id="mw-gauge"></script>
+
+<script type="text/html" data-help-name="mw-gauge">
+  <p>Add a gauge to the maxwhere space.</p>
+</script>

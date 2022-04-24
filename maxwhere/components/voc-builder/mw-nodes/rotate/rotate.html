@@ -1,0 +1,142 @@
+<script type="text/javascript">
+  RED.nodes.registerType('rotate', {
+    category: 'MaxWhere',
+    color: '#5ca61f',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'rotate';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+
+      let formSettings = {
+        schema: {
+          oriType: {
+            type: 'string',
+            title: 'Rotation type',
+            enum: ['quaternion', 'angle-axis'],
+          },
+
+          'angle-axis': {
+            type: 'object',
+            properties: {
+              angle: {
+                type: 'number',
+                title: 'Angle',
+                default: 180,
+                step: 0.01,
+              },
+              axis: {
+                type: 'object',
+                title: 'Axis',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 1,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                },
+              },
+            },
+          },
+          quaternion: {
+            type: 'object',
+            title: 'Quaternion',
+            properties: {
+              x: {
+                type: 'number',
+                title: 'X',
+                default: 0,
+                step: 0.01,
+                minimum: -1,
+                maximum: 1,
+              },
+              y: {
+                type: 'number',
+                title: 'Y',
+                default: 0,
+                step: 0.01,
+                minimum: -1,
+                maximum: 1,
+              },
+              z: {
+                type: 'number',
+                title: 'Z',
+                default: 0,
+                step: 0.01,
+                minimum: -1,
+                maximum: 1,
+              },
+              w: {
+                type: 'number',
+                title: 'W',
+                default: 1,
+                step: 0.01,
+                minimum: -1,
+                maximum: 1,
+              },
+            },
+          },
+          displayName: {
+            type: 'string',
+            title: 'Display name',
+          },
+        },
+        form: [
+          {
+            type: 'selectfieldset',
+            key: 'oriType',
+            title: 'Orientation type',
+            items: ['quaternion', 'angle-axis'],
+          },
+
+          'displayName',
+        ],
+      };
+      if (!node.settings) {
+        $('#jsonFormContainer').jsonForm(formSettings);
+      } else {
+        $('#jsonFormContainer').jsonForm(
+          Object.assign({ value: node.settings }, formSettings),
+        );
+      }
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="rotate" id="rotate"></script>
+
+<script type="text/html" data-help-name="rotate">
+  <p>Rotates a quaternion.</p>
+</script>

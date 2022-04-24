@@ -1,0 +1,52 @@
+<script src="./utils/public/formManagement.js"></script>
+<script type="text/javascript">
+  getNodeIds('exploded-view');
+  RED.nodes.registerType('exploded-view', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      name: { value: '' },
+      nodeid: { value: '', required: true },
+      displacementFactor: { value: 1 },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.name || 'exploded-view';
+    },
+    oneditprepare: function () {
+      let spinnerConfig = {
+        step: 0.01,
+        numberFormat: 'n',
+        incremental: true,
+      };
+
+      $('.spinner').spinner(spinnerConfig);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="exploded-view" id="exploded-view">
+  <div class="form-row">
+    <label for="node-input-displacementFactor"
+      >Displacement factor <i class="fa fa-location-arrow"></i
+    ></label>
+    <input
+      type="number"
+      id="node-input-displacementFactor"
+      class="spinner"
+      style="text-align:end; width:250px !important"
+    />
+  </div>
+
+  <hr />
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="exploded-view">
+  <p>Explode a node and its childrens.</p>
+</script>

@@ -1,0 +1,938 @@
+{
+    "node-red": {
+        "name": "node-red",
+        "version": "2.2.2",
+        "local": false,
+        "user": false,
+        "nodes": {
+            "inject": {
+                "name": "inject",
+                "types": [
+                    "inject"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\20-inject.js"
+            },
+            "debug": {
+                "name": "debug",
+                "types": [
+                    "debug"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\21-debug.js"
+            },
+            "complete": {
+                "name": "complete",
+                "types": [
+                    "complete"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\24-complete.js"
+            },
+            "catch": {
+                "name": "catch",
+                "types": [
+                    "catch"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\25-catch.js"
+            },
+            "status": {
+                "name": "status",
+                "types": [
+                    "status"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\25-status.js"
+            },
+            "link": {
+                "name": "link",
+                "types": [
+                    "link in",
+                    "link out",
+                    "link call"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\60-link.js"
+            },
+            "comment": {
+                "name": "comment",
+                "types": [
+                    "comment"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\90-comment.js"
+            },
+            "unknown": {
+                "name": "unknown",
+                "types": [
+                    "unknown"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\98-unknown.js"
+            },
+            "function": {
+                "name": "function",
+                "types": [
+                    "function"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\10-function.js"
+            },
+            "switch": {
+                "name": "switch",
+                "types": [
+                    "switch"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\10-switch.js"
+            },
+            "change": {
+                "name": "change",
+                "types": [
+                    "change"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\15-change.js"
+            },
+            "range": {
+                "name": "range",
+                "types": [
+                    "range"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\16-range.js"
+            },
+            "template": {
+                "name": "template",
+                "types": [
+                    "template"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\80-template.js"
+            },
+            "delay": {
+                "name": "delay",
+                "types": [
+                    "delay"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\89-delay.js"
+            },
+            "trigger": {
+                "name": "trigger",
+                "types": [
+                    "trigger"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\89-trigger.js"
+            },
+            "exec": {
+                "name": "exec",
+                "types": [
+                    "exec"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\90-exec.js"
+            },
+            "rbe": {
+                "name": "rbe",
+                "types": [
+                    "rbe"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\rbe.js"
+            },
+            "tls": {
+                "name": "tls",
+                "types": [
+                    "tls-config"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\05-tls.js"
+            },
+            "httpproxy": {
+                "name": "httpproxy",
+                "types": [
+                    "http proxy"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\06-httpproxy.js"
+            },
+            "mqtt": {
+                "name": "mqtt",
+                "types": [
+                    "mqtt in",
+                    "mqtt out",
+                    "mqtt-broker"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\10-mqtt.js"
+            },
+            "httpin": {
+                "name": "httpin",
+                "types": [
+                    "http in",
+                    "http response"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\21-httpin.js"
+            },
+            "httprequest": {
+                "name": "httprequest",
+                "types": [
+                    "http request"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\21-httprequest.js"
+            },
+            "websocket": {
+                "name": "websocket",
+                "types": [
+                    "websocket in",
+                    "websocket out",
+                    "websocket-listener",
+                    "websocket-client"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\22-websocket.js"
+            },
+            "tcpin": {
+                "name": "tcpin",
+                "types": [
+                    "tcp in",
+                    "tcp out",
+                    "tcp request"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\31-tcpin.js"
+            },
+            "udp": {
+                "name": "udp",
+                "types": [
+                    "udp in",
+                    "udp out"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\32-udp.js"
+            },
+            "CSV": {
+                "name": "CSV",
+                "types": [
+                    "csv"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-CSV.js"
+            },
+            "HTML": {
+                "name": "HTML",
+                "types": [
+                    "html"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-HTML.js"
+            },
+            "JSON": {
+                "name": "JSON",
+                "types": [
+                    "json"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-JSON.js"
+            },
+            "XML": {
+                "name": "XML",
+                "types": [
+                    "xml"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-XML.js"
+            },
+            "YAML": {
+                "name": "YAML",
+                "types": [
+                    "yaml"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-YAML.js"
+            },
+            "split": {
+                "name": "split",
+                "types": [
+                    "split",
+                    "join"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\17-split.js"
+            },
+            "sort": {
+                "name": "sort",
+                "types": [
+                    "sort"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\18-sort.js"
+            },
+            "batch": {
+                "name": "batch",
+                "types": [
+                    "batch"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\19-batch.js"
+            },
+            "file": {
+                "name": "file",
+                "types": [
+                    "file",
+                    "file in"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\storage\\10-file.js"
+            },
+            "watch": {
+                "name": "watch",
+                "types": [
+                    "watch"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\storage\\23-watch.js"
+            }
+        }
+    },
+    "mw-nodes": {
+        "name": "mw-nodes",
+        "version": "1.0.0",
+        "local": false,
+        "user": false,
+        "nodes": {
+            "add-mesh": {
+                "name": "add-mesh",
+                "types": [
+                    "add-mesh"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-mesh\\add-mesh.js"
+            },
+            "add-instanced-mesh": {
+                "name": "add-instanced-mesh",
+                "types": [
+                    "add-instanced-mesh"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-instanced-mesh\\add-instanced-mesh.js"
+            },
+            "add-mesh-hierarchy": {
+                "name": "add-mesh-hierarchy",
+                "types": [
+                    "add-mesh-hierarchy"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-mesh-hierarchy\\add-mesh-hierarchy.js"
+            },
+            "add-light": {
+                "name": "add-light",
+                "types": [
+                    "add-light"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-light\\add-light.js"
+            },
+            "add-webtable": {
+                "name": "add-webtable",
+                "types": [
+                    "add-webtable"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-webtable\\add-webtable.js"
+            },
+            "add-overlay": {
+                "name": "add-overlay",
+                "types": [
+                    "add-overlay"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-overlay\\add-overlay.js"
+            },
+            "animate": {
+                "name": "animate",
+                "types": [
+                    "animate"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\animate\\animate.js"
+            },
+            "get-node-property": {
+                "name": "get-node-property",
+                "types": [
+                    "get-node-property"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\get-node-property\\get-node-property.js"
+            },
+            "mesh-animator": {
+                "name": "mesh-animator",
+                "types": [
+                    "mesh-animator"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mesh-animator\\mesh-animator.js"
+            },
+            "wom-event-subscribe": {
+                "name": "wom-event-subscribe",
+                "types": [
+                    "wom-event-subscribe"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\wom-event-subscribe\\wom-event-subscribe.js"
+            },
+            "node-event-subscribe": {
+                "name": "node-event-subscribe",
+                "types": [
+                    "node-event-subscribe"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\node-event-subscribe\\node-event-subscribe.js"
+            },
+            "set-position": {
+                "name": "set-position",
+                "types": [
+                    "set-position"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-position\\set-position.js"
+            },
+            "set-scale": {
+                "name": "set-scale",
+                "types": [
+                    "set-scale"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-scale\\set-scale.js"
+            },
+            "set-orientation": {
+                "name": "set-orientation",
+                "types": [
+                    "set-orientation"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-orientation\\set-orientation.js"
+            },
+            "set-shader": {
+                "name": "set-shader",
+                "types": [
+                    "set-shader"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-shader\\set-shader.js"
+            },
+            "node-select": {
+                "name": "node-select",
+                "types": [
+                    "node-select"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\node-select\\node-select.js"
+            },
+            "exploded-view": {
+                "name": "exploded-view",
+                "types": [
+                    "exploded-view"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\exploded-view\\exploded-view.js"
+            },
+            "load-otf-asset": {
+                "name": "load-otf-asset",
+                "types": [
+                    "load-otf-asset"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\load-otf-asset\\load-otf-asset.js"
+            },
+            "set-material": {
+                "name": "set-material",
+                "types": [
+                    "set-material"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-material\\set-material.js"
+            },
+            "set-skybox": {
+                "name": "set-skybox",
+                "types": [
+                    "set-skybox"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-skybox\\set-skybox.js"
+            },
+            "offset": {
+                "name": "offset",
+                "types": [
+                    "offset"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\offset\\offset.js"
+            },
+            "rotate": {
+                "name": "rotate",
+                "types": [
+                    "rotate"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\rotate\\rotate.js"
+            },
+            "mw-gauge": {
+                "name": "mw-gauge",
+                "types": [
+                    "mw-gauge"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mw-gauge\\mw-gauge.js"
+            },
+            "mw-tank": {
+                "name": "mw-tank",
+                "types": [
+                    "mw-tank"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "mw-nodes",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mw-tank\\mw-tank.js"
+            }
+        }
+    },
+    "node-red-contrib-counter": {
+        "name": "node-red-contrib-counter",
+        "version": "0.1.6",
+        "local": false,
+        "user": false,
+        "nodes": {
+            "counter": {
+                "name": "counter",
+                "types": [
+                    "counter"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-contrib-counter",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-contrib-counter\\counter.js"
+            }
+        }
+    },
+    "node-red-dashboard": {
+        "name": "node-red-dashboard",
+        "version": "2.24.2",
+        "local": false,
+        "user": false,
+        "nodes": {
+            "ui_base": {
+                "name": "ui_base",
+                "types": [
+                    "ui_base"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_base.js"
+            },
+            "ui_button": {
+                "name": "ui_button",
+                "types": [
+                    "ui_button"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_button.js"
+            },
+            "ui_dropdown": {
+                "name": "ui_dropdown",
+                "types": [
+                    "ui_dropdown"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_dropdown.js"
+            },
+            "ui_switch": {
+                "name": "ui_switch",
+                "types": [
+                    "ui_switch"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_switch.js"
+            },
+            "ui_slider": {
+                "name": "ui_slider",
+                "types": [
+                    "ui_slider"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_slider.js"
+            },
+            "ui_numeric": {
+                "name": "ui_numeric",
+                "types": [
+                    "ui_numeric"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_numeric.js"
+            },
+            "ui_text_input": {
+                "name": "ui_text_input",
+                "types": [
+                    "ui_text_input"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_text_input.js"
+            },
+            "ui_date_picker": {
+                "name": "ui_date_picker",
+                "types": [
+                    "ui_date_picker"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_date_picker.js"
+            },
+            "ui_colour_picker": {
+                "name": "ui_colour_picker",
+                "types": [
+                    "ui_colour_picker"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_colour_picker.js"
+            },
+            "ui_form": {
+                "name": "ui_form",
+                "types": [
+                    "ui_form"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_form.js"
+            },
+            "ui_text": {
+                "name": "ui_text",
+                "types": [
+                    "ui_text"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_text.js"
+            },
+            "ui_gauge": {
+                "name": "ui_gauge",
+                "types": [
+                    "ui_gauge"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_gauge.js"
+            },
+            "ui_chart": {
+                "name": "ui_chart",
+                "types": [
+                    "ui_chart"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_chart.js"
+            },
+            "ui_audio": {
+                "name": "ui_audio",
+                "types": [
+                    "ui_audio"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_audio.js"
+            },
+            "ui_toast": {
+                "name": "ui_toast",
+                "types": [
+                    "ui_toast"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_toast.js"
+            },
+            "ui_ui_control": {
+                "name": "ui_ui_control",
+                "types": [
+                    "ui_ui_control"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_ui_control.js"
+            },
+            "ui_template": {
+                "name": "ui_template",
+                "types": [
+                    "ui_template"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_template.js"
+            },
+            "ui_link": {
+                "name": "ui_link",
+                "types": [
+                    "ui_link"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_link.js"
+            },
+            "ui_tab": {
+                "name": "ui_tab",
+                "types": [
+                    "ui_tab"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_tab.js"
+            },
+            "ui_group": {
+                "name": "ui_group",
+                "types": [
+                    "ui_group"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_group.js"
+            },
+            "ui_spacer": {
+                "name": "ui_spacer",
+                "types": [
+                    "ui_spacer"
+                ],
+                "enabled": true,
+                "local": false,
+                "user": false,
+                "module": "node-red-dashboard",
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_spacer.js"
+            }
+        }
+    }
+}

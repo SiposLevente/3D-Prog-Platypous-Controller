@@ -1,0 +1,478 @@
+<script src="./utils/public/formManagement.js"></script>
+
+<script type="text/javascript">
+  RED.nodes.registerType('add-overlay', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.settings.displayName || 'add overlay';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+
+      let formSettings = {
+        schema: {
+          options: {
+            type: 'object',
+            properties: {
+              id: {
+                title: 'Node id',
+                type: 'string',
+                required: true,
+              },
+              position: {
+                type: 'object',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 0,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 0,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 0,
+                  },
+                },
+              },
+              orientation: {
+                type: 'object',
+                properties: {
+                  w: {
+                    type: 'number',
+                    title: 'W',
+                    default: 1,
+                    step: 0.01,
+
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 0,
+                    step: 0.01,
+                    minimum: -1,
+                    maximum: 1,
+                  },
+                },
+              },
+              scale: {
+                type: 'object',
+                properties: {
+                  x: {
+                    type: 'number',
+                    title: 'X',
+                    default: 1,
+                    step: 0.01,
+                  },
+                  y: {
+                    type: 'number',
+                    title: 'Y',
+                    default: 1,
+                    step: 0.01,
+                  },
+                  z: {
+                    type: 'number',
+                    title: 'Z',
+                    default: 1,
+                    step: 0.01,
+                  },
+                },
+              },
+              autophysical: {
+                title: 'Auto physical',
+                type: 'boolean',
+                default: false,
+              },
+              physical: {
+                type: 'object',
+                properties: {
+                  'link-type': {
+                    type: 'string',
+                    enum: ['static', 'dynamic', 'kinematic', 'ghost'],
+                    default: 'ghost',
+                    title: 'Link-type',
+                  },
+                  raycast: {
+                    type: 'boolean',
+                    default: true,
+                    title: 'Raycast',
+                  },
+                  collision: {
+                    type: 'boolean',
+                    default: false,
+                    title: 'Collision',
+                  },
+                  coefficients: {
+                    type: 'object',
+                    properties: {
+                      restitution: {
+                        type: 'number',
+                        default: 0.7,
+                        title: 'Restitution',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      'linear-damping': {
+                        type: 'number',
+
+                        default: 0.1,
+                        title: 'Linear-damping',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      'angular-damping': {
+                        type: 'number',
+                        minimum: 0,
+                        maximum: 1,
+                        default: 0.1,
+                        title: 'Angular-damping',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      friction: {
+                        type: 'number',
+                        minimum: 0,
+                        maximum: 1,
+                        default: 0.3,
+                        title: 'Friction',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      'rolling-friction': {
+                        type: 'number',
+                        minimum: 0,
+                        maximum: 1,
+                        default: 0.01,
+                        title: 'Rolling friction',
+                        step: 0.01,
+                        minimum: 0,
+                        maximum: 1,
+                      },
+                      gravity: {
+                        type: 'object',
+                        properties: {
+                          x: {
+                            type: 'number',
+                            title: 'X',
+                            default: 0,
+                          },
+                          y: {
+                            type: 'number',
+                            title: 'Y',
+                            default: -9.81,
+                          },
+                          z: {
+                            type: 'number',
+                            title: 'Z',
+                            default: 0,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              location: {
+                type: 'string',
+                enum: ['in-game', 'overlay'],
+                default: 'overlay',
+                title: 'Location',
+              },
+              width: {
+                type: 'number',
+                default: 1280,
+                title: 'Width',
+              },
+              height: {
+                type: 'number',
+                default: 720,
+                title: 'height',
+              },
+              'resolution-width': {
+                type: 'number',
+                default: 1280,
+                title: 'Resolution-width',
+              },
+              'resolution-height': {
+                type: 'number',
+                default: 720,
+                title: 'Resolution-heigth',
+              },
+              transparent: {
+                type: 'boolean',
+                default: true,
+                title: 'Transparent',
+              },
+              zorder: {
+                type: 'number',
+                default: 1,
+                title: 'zOrder',
+              },
+              metrics: {
+                type: 'string',
+                enum: ['pixels', 'relative'],
+                default: 'pixels',
+                title: 'Metrics',
+              },
+              left: {
+                type: 'number',
+                default: 0,
+                title: 'Left',
+              },
+              top: {
+                type: 'number',
+                default: 0,
+                title: 'Top',
+              },
+              'horizontal-align': {
+                type: 'string',
+                enum: ['left', 'center', 'right'],
+                default: 'left',
+                title: 'Horizontal-align',
+              },
+              'vertical-align': {
+                type: 'string',
+                enum: ['top', 'center', 'bottom'],
+                default: 'top',
+                title: 'Vertical-align',
+              },
+              disableIngamePhysical: {
+                type: 'boolean',
+                default: true,
+                title: 'disable IngamePhysical',
+              },
+
+              url: {
+                type: 'string',
+                default: 'https://www.google.com/',
+                title: 'Url',
+              },
+              inputDisabled: {
+                type: 'boolean',
+                default: false,
+                title: 'inputDisabled',
+              },
+              directKeyEvent: {
+                type: 'boolean',
+                default: false,
+                title: 'directKeyEvent',
+              },
+              nodeIntegration: {
+                type: 'boolean',
+                default: false,
+                title: 'nodeIntegraion',
+              },
+              webSecurity: {
+                type: 'boolean',
+                default: true,
+                title: 'webSecurity',
+              },
+              scaleFactor: {
+                type: 'number',
+                default: 1,
+                title: 'scaleFactor',
+              },
+            },
+          },
+          displayName: {
+            type: 'string',
+            title: 'Display name',
+          },
+          create: {
+            type: 'string',
+            title: 'Create on',
+            enum: ['init', 'input'],
+            default: 'init',
+          },
+          behavior: {
+            type: 'string',
+            enum: ['Always on', '3D only', 'Menu only'],
+            default: 'Always on',
+            title: 'Behavior',
+          },
+        },
+        form: [
+          {
+            key: 'create',
+            titleMap: {
+              init: 'Initialization',
+              input: 'Input',
+            },
+          },
+          'options.id',
+          'options.url',
+          'behavior',
+
+          {
+            type: 'advancedfieldset',
+            title: 'Position',
+            items: [
+              {
+                key: 'options.position',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Orientation',
+            items: [
+              {
+                key: 'options.orientation',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Scale',
+            items: [
+              {
+                key: 'options.scale',
+              },
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Physical',
+            items: [
+              {
+                key: 'options.autophysical',
+              },
+              {
+                key: 'options.physical.raycast',
+              },
+              // Excluded in lite
+              {
+                key: 'options.physical.collision',
+              },
+              {
+                key: 'options.physical.link-type',
+              },
+              {
+                type: 'advancedfieldset',
+                title: 'Coefficients ',
+                items: [
+                  {
+                    key: 'options.physical.coefficients.restitution',
+                  },
+                  {
+                    key: 'options.physical.coefficients.linear-damping',
+                  },
+                  {
+                    key: 'options.physical.coefficients.angular-damping',
+                  },
+                  {
+                    key: 'options.physical.coefficients.friction',
+                  },
+                  {
+                    key: 'options.physical.coefficients.rolling-friction',
+                  },
+                  {
+                    type: 'advancedfieldset',
+                    title: 'Gravity ',
+                    items: [
+                      {
+                        key: 'options.physical.coefficients.gravity',
+                      },
+                    ],
+                  },
+                ],
+              },
+              // Excluded in lite
+            ],
+          },
+
+          {
+            type: 'advancedfieldset',
+            title: 'Canvas',
+            items: [
+              'options.location',
+              'options.width',
+              'options.height',
+              'options.resolution-width',
+              'options.resolution-height',
+              'options.transparent',
+              'options.zorder',
+              'options.metrics',
+              'options.left',
+              'options.top',
+              'options.horizontal-align',
+              'options.vertical-align',
+              'options.disableIngamePhysical',
+            ],
+          },
+          {
+            type: 'advancedfieldset',
+            title: 'Webview',
+            items: [
+              'options.inputDisabled',
+              'options.directKeyEvent',
+              'options.nodeIntegration',
+              'options.webSecurity',
+              'options.scaleFactor',
+            ],
+          },
+
+          {
+            key: 'displayName',
+          },
+        ],
+      };
+      if (!node.settings) {
+        $('#jsonFormContainer').jsonForm(formSettings);
+      } else {
+        $('#jsonFormContainer').jsonForm(
+          Object.assign({ value: node.settings }, formSettings),
+        );
+      }
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+<script
+  type="text/html"
+  data-template-name="add-overlay"
+  id="add-overlay"
+></script>
+
+<script type="text/html" data-help-name="add-overlay">
+  <p>Add an overlay to the MaxWhere space.</p>
+</script>

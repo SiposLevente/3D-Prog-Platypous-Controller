@@ -1,0 +1,40 @@
+site_name: MaxWhere - VOC-Builder
+site_url: https://nas.mistems.hu/blender-exporter-docs/
+site_description: Documentation of the MaxWhere Node-RED integration.
+site_author: Norbert Rajos
+copyright: MaxWhere Solutions Inc. and MISTEMS Ltd.
+nav:
+  - Home: index.md
+  - Getting Started: gettingstarted.md
+  - Migrate: migrate.md
+  - Nodes:
+      - animate: adv/animate.md
+      - add light: adv/add-light.md
+      - add mesh: adv/add-mesh.md
+      - add mesh hierarchy: adv/add-mesh-hierarchy.md
+      - add overlay: adv/add-overlay.md
+      - add webtable: adv/add-webtable.md
+      - exploded view: adv/exploded-view.md
+      - gauge: adv/gauge.md
+      - get node property: adv/get-node-property.md
+      - load otf asset: adv/load-otf-asset.md
+      - mesh animator: adv/mesh-animator.md
+      - node event subscribe: adv/node-event-subscribe.md
+      - set material: adv/set-material.md
+      - set orientation: adv/set-orientation.md
+      - set position: adv/set-position.md
+      - set scale: adv/set-scale.md
+      - set shader: adv/set-shader.md
+      - tank: adv/tank.md
+      - wom event subscribe: adv/wom-event-subscribe.md
+      - offset: adv/offset.md
+      - rotate: adv/rotate.md
+
+theme:
+  name: material
+  logo: img/logo-white.png
+markdown_extensions:
+  - attr_list
+  - def_list
+build_date_utc: 2020.11.16.
+plugins:

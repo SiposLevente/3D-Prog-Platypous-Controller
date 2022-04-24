@@ -1,0 +1,372 @@
+<script type="text/javascript">
+  RED.nodes.registerType('animate', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'animate';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              nodeid: {
+                type: 'string',
+                title: 'Node ID',
+                enum: ['camera'].concat(womIds),
+                default: womIds[0],
+              },
+              attribute: {
+                title: 'Attribute',
+                type: 'string',
+                enum: ['position', 'scale', 'orientation'],
+                default: 'position',
+              },
+              options: {
+                type: 'object',
+                properties: {
+                  fromPosition: {
+                    type: 'array',
+                    title: 'To',
+                    items: {
+                      type: 'object',
+                      title: 'Position',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                        },
+                      },
+                    },
+                  },
+                  toPosition: {
+                    type: 'array',
+                    title: 'To',
+                    items: {
+                      type: 'object',
+                      title: 'Position',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                        },
+                      },
+                    },
+                  },
+                  fromScale: {
+                    type: 'array',
+                    title: 'To',
+                    items: {
+                      type: 'object',
+                      title: 'Scale',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 1,
+                        },
+                      },
+                    },
+                  },
+                  toScale: {
+                    type: 'array',
+                    title: 'To',
+                    items: {
+                      type: 'object',
+                      title: 'Scale',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 1,
+                        },
+                      },
+                    },
+                  },
+                  fromOrientation: {
+                    type: 'array',
+                    title: 'From',
+                    items: {
+                      type: 'object',
+                      title: 'Orientation',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        w: {
+                          type: 'number',
+                          title: 'W',
+                          default: 1,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                      },
+                    },
+                  },
+                  toOrientation: {
+                    type: 'array',
+                    title: 'From',
+                    items: {
+                      type: 'object',
+                      title: 'Orientation',
+                      properties: {
+                        x: {
+                          type: 'number',
+                          title: 'X',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        y: {
+                          type: 'number',
+                          title: 'Y',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        z: {
+                          type: 'number',
+                          title: 'Z',
+                          default: 0,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                        w: {
+                          type: 'number',
+                          title: 'W',
+                          default: 1,
+                          step: 0.01,
+                          minimum: -1,
+                          maximum: 1,
+                        },
+                      },
+                    },
+                  },
+                  duration: {
+                    type: 'number',
+                    title: 'Duration',
+                    default: 1,
+                  },
+                  repeat: {
+                    type: 'boolean',
+                    title: 'Repeat',
+                    default: false,
+                  },
+                  loop: {
+                    type: 'boolean',
+                    title: 'Loop',
+                    default: false,
+                  },
+                  cubic: {
+                    title: 'Cubic',
+                    type: 'string',
+                    enum: [
+                      'ease',
+                      'ease-in',
+                      'ease-out',
+                      'ease-in-out',
+                      'ease-in-out-back',
+                      'ease-in-out-circ',
+                      'ease-in-out-expo',
+                      'ease-in-out-sine',
+                      'ease-in-out-quint',
+                      'ease-in-out-quart',
+                      'ease-in-out-cubic',
+                      'ease-in-out-quad',
+                      'ease-out-back',
+                      'ease-out-circ',
+                      'ease-out-expo',
+                      'ease-out-sine',
+                      'ease-out-quint',
+                      'ease-out-quart',
+                      'ease-out-cubic',
+                      'ease-out-quad',
+                      'ease-in-back',
+                      'ease-in-circ',
+                      'ease-in-expo',
+                      'ease-in-sine',
+                      'ease-in-quint',
+                      'ease-in-quart',
+                      'ease-in-cubic',
+                      'ease-in-quad',
+                    ],
+                  },
+                  reference: {
+                    type: 'string',
+                    title: 'Reference',
+                    enum: ['absolute', 'relative'],
+                    default: 'absolute',
+                  },
+                  space: {
+                    type: 'string',
+                    title: 'Space',
+                    enum: ['parent', 'local', 'world'],
+                    default: 'parent',
+                  },
+                },
+              },
+
+              mode: {
+                type: 'string',
+                title: 'Data source',
+                enum: ['local', 'fromInput'],
+                default: 'local',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              'nodeid',
+              {
+                type: 'selectfieldset',
+                key: 'attribute',
+                title: 'Attribute',
+
+                items: [
+                  {
+                    type: 'section',
+                    items: [
+                      //'options.fromPosition',
+                      'options.toPosition',
+                    ],
+                  },
+                  {
+                    type: 'section',
+                    items: [
+                      //'options.fromScale',
+                      'options.toScale',
+                    ],
+                  },
+                  {
+                    type: 'section',
+                    items: [
+                      //'options.fromOrientation',
+                      'options.toOrientation',
+                    ],
+                  },
+                ],
+              },
+              'options.duration',
+              'options.repeat',
+              'options.loop',
+              'options.cubic',
+              'mode',
+              {
+                key: 'options.reference',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              {
+                key: 'options.space',
+                type: 'radiobuttons',
+                activeClass: 'btn-success',
+              },
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="animate" id="animate"></script>
+
+<script type="text/html" data-help-name="animate">
+  <p>Set a MaxWhere node position.</p>
+</script>

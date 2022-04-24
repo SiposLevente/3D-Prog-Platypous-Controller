@@ -1,0 +1,57 @@
+<script src="./utils/public/formManagement.js"></script>
+<script type="text/javascript">
+  RED.nodes.registerType('load-otf-asset', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: 'inject.svg',
+    label: function () {
+      return this.settings.displayName || 'load-otf-asset';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let formSettings = {
+        schema: {
+          otf: {
+            type: 'string',
+            title: 'OTF Asset',
+            default: 'test-asset-1',
+          },
+          displayName: {
+            type: 'string',
+            title: 'Display name',
+          },
+        },
+        form: ['otf', 'displayName'],
+      };
+      if (!node.settings) {
+        $('#jsonFormContainer').jsonForm(formSettings);
+      } else {
+        $('#jsonFormContainer').jsonForm(
+          Object.assign({ value: node.settings }, formSettings),
+        );
+      }
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="load-otf-asset"
+  id="load-otf-asset"
+></script>
+
+<script type="text/html" data-help-name="load-otf-asset">
+  <p>Load OTF asset</p>
+</script>

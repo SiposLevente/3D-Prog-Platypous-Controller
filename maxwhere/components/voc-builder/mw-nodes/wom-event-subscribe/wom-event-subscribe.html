@@ -1,0 +1,199 @@
+<script type="text/javascript">
+  RED.nodes.registerType('wom-event-subscribe', {
+    category: 'MaxWhere',
+    color: '#1ab9ff',
+    defaults: {
+      settings: { value: '' },
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: 'bridge-dash.svg',
+    label: function () {
+      return this.settings.displayName || 'wom-event-subscribe';
+    },
+    oneditprepare: function () {
+      $('#dialog-form').before('<div id="editorContainer"></div>');
+      $('#editorContainer').append('<form id="jsonFormContainer"></form>');
+      let node = this;
+      let womIds;
+      $.ajax({
+        type: 'GET',
+        url: './getWomIds/',
+        async: false,
+        success: function (response) {
+          womIds = Array.from(new Set(response));
+          let formSettings = {
+            schema: {
+              eventName: {
+                type: 'string',
+                title: 'Event name',
+                enum: [
+                  'click',
+                  'contextMenu',
+                  'dblclick',
+                  'strafeclick',
+                  'mouseDown',
+                  'mouseEnter',
+                  'mouseLeave',
+                  'mouseMove',
+                  'mouseUp',
+                  'mouseWheel',
+                  'node-create',
+                  'node-delete',
+                  'node-position',
+                  'node-orientation',
+                  'node-pose',
+                  'node-scale',
+                  'node-parent',
+                  'node-visible',
+                  'light-create',
+                  'light-delete',
+                  'light-type',
+                  'light-diffuse',
+                  'light-specular',
+                  'light-attenuation',
+                  'light-direction',
+                  'light-spotrange',
+                  'light-visible',
+                  'visual-create',
+                  'visual-delete',
+                  'visual-filename',
+                  'visual-material',
+                  'visual-visible',
+                  'visual-save',
+                  'manualvisual-create',
+                  'manualvisual-delete',
+                  'manualvisual-clear',
+                  'manualvisual-updatedirty',
+                  'manualvisual-material',
+                  'manualvisual-dynamic',
+                  'manualvisual-visible',
+                  'material-create',
+                  'material-clone',
+                  'material-delete',
+                  'material-diffuse',
+                  'material-ambient',
+                  'material-specular',
+                  'material-emissive',
+                  'material-shininess',
+                  'material-depthcheck',
+                  'material-depthwrite',
+                  'material-transparent',
+                  'material-recieveshadow',
+                  'material-lighting',
+                  'material-culling',
+                  'material-shaderparamset',
+                  'material-save',
+                  'meshanimation-create',
+                  'meshanimation-update',
+                  'meshanimation-play',
+                  'meshanimation-pause',
+                  'meshanimation-stop',
+                  'meshanimation-delete',
+                  'label-create',
+                  'label-delete',
+                  'label-visible',
+                  'label-caption',
+                  'label-offset',
+                  'label-charheight',
+                  'label-color',
+                  'label-ontop',
+                  'canvas-create',
+                  'canvas-delete',
+                  'canvas-visible',
+                  'canvas-zorder',
+                  'canvas-passive',
+                  'canvas-updatebuffer',
+                  'canvas-size',
+                  'canvas-offset',
+                  'canvas-resolution',
+                  'canvas-inview',
+                  'view-create',
+                  'view-delete',
+                  'view-fov',
+                  'view-nearclip',
+                  'view-farclip',
+                  'view-offset',
+                  'view-orientation',
+                  'physical-create',
+                  'physical-delete',
+                  'physical-collision',
+                  'physical-debugdraw',
+                  'input-mouse',
+                  'input-keyboard',
+                  'input-text',
+                  'interpolator-info',
+                  'render-windowsize',
+                  'render-fullscreen',
+                  'render-maximize',
+                  'render-displayposition',
+                  'render-window-show',
+                  'render-window-hide',
+                  'render-window-enter',
+                  'render-window-leave',
+                  'render-cursor',
+                  'render-request-raytest',
+                  'spatialctrl-enable',
+                  'spatialctrl-state',
+                  'render-crosshair-enable',
+                  'render-crosshair-props',
+                  'render-fpspanel',
+                  'render-skybox',
+                  'render-sceneambient',
+                  'render-viewportbackground',
+                  'render-fog',
+                  'render-resource-create',
+                  'render-resource-add',
+                  'render-resource-init',
+                  'core-quit',
+                ],
+                default: 'click',
+              },
+
+              subject: {
+                type: 'string',
+                title: 'subject',
+                enum: ['none', 'camera'].concat(womIds),
+                default: 'none',
+              },
+              object: {
+                type: 'string',
+                title: 'Object',
+                enum: ['none', 'camera'].concat(womIds),
+                default: 'none',
+              },
+              displayName: {
+                type: 'string',
+                title: 'Display name',
+              },
+            },
+            form: [
+              'eventName',
+              'subject',
+              //'object',
+              'displayName',
+            ],
+          };
+          if (!node.settings) {
+            $('#jsonFormContainer').jsonForm(formSettings);
+          } else {
+            $('#jsonFormContainer').jsonForm(
+              Object.assign({ value: node.settings }, formSettings),
+            );
+          }
+        },
+      });
+    },
+    oneditsave: function () {
+      let node = this;
+      node.settings = JSONForm.getFormValue('#jsonFormContainer');
+      console.log(node.settings);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="wom-event-subscribe"></script>
+
+<script type="text/html" data-help-name="wom-event-subscribe">
+  <p>Add an event listener to the wom.</p>
+</script>
