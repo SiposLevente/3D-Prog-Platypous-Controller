@@ -4,9 +4,9 @@ const RELEASE_TEXT = "released"
 // MQTT topics
 const mainTopic = "controller/";
 const useTopic = "inUse";
-const xTopic = "orietation/x";
-const yTopic = "orietation/y";
-const zTopic = "orietation/z";
+const xTopic = "orientation/x";
+const yTopic = "orientation/y";
+const zTopic = "orientation/z";
 
 
 // MQTT connection settings
