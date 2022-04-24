@@ -25,6 +25,8 @@ class Platypous_Controller:
         self.z_topic = self.main_topic+"orientation/z"
         self.use_topic = self.main_topic+"inUse"
         self.platypous_topic = "platypous/"
+        self.platypous_position_topic = self.platypous_topic + "position/"
+        self.platypous_orientation_topic = self.platypous_topic + "orientation/"
         self.connected = False
         self.timeout = TIMEOUT_TIME
 
@@ -85,6 +87,7 @@ class Platypous_Controller:
             vel_msg = Twist()
             self.timeout -= 1
             if self.timeout == 0:
+                print("cucc")
                 Orientation.x = 0
                 Orientation.y = 0
                 Orientation.z = 0
@@ -98,19 +101,20 @@ class Platypous_Controller:
 
             client.on_message = self.on_message
 
-            print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
-
-            if abs(float(Orientation().z)) > 10:
+            print("X: " + str(Orientation.x) + " Y: " +
+                  str(Orientation.y) + " Z: " + str(Orientation.z))
+            if abs(float(Orientation.x)) > 10:
                 vel_msg.linear.x = -float(Orientation.z)/50
-            if abs(float(Orientation().x)) > 10:
+            if abs(float(Orientation.y)) > 10:
                 vel_msg.angular.z = -float(Orientation.x)/50
             self.twist_pub.publish(vel_msg)
 
     def publish_platypous_positon(self, value, positions, client):
         value_index = positions.index(value + ":")
         value = positions[value_index+1]
-        client.publish(self.platypous_topic +
+        client.publish(self.platypous_position_topic +
                        positions[value_index].split(":")[0], value)
+
 
 if __name__ == '__main__':
     controller = Platypous_Controller()
