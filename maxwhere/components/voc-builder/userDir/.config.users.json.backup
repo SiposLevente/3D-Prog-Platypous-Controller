@@ -4,13 +4,16 @@
             "view": {
                 "view-show-grid": true,
                 "view-snap-grid": true,
-                "view-grid-size": 20,
+                "view-grid-size": "20",
                 "view-node-status": true,
                 "view-node-show-label": true,
                 "view-show-tips": true,
                 "view-show-welcome-tours": true,
                 "view-store-position": false,
                 "view-store-zoom": false
+            },
+            "tours": {
+                "welcome": "2.2.2"
             }
         },
         "menu-deploymenu-item-node": true,
