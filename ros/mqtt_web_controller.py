@@ -92,9 +92,9 @@ class Platypous_Controller:
             odometry_data = self.odometry_cp
             positions = str(odometry_data.pose).split()
 
-            self.public_platypous_positon("x", positions, client)
-            self.public_platypous_positon("y", positions, client)
-            self.public_platypous_positon("z", positions, client)
+            self.publish_platypous_positon("x", positions, client)
+            self.publish_platypous_positon("y", positions, client)
+            self.publish_platypous_positon("z", positions, client)
 
             client.on_message = self.on_message
 
@@ -106,7 +106,7 @@ class Platypous_Controller:
                 vel_msg.angular.z = -float(Orientation.x)/50
             self.twist_pub.publish(vel_msg)
 
-    def public_platypous_positon(self, value, positions, client):
+    def publish_platypous_positon(self, value, positions, client):
         value_index = positions.index(value + ":")
         value = positions[value_index+1]
         client.publish(self.platypous_topic +
