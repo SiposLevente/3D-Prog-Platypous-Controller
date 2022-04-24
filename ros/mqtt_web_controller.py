@@ -93,27 +93,27 @@ class Platypous_Controller:
                 Orientation.z = 0
             time.sleep(1)
             odometry_data = self.odometry_cp
-            positions = str(odometry_data.pose).split()
+            position = str(odometry_data.pose).split()
 
-            self.publish_platypous_positon("x", positions, client)
-            self.publish_platypous_positon("y", positions, client)
-            self.publish_platypous_positon("z", positions, client)
+            self.publish_platypous_positon("x", position, client)
+            self.publish_platypous_positon("y", position, client)
+            self.publish_platypous_positon("z", position, client)
 
             client.on_message = self.on_message
 
-            print("X: " + str(Orientation.x) + " Y: " +
-                  str(Orientation.y) + " Z: " + str(Orientation.z))
-            if abs(float(Orientation.x)) > 10:
-                vel_msg.linear.x = -float(Orientation.z)/50
-            if abs(float(Orientation.y)) > 10:
-                vel_msg.angular.z = -float(Orientation.x)/50
+            # print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
+
+            if abs(float(Orientation.x)) > 18:
+                vel_msg.linear.x = float(Orientation.x)/50
+            if abs(float(Orientation.y)) > 18:
+                vel_msg.angular.z = -float(Orientation.y)/50
             self.twist_pub.publish(vel_msg)
 
-    def publish_platypous_positon(self, value, positions, client):
-        value_index = positions.index(value + ":")
-        value = positions[value_index+1]
+    def publish_platypous_positon(self, value, position, client):
+        value_index = position.index(value + ":")
+        value = position[value_index+1]
         client.publish(self.platypous_position_topic +
-                       positions[value_index].split(":")[0], value)
+                       position[value_index].split(":")[0], value)
 
 
 if __name__ == '__main__':
