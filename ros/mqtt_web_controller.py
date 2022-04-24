@@ -2,6 +2,7 @@ import paho.mqtt.client as mqttClient
 import time
 import certifi
 import rospy
+import math
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
@@ -87,7 +88,6 @@ class Platypous_Controller:
             vel_msg = Twist()
             self.timeout -= 1
             if self.timeout == 0:
-                print("cucc")
                 Orientation.x = 0
                 Orientation.y = 0
                 Orientation.z = 0
@@ -99,7 +99,7 @@ class Platypous_Controller:
             self.publish_platypous_position("y", pose_data, client)
             self.publish_platypous_position("z", pose_data, client)
 
-            self.publish_platypous_position(pose_data, client)
+            self.publish_platypous_orientation(pose_data, client)
 
             client.on_message = self.on_message
 
@@ -130,7 +130,7 @@ class Platypous_Controller:
         data_z = pose_data[index_z + 1]
         data_w = pose_data[index_w + 1]
 
-        rotation_data = euler_from_quaternion(float(data_x), float(data_y), float(data_z), float(data_w))
+        rotation_data = self.euler_from_quaternion(float(data_x), float(data_y), float(data_z), float(data_w))
         
         client.publish(self.platypous_orientation_topic + "x", rotation_data[0])
         client.publish(self.platypous_orientation_topic + "y", rotation_data[1])
