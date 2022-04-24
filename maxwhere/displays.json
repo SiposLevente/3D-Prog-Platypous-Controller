@@ -1,0 +1,13 @@
+{
+  "id": 519,
+  "name": "default-project-for-528",
+  "access_type": {
+    "viewer": false,
+    "editor": false,
+    "owner": false
+  },
+  "displays": {
+    "id": 519,
+    "placeholders": []
+  }
+}

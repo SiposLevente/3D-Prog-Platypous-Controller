@@ -1,0 +1,76 @@
+
+material talp_krom
+{
+	technique
+	{
+		pass mxw_pbs
+		{
+
+			vertex_program_ref physicallybased_vp
+			{
+				param_named uv_changer float2 1 1
+			}
+
+			fragment_program_ref physicallybased_fp
+			{
+				param_named metallic_bias float -0.35
+				param_named refl_blur_bias float 5.77
+				param_named roughness_bias float 0.31
+				param_named surface_reflectivity float2 2.81 0.3
+			}
+
+			texture_unit diffuse_map
+			{
+				texture_alias diffuse_map
+				texture krom.jpg
+				max_anisotropy 8
+			}
+
+			texture_unit normal_map
+			{
+				texture_alias normal_map
+				texture krom_norm.jpg
+				max_anisotropy 8
+			}
+
+			texture_unit roughness_map
+			{
+				texture_alias roughness_map
+				texture tiny_grey.png
+				max_anisotropy 8
+			}
+
+			texture_unit metallic_map
+			{
+				texture_alias metallic_map
+				texture tiny_white.png
+				max_anisotropy 8
+			}
+
+			texture_unit reflection_map
+			{
+				texture_alias reflection_map
+				cubic_texture SaintPetersBasilica.dds combinedUVW
+				max_anisotropy 8
+				tex_address_mode clamp
+				env_map cubic_reflection
+			}
+
+			texture_unit light_map
+			{
+				texture_alias light_map
+				texture tiny_white.png
+				max_anisotropy 8
+			}
+
+			texture_unit ambientocclusion_map
+			{
+				texture_alias ambientocclusion_map
+				texture krom_AO.jpg
+				max_anisotropy 8
+			}
+		}
+
+	}
+
+}

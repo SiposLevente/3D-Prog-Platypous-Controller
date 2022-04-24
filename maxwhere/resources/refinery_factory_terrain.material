@@ -1,0 +1,80 @@
+// Material by D3KB
+
+material refinery_factory_terrain
+{
+	technique glsl
+	{
+		pass mxw_pbs
+		{
+			vertex_program_ref physicallybased_vp
+			{
+				param_named texture_offset float2 1.0 1.0
+				param_named tile_count float 1.0
+				param_named tile_count_metallic float 1.0
+				param_named tile_count_normal float 1.0
+				param_named tile_count_roughness float 1.0
+			}
+			
+			fragment_program_ref physicallybased_fp
+			{
+				param_named refl_blur_bias float 0.0
+				param_named reflection_power float 0.5
+				param_named roughness_bias float 0.0
+				param_named spec_multiplier float 1.0
+				param_named surface_reflectivity float2 1.0 1.0
+			}
+			
+			
+			texture_unit diffuse_map
+			{
+				texture_alias diffuse_map
+				texture refinery_factory_terrain_D.jpg
+				max_anisotropy 8
+			}
+			
+			texture_unit normal_map
+			{
+				texture_alias normal_map
+				texture refinery_factory_terrain_N.jpg
+				max_anisotropy 8
+			}
+			texture_unit roughness_map
+			{
+				texture_alias roughness_map
+				texture refinery_factory_terrain_Roughness.png
+				max_anisotropy 8
+			}
+			
+			texture_unit metallic_map
+			{
+				texture_alias metallic_map
+				texture refinery_factory_terrain_Metallic.png
+				max_anisotropy 8
+			}
+			
+			texture_unit reflection_map
+			{
+				texture_alias reflection_map
+				cubic_texture waves2.dds combinedUVW
+				max_anisotropy 8
+				env_map cubic_reflection
+				
+			}
+			
+			texture_unit light_map
+			{
+				texture_alias light_map
+				texture tiny_white.png
+				max_anisotropy 8
+			}
+			
+			texture_unit ambientocclusion_map
+			{
+				texture_alias ambientocclusion_map
+				texture tiny_white.png
+				max_anisotropy 8
+			}
+			
+		}
+	}
+}

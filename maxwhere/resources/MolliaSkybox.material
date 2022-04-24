@@ -1,0 +1,30 @@
+// Material by D3KB
+
+material MolliaSkybox
+{
+	technique
+	{
+		pass
+		{
+			depth_check on
+			depth_write off
+			depth_func less_equal
+			
+			vertex_program_ref VSUnlitSkybox {}
+			
+			fragment_program_ref FSUnlitSkyboxLatlong
+			{
+				param_named UTexCoordOffset float2 1.0 1.0
+				param_named UTexCoordScale float2 1.0 1.0
+			}
+			
+			texture_unit TU0SkyboxTex
+			{
+				texture canary_wharf_offset_4096.jpg numMipMaps 0
+				tex_address_mode wrap wrap wrap
+				filtering anisotropic
+				max_anisotropy 8
+			}
+		}
+	}
+}

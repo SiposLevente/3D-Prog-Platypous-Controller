@@ -1,0 +1,48 @@
+{
+  "ccid": 528,
+  "name": "Virtual Operation Center (VOC) Builder",
+  "title": "Virtual Operation Center (VOC) Builder",
+  "subtitle": "Virtual Operations Center (VOC) Builder application.",
+  "description": {
+    "short": "Virtual Operations Center (VOC) Builder application.",
+    "full": "Virtual Operations Center (VOC) Builder application."
+  },
+  "domain": null,
+  "canEdit": true,
+  "isPublic": true,
+  "isFavourite": false,
+  "isAvailable3D": true,
+  "isAvailable2D": false,
+  "isAvailableWeb": false,
+  "version": 9,
+  "remoteVersion": 9,
+  "tags": [],
+  "thumbnail": {
+    "alt": "image",
+    "source": "C:\\Users\\vr\\AppData\\Roaming\\MaxWhere\\f1c173c2-bd56-4ca5-823d-3974a6e3dc42\\7a5ce878-efed-4376-bc4d-41bc0050257f\\thumb6\\7a5ce878-efed-4376-bc4d-41bc0050257f-thumb.jpg"
+  },
+  "cover": {
+    "source": "C:\\Users\\vr\\AppData\\Roaming\\MaxWhere\\f1c173c2-bd56-4ca5-823d-3974a6e3dc42\\7a5ce878-efed-4376-bc4d-41bc0050257f\\thumb6\\.jpg"
+  },
+  "minreqclientversion": "3.0.0",
+  "magic_link": "https://www.maxwhere.com/cp/where/7a5ce878-efed-4376-bc4d-41bc0050257f",
+  "magic_link_web": "https://testmwweb.maxwhere.com/url.html#7a5ce878-efed-4376-bc4d-41bc0050257f",
+  "updatedAt": "2022-01-13T00:59:56Z",
+  "created_at": null,
+  "organisation": null,
+  "artist": null,
+  "isVisibleMetaData": false,
+  "canHideMetaData": false,
+  "isOwner": false,
+  "numberOfInstallations": 0,
+  "uuid": "7a5ce878-efed-4376-bc4d-41bc0050257f",
+  "thumbnails": [
+    "7a5ce878-efed-4376-bc4d-41bc0050257f-thumb"
+  ],
+  "mwDomain": [],
+  "meta": {
+    "creator": null,
+    "affiliation": null,
+    "webtables": 0
+  }
+}

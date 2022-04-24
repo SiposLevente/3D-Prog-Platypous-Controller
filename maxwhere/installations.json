@@ -1,0 +1,32 @@
+{
+  "access_type": {
+    "editor": false,
+    "owner": false,
+    "viewer": true
+  },
+  "canDelete": false,
+  "canEdit": false,
+  "can_delete": false,
+  "can_duplicate": false,
+  "can_edit": false,
+  "can_hide_metadata": false,
+  "createdAt": "Thu, 13 Jan 2022 00:00:00 GMT",
+  "createdBy": "No creator set!",
+  "description": null,
+  "displays": {
+    "id": 519,
+    "placeholders": []
+  },
+  "domain": null,
+  "id": 519,
+  "isPublic": false,
+  "is_public": false,
+  "is_visible_metadata": true,
+  "modified": "Thu, 13 Jan 2022 00:56:00 GMT",
+  "name": "default-project-for-528",
+  "numberOfPlaceholders": 0,
+  "project_id": 519,
+  "sharingRoles": [],
+  "thumbnail": "",
+  "title": "default-project-for-528"
+}

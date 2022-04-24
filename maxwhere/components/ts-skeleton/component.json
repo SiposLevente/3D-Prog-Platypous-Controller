@@ -1,0 +1,5 @@
+{
+  "name": "ts-skeleton",
+  "main": "./mwdist/index.js",
+  "resources": "./resources"
+}

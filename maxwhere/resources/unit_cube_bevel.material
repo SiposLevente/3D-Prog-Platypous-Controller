@@ -1,0 +1,75 @@
+
+material unit_cube_bevel
+{
+	technique glsl
+	{
+		pass mxw_pbs
+		{
+
+			vertex_program_ref physicallybased_vp
+			{
+				param_named texture_offset float2 1 1
+			}
+
+			fragment_program_ref physicallybased_fp
+			{
+				param_named refl_blur_bias float 2.23
+				param_named reflection_power float 0.4
+				param_named roughness_bias float -0.01
+				param_named surface_reflectivity float2 0.68 1
+			}
+
+			texture_unit diffuse_map
+			{
+				texture_alias diffuse_map
+				texture unit_cube_bevel_Base_Color.png
+				max_anisotropy 8
+			}
+
+			texture_unit normal_map
+			{
+				texture_alias normal_map
+				texture unit_cube_bevel_N.png
+				max_anisotropy 8
+			}
+
+			texture_unit roughness_map
+			{
+				texture_alias roughness_map
+				texture unit_cube_bevel_Roughness.png
+				max_anisotropy 8
+			}
+
+			texture_unit metallic_map
+			{
+				texture_alias metallic_map
+				texture unit_cube_bevel_Metallic.png
+				max_anisotropy 8
+			}
+
+			texture_unit reflection_map
+			{
+				texture_alias reflection_map
+				cubic_texture refl_cubemap_01.dds combinedUVW
+				max_anisotropy 8
+				env_map cubic_reflection
+			}
+
+			texture_unit light_map
+			{
+				texture_alias light_map
+				texture tiny_white.png
+				max_anisotropy 8
+			}
+
+			texture_unit ambientocclusion_map
+			{
+				texture_alias ambientocclusion_map
+				texture tiny_white.png
+				max_anisotropy 8
+			}
+		}
+
+	}
+
+}

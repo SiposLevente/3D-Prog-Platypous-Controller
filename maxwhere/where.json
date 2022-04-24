@@ -1,0 +1,51 @@
+{
+  "deploy-name": "Coding Arena",
+  "version": "1.0.0",
+  "main": "index.jsx",
+  "environment": {
+    "background": {
+      "r": 0.12,
+      "g": 0.16,
+      "b": 0.24,
+      "a": 1
+    },
+    "ambient": {
+      "r": 0.6,
+      "g": 0.6,
+      "b": 0.6,
+      "a": 1
+    },
+    "skybox": {
+      "material": "FXUnlitSkyboxLatlong"
+    }
+  },
+  "camera": {
+    "position": {
+      "x": -334.80535888671875,
+      "y": 600.8982543945312,
+      "z": 2731.151123046875
+    },
+    "orientation": {
+      "w": -0.9957274794578552,
+      "x": 0.05671340227127075,
+      "y": 0.07275563478469849,
+      "z": 0.004143621772527695
+    }
+  },
+  "local": "resources",
+  "description": {
+    "short": "Component with node-red integration.",
+    "full": "Component with node-red integration."
+  },
+  "tags": [
+    "private"
+  ],
+  "meta": {
+    "creator": "MaxWhere Team",
+    "affiliation": "Mistems Ltd."
+  },
+  "components": {
+    "ts-skeleton": "./components/ts-skeleton/component.json"
+  },
+  "dependencies": []
+}
