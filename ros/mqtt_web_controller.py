@@ -20,10 +20,10 @@ class Platypous_Controller:
                          Odometry, self.cb_odometry_cp)
         self.twist_pub = rospy.Publisher('/cmd_vel/nav', Twist, queue_size=10)
         self.main_topic = "controller/"
-        self.x_topic = "controller/orientation/x"
-        self.y_topic = "controller/orientation/y"
-        self.z_topic = "controller/orientation/z"
-        self.use_topic = "controller/inUse"
+        self.x_topic = self.main_topic+"orientation/x"
+        self.y_topic = self.main_topic+"orientation/y"
+        self.z_topic = self.main_topic+"orientation/z"
+        self.use_topic = self.main_topic+"inUse"
         self.platypous_topic = "platypous/"
         self.connected = False
         self.timeout = TIMEOUT_TIME
