@@ -31,13 +31,13 @@ class Main:
             time.sleep(0.1)
 
     def on_message(client, userdata, msg):  # The callback for when a PUBLISH message is received from the server.
-        if "xAccel" in msg.topic:
+        if "to_platypous/x" in msg.topic:
             x_value = msg.payload
             Values.x_value = str(x_value).split("b'")[1].split("'")[0]
-        elif "yAccel" in msg.topic:
+        elif "to_platypous/y" in msg.topic:
             y_value = msg.payload
             Values.y_value = str(y_value).split("b'")[1].split("'")[0]
-        elif "zAccel" in msg.topic:
+        elif "to_platypous/z" in msg.topic:
             z_value = msg.payload
             Values.z_value = str(z_value).split("b'")[1].split("'")[0]
 
