@@ -28,6 +28,8 @@ class Platypous_Controller:
         self.platypous_topic = "platypous/"
         self.platypous_position_topic = self.platypous_topic + "position/"
         self.platypous_orientation_topic = self.platypous_topic + "orientation/"
+        self.broker_address = "192.168.1.150"
+        self.broker_port = 1883
         self.connected = False
         self.timeout = TIMEOUT_TIME
 
@@ -70,9 +72,6 @@ class Platypous_Controller:
 
     def start(self):
         self.connected = False
-
-        broker_address = "192.168.1.150"
-        port = 1883
         # user = "Ponti"
         # password = "n3vSLVTpecC!QhP"
 
@@ -81,7 +80,7 @@ class Platypous_Controller:
         # set username and password
         #client.username_pw_set(user, password=password)
         client.on_connect = self.on_connect  # attach function to callback
-        client.connect(broker_address, port=port)  # connect to broker
+        client.connect(self.broker_address, port=self.broker_port)  # connect to broker
 
         client.loop_start()  # start the loop
         while not rospy.is_shutdown():
