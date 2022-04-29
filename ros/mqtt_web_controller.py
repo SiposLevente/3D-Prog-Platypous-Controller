@@ -113,34 +113,10 @@ class Platypous_Controller:
 
     def publish_platypous_orientation(self, client):
         pose_data = self.odometry_cp.pose.pose.orientation
-
-        data_x = pose_data.x
-        data_y = pose_data.y
-        data_z = pose_data.z
-        data_w = pose_data.w
-
-        rotation_data = self.euler_from_quaternion(float(data_x), float(data_y), float(data_z), float(data_w))
-        
-        client.publish(self.platypous_orientation_topic + "x", rotation_data[0])
-        client.publish(self.platypous_orientation_topic + "y", rotation_data[1])
-        client.publish(self.platypous_orientation_topic + "z", rotation_data[2])
-
-
-    def euler_from_quaternion(self, x, y, z, w):
-        t0 = +2.0 * (w * x + y * z)
-        t1 = +1.0 - 2.0 * (x * x + y * y)
-        roll_x = math.atan2(t0, t1)
-     
-        t2 = +2.0 * (w * y - z * x)
-        t2 = +1.0 if t2 > +1.0 else t2
-        t2 = -1.0 if t2 < -1.0 else t2
-        pitch_y = math.asin(t2)
-     
-        t3 = +2.0 * (w * z + x * y)
-        t4 = +1.0 - 2.0 * (y * y + z * z)
-        yaw_z = math.atan2(t3, t4)
-     
-        return math.degrees(roll_x), math.degrees(pitch_y), math.degrees(yaw_z)
+        client.publish(self.platypous_orientation_topic + "x", pose_data.x )
+        client.publish(self.platypous_orientation_topic + "y", pose_data.y )
+        client.publish(self.platypous_orientation_topic + "z", pose_data.z )
+        client.publish(self.platypous_orientation_topic + "w", pose_data.w)
 
 if __name__ == '__main__':
     controller = Platypous_Controller()
