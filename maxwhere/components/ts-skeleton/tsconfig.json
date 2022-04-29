@@ -8,7 +8,7 @@
     "jsx": "preserve",
     "outDir": "./mwdist",
     "removeComments": true,
-
+    "resolveJsonModule":true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
