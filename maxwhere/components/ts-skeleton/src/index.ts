@@ -3,10 +3,94 @@
  * Proprietary and confidential
  */
 
-import { wom, context, modules, Mesh, Node } from 'maxwhere';
-import { womAsync } from '@mxw/next';
+import Config from '../src/mqtt-config.json';
+import { wom, context, modules, Mesh, Node } from 'maxwhere'
+import { womAsync } from '@mxw/next'
+import * as THREE from '@mxw/three';
+import { ipcMain } from 'electron'
+import mqtt, { Client, IClientOptions, MqttClient } from 'mqtt'
 
-import { ipcMain } from 'electron';
+let currentPos = { 'x': 0, 'y': 0, 'z': 0 } // Initial position of the test avatar
+let currentOri = new THREE.Quaternion(0, 0, 0, 1)
+
+const mainTopic = 'platypous/'
+const positionTopic = mainTopic + 'position/'
+const positionXTopic = positionTopic + 'x'
+const positionYTopic = positionTopic + 'y'
+const positionZTopic = positionTopic + 'z'
+
+const orientationTopic = mainTopic + 'orientation/'
+const orientationXTopic = orientationTopic + 'x'
+const orientationYTopic = orientationTopic + 'y'
+const orientationZTopic = orientationTopic + 'z'
+const orientationWTopic = orientationTopic + 'w'
+
+const mqttOptions: IClientOptions = {
+  'host': Config.host,
+  'port': Config.port,
+  'username': Config.username,
+  'password': Config.password,
+  clientId: 'MaxwhereListener',
+  'protocol': 'mqtt',
+  'rejectUnauthorized': false,
+  'clean': true,
+  'keepalive': 60,
+  'reconnectPeriod': 1000,
+  'protocolVersion': 5,
+  'queueQoSZero': false,
+  'properties': {
+    'sessionExpiryInterval': 0
+  }
+}
+
+let platypous: Mesh
+
+let mqttClient = mqtt.connect(`mqtt://${Config.host}:${Config.port}`, mqttOptions)
+
+mqttClient.on('connect', () => {
+  mqttClient.subscribe(positionXTopic)
+  mqttClient.subscribe(positionYTopic)
+  mqttClient.subscribe(positionZTopic)
+
+  mqttClient.subscribe(orientationXTopic)
+  mqttClient.subscribe(orientationYTopic)
+  mqttClient.subscribe(orientationZTopic)
+})
+
+
+mqttClient.on('message', (topic, payload) => {
+  switch (topic) {
+    case positionXTopic:
+      currentPos.x = parseInt(payload.toString())
+      break;
+    case positionYTopic:
+      currentPos.y = parseInt(payload.toString())
+      break;
+    case positionZTopic:
+      currentPos.z = parseInt(payload.toString())
+      break;
+    case orientationXTopic:
+      currentOri.x = parseInt(payload.toString())
+      break;
+    case orientationYTopic:
+      currentOri.y = parseInt(payload.toString())
+      break;
+    case orientationZTopic:
+      currentOri.z = parseInt(payload.toString())
+      break;
+    case orientationWTopic:
+      currentOri.w = parseInt(payload.toString())
+      break;
+  }
+  updatePos();
+  updateOri();
+})
+
+mqttClient.publish("test", 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
+  if (error) {
+    console.error(error)
+  }
+})
 
 module.exports.init = function () { };
 
@@ -19,23 +103,26 @@ module.exports.render = function (options: object): any {
 
 module.exports.clear = function () { };
 
+function updatePos() {
+  platypous.setPosition(currentPos.x, currentPos.y, currentPos.z)
+}
+
+function updateOri() {
+  platypous.setOrientation(currentOri.w, currentOri.x, currentPos.y, currentPos.z)
+}
 async function initAsync() {
-  let pengu = wom.create('mesh', {
+  platypous = wom.create('mesh', {
     url: 'penguin.mesh',
     id: 'pengu',
     class: 'animal',
     scale: 10,
-    position: { x: 10, y: 250, z: 10 },
+    position: { x: currentPos.x, y: currentPos.y, z: currentPos.z },
+    orientation: { x: currentOri.x, y: currentOri.y, z: currentOri.z, w: currentOri.w },
     autophysical: true,
     done: (m) => {
       console.log('DONE');
-      m.addListener('click', (e) => {
-        console.log('clicked');
-        console.log(e);
-        pengu.setPosition([10, 0, 0], 'relative', 'local');
-      })
     }
   });
 
-  await womAsync.render(pengu);
+  await womAsync.render(platypous);
 }
