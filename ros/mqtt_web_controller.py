@@ -28,8 +28,6 @@ class Platypous_Controller:
         self.platypous_topic = "platypous/"
         self.platypous_position_topic = self.platypous_topic + "position/"
         self.platypous_orientation_topic = self.platypous_topic + "orientation/"
-        self.broker_address = "192.168.1.150"
-        self.broker_port = 1883
         self.connected = False
         self.timeout = TIMEOUT_TIME
 
@@ -72,6 +70,9 @@ class Platypous_Controller:
 
     def start(self):
         self.connected = False
+
+        broker_address = "192.168.1.150"
+        port = 1883
         # user = "Ponti"
         # password = "n3vSLVTpecC!QhP"
 
@@ -80,7 +81,7 @@ class Platypous_Controller:
         # set username and password
         #client.username_pw_set(user, password=password)
         client.on_connect = self.on_connect  # attach function to callback
-        client.connect(self.broker_address, port=self.broker_port)  # connect to broker
+        client.connect(broker_address, port=port)  # connect to broker
 
         client.loop_start()  # start the loop
         while not rospy.is_shutdown():
@@ -91,18 +92,12 @@ class Platypous_Controller:
                 Orientation.y = 0
                 Orientation.z = 0
             time.sleep(1)
-            odometry_data = self.odometry_cp
-            pose_data = str(odometry_data.pose).split()
+            
 
-            self.publish_platypous_position("x", pose_data, client)
-            self.publish_platypous_position("y", pose_data, client)
-            self.publish_platypous_position("z", pose_data, client)
-
-            self.publish_platypous_orientation(pose_data, client)
+            self.publish_platypous_position(client)
+            self.publish_platypous_orientation(client)
 
             client.on_message = self.on_message
-
-            # print("X: " + str(Orientation.x) + " Y: " + str(Orientation.y) + " Z: " + str(Orientation.z))
 
             if abs(float(Orientation.x)) > 18:
                 vel_msg.linear.x = float(Orientation.x)/50
@@ -110,24 +105,19 @@ class Platypous_Controller:
                 vel_msg.angular.z = -float(Orientation.y)/50
             self.twist_pub.publish(vel_msg)
 
-    def publish_platypous_position(self, value, pose_data, client):
-        value_index = pose_data.index(value + ":")
-        value = pose_data[value_index+1]
-        client.publish(self.platypous_position_topic +
-                       pose_data[value_index].split(":")[0], value)
+    def publish_platypous_position(self, client):
+        pose_data = self.odometry_cp.pose.pose.position
+        client.publish(self.platypous_position_topic + "x", pose_data.x)
+        client.publish(self.platypous_position_topic + "y", pose_data.y)
+        client.publish(self.platypous_position_topic + "z", pose_data.z)
 
-    def publish_platypous_orientation(self, pose_data, client):
-        value_index = pose_data.index("orientation:")
+    def publish_platypous_orientation(self, client):
+        pose_data = self.odometry_cp.pose.pose.orientation
 
-        index_x = pose_data.index("x:", value_index)
-        index_y = pose_data.index("y:", value_index)
-        index_z = pose_data.index("z:", value_index)
-        index_w = pose_data.index("w:", value_index)
-
-        data_x = pose_data[index_x + 1]
-        data_y = pose_data[index_y + 1]
-        data_z = pose_data[index_z + 1]
-        data_w = pose_data[index_w + 1]
+        data_x = pose_data.x
+        data_y = pose_data.y
+        data_z = pose_data.z
+        data_w = pose_data.w
 
         rotation_data = self.euler_from_quaternion(float(data_x), float(data_y), float(data_z), float(data_w))
         
