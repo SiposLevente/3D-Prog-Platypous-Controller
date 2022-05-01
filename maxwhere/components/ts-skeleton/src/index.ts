@@ -92,9 +92,9 @@ module.exports.init = function () { }
 module.exports.done = function (nodeReturnedByRenderFunction: Node) { }
 
 module.exports.render = function (options: object): any {
-  initAsync()
-  initMQTT()
-  return wom.create('node', {})
+  // initAsync()
+  // initMQTT()
+  // return wom.create('node', {})
 }
 
 module.exports.clear = function () { }

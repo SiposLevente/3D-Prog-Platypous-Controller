@@ -45,7 +45,6 @@
     "affiliation": "Mistems Ltd."
   },
   "components": {
-    "ts-skeleton": "./components/ts-skeleton/component.json",
     "voc-builder": "./components/voc-builder/component.json"
   },
   "dependencies": []
