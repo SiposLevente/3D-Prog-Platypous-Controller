@@ -8,10 +8,12 @@ from nav_msgs.msg import Odometry
 
 TIMEOUT_TIME = 1
 
+
 class Orientation:
     x = 0.0
     y = 0.0
     z = 0.0
+
 
 class Platypous_Controller:
     def __init__(self):
@@ -26,8 +28,8 @@ class Platypous_Controller:
         self.z_topic = self.main_topic+"orientation/z"
         self.use_topic = self.main_topic+"inUse"
         self.platypous_topic = "platypous/"
-        self.platypous_position_topic = self.platypous_topic + "position/"
-        self.platypous_orientation_topic = self.platypous_topic + "orientation/"
+        self.platypous_position_topic = self.platypous_topic + "position"
+        self.platypous_orientation_topic = self.platypous_topic + "orientation"
         self.connected = False
         self.timeout = TIMEOUT_TIME
 
@@ -92,7 +94,6 @@ class Platypous_Controller:
                 Orientation.y = 0
                 Orientation.z = 0
             time.sleep(1)
-            
 
             self.publish_platypous_position(client)
             self.publish_platypous_orientation(client)
@@ -107,16 +108,16 @@ class Platypous_Controller:
 
     def publish_platypous_position(self, client):
         pose_data = self.odometry_cp.pose.pose.position
-        client.publish(self.platypous_position_topic + "x", pose_data.x)
-        client.publish(self.platypous_position_topic + "y", pose_data.y)
-        client.publish(self.platypous_position_topic + "z", pose_data.z)
+        publish_data = '{"x":' + pose_data.x + ',"y":' + \
+            pose_data.y + ',"z":' + pose_data.z + '}'
+        client.publish(self.platypous_position_topic, publish_data)
 
     def publish_platypous_orientation(self, client):
         pose_data = self.odometry_cp.pose.pose.orientation
-        client.publish(self.platypous_orientation_topic + "x", pose_data.x )
-        client.publish(self.platypous_orientation_topic + "y", pose_data.y )
-        client.publish(self.platypous_orientation_topic + "z", pose_data.z )
-        client.publish(self.platypous_orientation_topic + "w", pose_data.w)
+        publish_data = '{"w":' + pose_data.w + ',"x":' + pose_data.x + \
+            ',"y":' + pose_data.y + ',"z":' + pose_data.z + '}'
+        client.publish(self.platypous_orientation_topic, publish_data)
+
 
 if __name__ == '__main__':
     controller = Platypous_Controller()

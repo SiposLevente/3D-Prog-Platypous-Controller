@@ -1,5 +1,5 @@
 <root>
-  <ts-skeleton />
+  {/* <ts-skeleton /> */}
   <voc-builder
     userDir="userDir"
     flowFile="./../../myVoc/exampleFlows.json"
