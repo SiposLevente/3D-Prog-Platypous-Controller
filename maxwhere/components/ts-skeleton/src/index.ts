@@ -50,15 +50,15 @@ async function initMQTT() {
     mqttClient.subscribe(positionXTopic)
     mqttClient.subscribe(positionYTopic)
     mqttClient.subscribe(positionZTopic)
-  
+
     mqttClient.subscribe(orientationXTopic)
     mqttClient.subscribe(orientationYTopic)
     mqttClient.subscribe(orientationZTopic)
     mqttClient.subscribe(orientationWTopic)
     mqttClient.publish("test", "test")
   })
-  
-  
+
+
   mqttClient.on('message', (topic, payload) => {
     switch (topic) {
       case positionXTopic:
@@ -84,7 +84,7 @@ async function initMQTT() {
         currentOri.w = parseInt(payload.toString())
         break
     }
-  })  
+  })
 }
 
 module.exports.init = function () { }
@@ -94,7 +94,7 @@ module.exports.done = function (nodeReturnedByRenderFunction: Node) { }
 module.exports.render = function (options: object): any {
   // initAsync()
   // initMQTT()
-  // return wom.create('node', {})
+  return wom.create('node', {})
 }
 
 module.exports.clear = function () { }
@@ -107,7 +107,7 @@ function updateOri() {
   platypous.setOrientation(currentOri.w, currentOri.x, currentPos.y, currentPos.z)
 }
 
-function updateStatus(){
+function updateStatus() {
   updatePos()
   updateOri()
 }
@@ -118,7 +118,7 @@ async function initAsync() {
     id: 'platypous',
     class: 'animal',
     scale: 10,
-    position: { x: currentPos.x, y: currentPos.y+500, z: currentPos.z },
+    position: { x: currentPos.x, y: currentPos.y, z: currentPos.z },
     orientation: { x: currentOri.x, y: currentOri.y, z: currentOri.z, w: currentOri.w },
     autophysical: true,
     done: (m) => {
