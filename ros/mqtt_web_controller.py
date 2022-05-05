@@ -19,7 +19,7 @@ class Platypous_Controller:
     def __init__(self):
         rospy.init_node('mqtt_subscriber', anonymous=True)
         rospy.sleep(1)
-        rospy.Subscriber("/driver/wheel_odometry",
+        rospy.Subscriber("/odometry/wheel",
                          Odometry, self.cb_odometry_cp)
         self.twist_pub = rospy.Publisher('/cmd_vel/nav', Twist, queue_size=10)
         self.main_topic = "controller/"
@@ -93,7 +93,7 @@ class Platypous_Controller:
                 Orientation.x = 0
                 Orientation.y = 0
                 Orientation.z = 0
-            time.sleep(1)
+            rospy.sleep(0.1)
 
             self.publish_platypous_position(client)
             self.publish_platypous_orientation(client)
