@@ -14,7 +14,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\20-inject.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\20-inject.js"
             },
             "debug": {
                 "name": "debug",
@@ -25,7 +25,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\21-debug.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\21-debug.js"
             },
             "complete": {
                 "name": "complete",
@@ -36,7 +36,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\24-complete.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\24-complete.js"
             },
             "catch": {
                 "name": "catch",
@@ -47,7 +47,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\25-catch.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\25-catch.js"
             },
             "status": {
                 "name": "status",
@@ -58,7 +58,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\25-status.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\25-status.js"
             },
             "link": {
                 "name": "link",
@@ -71,7 +71,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\60-link.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\60-link.js"
             },
             "comment": {
                 "name": "comment",
@@ -82,7 +82,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\90-comment.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\90-comment.js"
             },
             "unknown": {
                 "name": "unknown",
@@ -93,7 +93,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\98-unknown.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\common\\98-unknown.js"
             },
             "function": {
                 "name": "function",
@@ -104,7 +104,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\10-function.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\10-function.js"
             },
             "switch": {
                 "name": "switch",
@@ -115,7 +115,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\10-switch.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\10-switch.js"
             },
             "change": {
                 "name": "change",
@@ -126,7 +126,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\15-change.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\15-change.js"
             },
             "range": {
                 "name": "range",
@@ -137,7 +137,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\16-range.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\16-range.js"
             },
             "template": {
                 "name": "template",
@@ -148,7 +148,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\80-template.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\80-template.js"
             },
             "delay": {
                 "name": "delay",
@@ -159,7 +159,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\89-delay.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\89-delay.js"
             },
             "trigger": {
                 "name": "trigger",
@@ -170,7 +170,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\89-trigger.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\89-trigger.js"
             },
             "exec": {
                 "name": "exec",
@@ -181,7 +181,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\90-exec.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\90-exec.js"
             },
             "rbe": {
                 "name": "rbe",
@@ -192,7 +192,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\rbe.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\function\\rbe.js"
             },
             "tls": {
                 "name": "tls",
@@ -203,7 +203,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\05-tls.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\05-tls.js"
             },
             "httpproxy": {
                 "name": "httpproxy",
@@ -214,7 +214,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\06-httpproxy.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\06-httpproxy.js"
             },
             "mqtt": {
                 "name": "mqtt",
@@ -227,7 +227,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\10-mqtt.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\10-mqtt.js"
             },
             "httpin": {
                 "name": "httpin",
@@ -239,7 +239,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\21-httpin.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\21-httpin.js"
             },
             "httprequest": {
                 "name": "httprequest",
@@ -250,7 +250,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\21-httprequest.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\21-httprequest.js"
             },
             "websocket": {
                 "name": "websocket",
@@ -264,7 +264,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\22-websocket.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\22-websocket.js"
             },
             "tcpin": {
                 "name": "tcpin",
@@ -277,7 +277,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\31-tcpin.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\31-tcpin.js"
             },
             "udp": {
                 "name": "udp",
@@ -289,7 +289,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\32-udp.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\network\\32-udp.js"
             },
             "CSV": {
                 "name": "CSV",
@@ -300,7 +300,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-CSV.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-CSV.js"
             },
             "HTML": {
                 "name": "HTML",
@@ -311,7 +311,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-HTML.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-HTML.js"
             },
             "JSON": {
                 "name": "JSON",
@@ -322,7 +322,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-JSON.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-JSON.js"
             },
             "XML": {
                 "name": "XML",
@@ -333,7 +333,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-XML.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-XML.js"
             },
             "YAML": {
                 "name": "YAML",
@@ -344,7 +344,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-YAML.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\parsers\\70-YAML.js"
             },
             "split": {
                 "name": "split",
@@ -356,7 +356,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\17-split.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\17-split.js"
             },
             "sort": {
                 "name": "sort",
@@ -367,7 +367,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\18-sort.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\18-sort.js"
             },
             "batch": {
                 "name": "batch",
@@ -378,7 +378,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\19-batch.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\sequence\\19-batch.js"
             },
             "file": {
                 "name": "file",
@@ -390,7 +390,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\storage\\10-file.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\storage\\10-file.js"
             },
             "watch": {
                 "name": "watch",
@@ -401,7 +401,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\storage\\23-watch.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\@node-red\\nodes\\core\\storage\\23-watch.js"
             }
         }
     },
@@ -420,7 +420,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-mesh\\add-mesh.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-mesh\\add-mesh.js"
             },
             "add-instanced-mesh": {
                 "name": "add-instanced-mesh",
@@ -431,7 +431,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-instanced-mesh\\add-instanced-mesh.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-instanced-mesh\\add-instanced-mesh.js"
             },
             "add-mesh-hierarchy": {
                 "name": "add-mesh-hierarchy",
@@ -442,7 +442,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-mesh-hierarchy\\add-mesh-hierarchy.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-mesh-hierarchy\\add-mesh-hierarchy.js"
             },
             "add-light": {
                 "name": "add-light",
@@ -453,7 +453,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-light\\add-light.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-light\\add-light.js"
             },
             "add-webtable": {
                 "name": "add-webtable",
@@ -464,7 +464,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-webtable\\add-webtable.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-webtable\\add-webtable.js"
             },
             "add-overlay": {
                 "name": "add-overlay",
@@ -475,7 +475,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-overlay\\add-overlay.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\add-overlay\\add-overlay.js"
             },
             "animate": {
                 "name": "animate",
@@ -486,7 +486,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\animate\\animate.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\animate\\animate.js"
             },
             "get-node-property": {
                 "name": "get-node-property",
@@ -497,7 +497,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\get-node-property\\get-node-property.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\get-node-property\\get-node-property.js"
             },
             "mesh-animator": {
                 "name": "mesh-animator",
@@ -508,7 +508,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mesh-animator\\mesh-animator.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mesh-animator\\mesh-animator.js"
             },
             "wom-event-subscribe": {
                 "name": "wom-event-subscribe",
@@ -519,7 +519,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\wom-event-subscribe\\wom-event-subscribe.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\wom-event-subscribe\\wom-event-subscribe.js"
             },
             "node-event-subscribe": {
                 "name": "node-event-subscribe",
@@ -530,7 +530,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\node-event-subscribe\\node-event-subscribe.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\node-event-subscribe\\node-event-subscribe.js"
             },
             "set-position": {
                 "name": "set-position",
@@ -541,7 +541,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-position\\set-position.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-position\\set-position.js"
             },
             "set-scale": {
                 "name": "set-scale",
@@ -552,7 +552,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-scale\\set-scale.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-scale\\set-scale.js"
             },
             "set-orientation": {
                 "name": "set-orientation",
@@ -563,7 +563,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-orientation\\set-orientation.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-orientation\\set-orientation.js"
             },
             "set-shader": {
                 "name": "set-shader",
@@ -574,7 +574,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-shader\\set-shader.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-shader\\set-shader.js"
             },
             "node-select": {
                 "name": "node-select",
@@ -585,7 +585,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\node-select\\node-select.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\node-select\\node-select.js"
             },
             "exploded-view": {
                 "name": "exploded-view",
@@ -596,7 +596,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\exploded-view\\exploded-view.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\exploded-view\\exploded-view.js"
             },
             "load-otf-asset": {
                 "name": "load-otf-asset",
@@ -607,7 +607,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\load-otf-asset\\load-otf-asset.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\load-otf-asset\\load-otf-asset.js"
             },
             "set-material": {
                 "name": "set-material",
@@ -618,7 +618,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-material\\set-material.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-material\\set-material.js"
             },
             "set-skybox": {
                 "name": "set-skybox",
@@ -629,7 +629,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-skybox\\set-skybox.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\set-skybox\\set-skybox.js"
             },
             "offset": {
                 "name": "offset",
@@ -640,7 +640,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\offset\\offset.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\offset\\offset.js"
             },
             "rotate": {
                 "name": "rotate",
@@ -651,7 +651,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\rotate\\rotate.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\rotate\\rotate.js"
             },
             "mw-gauge": {
                 "name": "mw-gauge",
@@ -662,7 +662,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mw-gauge\\mw-gauge.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mw-gauge\\mw-gauge.js"
             },
             "mw-tank": {
                 "name": "mw-tank",
@@ -673,7 +673,7 @@
                 "local": false,
                 "user": false,
                 "module": "mw-nodes",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mw-tank\\mw-tank.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\mw-nodes\\mw-tank\\mw-tank.js"
             }
         }
     },
@@ -692,7 +692,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-contrib-counter",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-contrib-counter\\counter.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-contrib-counter\\counter.js"
             }
         }
     },
@@ -711,7 +711,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_base.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_base.js"
             },
             "ui_button": {
                 "name": "ui_button",
@@ -722,7 +722,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_button.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_button.js"
             },
             "ui_dropdown": {
                 "name": "ui_dropdown",
@@ -733,7 +733,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_dropdown.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_dropdown.js"
             },
             "ui_switch": {
                 "name": "ui_switch",
@@ -744,7 +744,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_switch.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_switch.js"
             },
             "ui_slider": {
                 "name": "ui_slider",
@@ -755,7 +755,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_slider.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_slider.js"
             },
             "ui_numeric": {
                 "name": "ui_numeric",
@@ -766,7 +766,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_numeric.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_numeric.js"
             },
             "ui_text_input": {
                 "name": "ui_text_input",
@@ -777,7 +777,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_text_input.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_text_input.js"
             },
             "ui_date_picker": {
                 "name": "ui_date_picker",
@@ -788,7 +788,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_date_picker.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_date_picker.js"
             },
             "ui_colour_picker": {
                 "name": "ui_colour_picker",
@@ -799,7 +799,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_colour_picker.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_colour_picker.js"
             },
             "ui_form": {
                 "name": "ui_form",
@@ -810,7 +810,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_form.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_form.js"
             },
             "ui_text": {
                 "name": "ui_text",
@@ -821,7 +821,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_text.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_text.js"
             },
             "ui_gauge": {
                 "name": "ui_gauge",
@@ -832,7 +832,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_gauge.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_gauge.js"
             },
             "ui_chart": {
                 "name": "ui_chart",
@@ -843,7 +843,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_chart.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_chart.js"
             },
             "ui_audio": {
                 "name": "ui_audio",
@@ -854,7 +854,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_audio.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_audio.js"
             },
             "ui_toast": {
                 "name": "ui_toast",
@@ -865,7 +865,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_toast.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_toast.js"
             },
             "ui_ui_control": {
                 "name": "ui_ui_control",
@@ -876,7 +876,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_ui_control.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_ui_control.js"
             },
             "ui_template": {
                 "name": "ui_template",
@@ -887,7 +887,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_template.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_template.js"
             },
             "ui_link": {
                 "name": "ui_link",
@@ -898,7 +898,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_link.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_link.js"
             },
             "ui_tab": {
                 "name": "ui_tab",
@@ -909,7 +909,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_tab.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_tab.js"
             },
             "ui_group": {
                 "name": "ui_group",
@@ -920,7 +920,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_group.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_group.js"
             },
             "ui_spacer": {
                 "name": "ui_spacer",
@@ -931,7 +931,7 @@
                 "local": false,
                 "user": false,
                 "module": "node-red-dashboard",
-                "file": "D:\\Dokumentumok\\Levente\\Programs\\Javascript\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_spacer.js"
+                "file": "C:\\Users\\Levente\\Documents\\Egyetem\\6\\3Dprog\\3D-Prog-Platypous-Controller\\maxwhere\\components\\voc-builder\\node_modules\\node-red-dashboard\\nodes\\ui_spacer.js"
             }
         }
     }
