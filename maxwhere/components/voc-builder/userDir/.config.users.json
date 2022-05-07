@@ -18,6 +18,7 @@
         },
         "menu-deploymenu-item-node": true,
         "menu-deploymenu-item-full": false,
-        "menu-deploymenu-item-flow": false
+        "menu-deploymenu-item-flow": false,
+        "menu-menu-item-sidebar": false
     }
 }
