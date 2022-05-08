@@ -33,7 +33,7 @@ material Platy_body
 			
 			texture_unit diffuse_map
 			{
-				texture 151151151254.png
+				texture 254254254254.png
 				max_anisotropy 8
 			}
 			
