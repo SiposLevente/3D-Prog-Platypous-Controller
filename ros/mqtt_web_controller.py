@@ -100,10 +100,14 @@ class Platypous_Controller:
 
             client.on_message = self.on_message
 
+
             if abs(float(Orientation.x)) > 18:
                 vel_msg.linear.x = float(Orientation.x)/50
             if abs(float(Orientation.y)) > 18:
-                vel_msg.angular.z = -float(Orientation.y)/50
+                if float(Orientation.x) < 0:
+                    vel_msg.angular.z = float(Orientation.y)/50
+                else:
+                    vel_msg.angular.z = -float(Orientation.y)/50
             self.twist_pub.publish(vel_msg)
 
     def publish_platypous_position(self, client):
