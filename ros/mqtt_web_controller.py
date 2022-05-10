@@ -104,7 +104,7 @@ class Platypous_Controller:
             if abs(float(Orientation.x)) > 18:
                 vel_msg.linear.x = float(Orientation.x)/50
             if abs(float(Orientation.y)) > 18:
-                if float(Orientation.x) < 0:
+                if float(Orientation.x) < -8:
                     vel_msg.angular.z = float(Orientation.y)/50
                 else:
                     vel_msg.angular.z = -float(Orientation.y)/50
