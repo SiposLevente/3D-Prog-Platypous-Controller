@@ -30,5 +30,16 @@
 - [x]  Odometry datas from Platypous
 - [X]  Make (own) MQTT server
 - [x] Write [some code](https://github.com/SiposLevente/3D-Prog-Platypous-Controller/tree/main/ros) to get the datas
-- [ ]  Plarypous 3D modell
-- [ ]  Node-RED
+- [x]  Plarypous 3D modell
+- [x]  Node-RED
+
+## Videos
+
+Platypous manual control:
+
+[![Platypous](https://img.youtube.com/vi/aK_59uRUeb0/mq1.jpg)](https://youtu.be/aK_59uRUeb0)
+
+Platypous MaxWhere Digital Twin:
+
+[![MaxWhere](https://img.youtube.com/vi/qSAbin28fnc/mq1.jpg)](https://youtu.be/qSAbin28fnc)
+
