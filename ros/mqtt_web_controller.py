@@ -19,8 +19,8 @@ class Platypous_Controller:
     def __init__(self):
         rospy.init_node('mqtt_subscriber', anonymous=True)
         rospy.sleep(1)
-        rospy.Subscriber("/odometry/wheel",
-                         Odometry, self.cb_odometry_cp)
+        # rospy.Subscriber("/odometry/wheel",Odometry, self.cb_odometry_cp)
+        rospy.Subscriber("/driver/wheel_odometry",Odometry, self.cb_odometry_cp)
         self.twist_pub = rospy.Publisher('/cmd_vel/nav', Twist, queue_size=10)
         self.main_topic = "controller/"
         self.x_topic = self.main_topic+"orientation/x"
@@ -100,10 +100,14 @@ class Platypous_Controller:
 
             client.on_message = self.on_message
 
+
             if abs(float(Orientation.x)) > 18:
                 vel_msg.linear.x = float(Orientation.x)/50
             if abs(float(Orientation.y)) > 18:
-                vel_msg.angular.z = -float(Orientation.y)/50
+                if float(Orientation.x) < -8:
+                    vel_msg.angular.z = float(Orientation.y)/50
+                else:
+                    vel_msg.angular.z = -float(Orientation.y)/50
             self.twist_pub.publish(vel_msg)
 
     def publish_platypous_position(self, client):
