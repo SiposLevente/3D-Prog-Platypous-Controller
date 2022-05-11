@@ -9,8 +9,6 @@
 - Creator: Sipos Levente
 - Teammate: Albert Dávid
 
-<br />
-
 # Short description
 *Our project goal was to control the movement of the robot using the accelerometer built into the phone.*
 <br /> We used the [PlatypOUs-Mobile-Robot-Platform](https://github.com/ABC-iRobotics/PlatypOUs-Mobile-Robot-Platform) fore the implementation.
