@@ -6,15 +6,16 @@ import rospy
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
-TIMEOUT_DEFAULT_VAL = 1000
-
+TIMEOUT_DEFAULT_VAL = 5
+timeout = TIMEOUT_DEFAULT_VAL
 
 class Main:
     def __init__(self):
         rospy.init_node('mqtt_subscriber', anonymous=True)
         self.twist_pub = rospy.Publisher('/cmd_vel/nav', Twist, queue_size=10)
         rospy.Subscriber("/odometry/wheel", Odometry, self.cb_odometry_cp)
-        self.timeout = TIMEOUT_DEFAULT_VAL
+        global timeout
+        timeout = TIMEOUT_DEFAULT_VAL
 
     def cb_odometry_cp(self, msg):
         self.odometry_cp = msg
@@ -35,7 +36,8 @@ class Main:
 
     # The callback for when a PUBLISH message is received from the server.
     def on_message(client, userdata, msg):
-        self.timeout = TIMEOUT_DEFAULT_VAL
+        global timeout
+        timeout = TIMEOUT_DEFAULT_VAL
         if "to_platypous/x" in msg.topic:
             x_value = msg.payload
             Values.x_value = str(x_value).split("b'")[1].split("'")[0]
@@ -49,15 +51,16 @@ class Main:
     def pub(self):
         vel_msg = Twist()
         global Connected
+        global timeout
         Connected = False  # global variable for the state of the connection
 
-        broker_address = "d6b5f80560aa4c889516ecf66760dcae.s2.eu.hivemq.cloud"
-        port = 8883
-        user = "Ponti"
-        password = "n3vSLVTpecC!QhP"
+        broker_address = "10.8.8.187"
+        port = 1883
+        user = ""
+        password = ""
 
         client = mqttClient.Client("Python")  # create new instance
-        client.tls_set(certifi.where())
+        #client.tls_set(certifi.where())
         # set username and password
         client.username_pw_set(user, password=password)
         client.on_connect = Main.on_connect  # attach function to callback
@@ -67,9 +70,9 @@ class Main:
         while not rospy.is_shutdown():
             time.sleep(0.1)
             o = self.odometry_cp
-            if self.timeout > 0:
-                self.timeout -= 1
-            if self.timeout == 0:
+            if timeout > 0:
+                timeout -= 1
+            if timeout == 0:
                 client.publish("to_platypous/x", 0)
                 client.publish("to_platypous/y", 0)
                 client.publish("to_platypous/z", 0)
@@ -85,9 +88,22 @@ class Main:
             # client.publish(f + "z", str(z))
 
             client.on_message = Main.on_message
+            y_val = -float(Values.y_value)/20
+            x_val = float(Values.x_value)/10
 
-            vel_msg.linear.x = -float(Values.y_value)/8
-            vel_msg.angular.z = float(Values.x_value)/8
+
+            if (y_val > 0.5):
+                y_val = 0.5
+            if (x_val > 1.0):
+                x_val = 1.0
+
+            if (y_val < -0.5):
+                y_val = -0.5
+            if (x_val < -1.0):
+                x_val = -1.0
+
+            vel_msg.linear.x = y_val
+            vel_msg.angular.z = x_val
             self.twist_pub.publish(vel_msg)
 
 
